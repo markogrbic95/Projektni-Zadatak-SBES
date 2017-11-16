@@ -22,6 +22,5 @@ namespace Common
 
         [OperationContract]
         bool logout(string username);
-
     }
 }

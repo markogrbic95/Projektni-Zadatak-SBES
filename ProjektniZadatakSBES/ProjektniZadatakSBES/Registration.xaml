@@ -5,32 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjektniZadatakSBES"
              mc:Ignorable="d" 
-             d:DesignHeight="380" d:DesignWidth="700">
+             d:DesignHeight="490" d:DesignWidth="700">
     <Grid>
-        <Button x:Name="exitBtn" Height="20" Width="20" Margin="670,10,10,350" MouseEnter="exitBtn_MouseEnter" MouseLeave="exitBtn_MouseLeave" Click="exitBtn_Click" BorderThickness="0">
-            <Image Source="Resources/exit.png"></Image>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#fff"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#fff"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+        <Label x:Name="menuLabel" Foreground="#494041" FontSize="40" FontWeight="Light" Content="REGISTRATION" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
+       
+        <TextBox x:Name="nameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <TextBox x:Name="surnameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="455,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <TextBox x:Name="addressTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="125,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <TextBox x:Name="phoneTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="455,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <TextBox x:Name="bankaccTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <TextBox x:Name="usernsameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="455,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <PasswordBox x:Name="passwordTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="14" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="125,360,0,0" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
 
-        <Label x:Name="menuLabel" Foreground="#494041" FontSize="40" FontWeight="Light" Content="LOGIN" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="nameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Name:" HorizontalAlignment="Left" Margin="45,175,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        <Label x:Name="surnameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Surname:" HorizontalAlignment="Left" Margin="375,175,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        <Label x:Name="addressLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Address:" HorizontalAlignment="Left" Margin="45,235,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        <Label x:Name="numberLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Phone:" HorizontalAlignment="Left" Margin="375,235,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        <Label x:Name="bankLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Bank acc:" HorizontalAlignment="Left" Margin="45,295,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        <Label x:Name="usernameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Username:" HorizontalAlignment="Left" Margin="375,295,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        <Label x:Name="passwordLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Password:" HorizontalAlignment="Left" Margin="45,355,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        <Label x:Name="errorlabel" Content="" FontSize="14" Foreground="#cc0000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="375,72,0,0"/>
 
     </Grid>
 </UserControl>

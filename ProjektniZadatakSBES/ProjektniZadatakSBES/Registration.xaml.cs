@@ -23,21 +23,6 @@ namespace ProjektniZadatakSBES
         public Registration()
         {
             InitializeComponent();
-        }
-
-        private void exitBtn_MouseEnter(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Hand;
-        }
-
-        private void exitBtn_MouseLeave(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Arrow;
-        }
-
-        private void exitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+        }        
     }
 }

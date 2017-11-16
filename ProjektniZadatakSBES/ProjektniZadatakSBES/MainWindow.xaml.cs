@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -34,9 +35,26 @@ namespace ProjektniZadatakSBES
                 this.DragMove();
         }
 
+        private void exitBtn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Hand;
+        }
+
+        private void exitBtn_MouseLeave(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void exitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
         private void signInButton_Click(object sender, RoutedEventArgs e)
         {
             activeButton = 1;
+
+            SetWindowHeight();
 
             ContentArea.Content = new Login();
 
@@ -48,6 +66,8 @@ namespace ProjektniZadatakSBES
         {
             activeButton = 0;
 
+            SetWindowHeight();
+
             ContentArea.Content = new Registration();
 
             signInButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
@@ -57,7 +77,7 @@ namespace ProjektniZadatakSBES
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
             ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
-            ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255,255,255));
+            ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
@@ -72,6 +92,31 @@ namespace ProjektniZadatakSBES
             {
                 ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
                 ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
+            }
+        }
+
+        private void SetWindowHeight()
+        {
+            switch (activeButton)
+            {
+                case 0:
+                    {
+                        exitBtn.Margin = new Thickness(670, 10, 10, 510);
+                        this.Height = 540;                        
+
+                        signInButton.Margin = new Thickness(350, 490, 0, 0);
+                        registerButton.Margin = new Thickness(0, 490, 350, 0);
+                        break;
+                    }
+                case 1:
+                    {
+                        exitBtn.Margin = new Thickness(670, 10, 10, 400);
+                        this.Height = 430;
+
+                        signInButton.Margin = new Thickness(350, 380, 0, 0);
+                        registerButton.Margin = new Thickness(0, 380, 350, 0);
+                        break;
+                    }
             }
         }
     }
