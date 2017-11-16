@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Marko Grbic\Desktop\SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\Debug\
+C:\Projektni-Zadatak-SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\Debug\
 ProjektniZadatakSBES
 none
 false
 DEBUG;TRACE
-C:\Users\Marko Grbic\Desktop\SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\App.xaml
-11151548125
+C:\Projektni-Zadatak-SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\App.xaml
+3384554857
 
-9-653290499
+111515376109
 13738642453
-MainWindow.xaml;
+Login.xaml;MainWindow.xaml;Registration.xaml;
 
-True
+False
 
