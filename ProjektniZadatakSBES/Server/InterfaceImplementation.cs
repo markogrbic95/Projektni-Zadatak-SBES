@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Server
 {
@@ -75,11 +76,58 @@ namespace Server
             }
         }
 
-        public bool Registration(string name, string surname, string email, string phoneNumber, string accNumber, string username, string password)
+        public bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
+            registeredUsers = ReadFile();
+
+            if(registeredUsers.ContainsKey(username))
+            {
+                Console.WriteLine("This user already exist!");
+                return false;
+            }
+            else
+            {
+                registeredUsers.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
+                WriteFile();
+                return true;
+            }
+        }
+
+        public Dictionary<string,User> ReadFile()
+        {
+            try
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
+                StreamReader sr = new StreamReader(@"../../../users.xml");
+                registeredUsers = (Dictionary<string, User>)ser.Deserialize(sr);
+                sr.Close();
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+
+            return registeredUsers;
+        }
 
 
-            return true;
+        public void WriteFile()
+        {
+            try
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
+                StreamWriter sw = new StreamWriter(@"../../../users.xml");
+                ser.Serialize(sw, registeredUsers);
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
