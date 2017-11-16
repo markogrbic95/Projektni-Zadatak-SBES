@@ -1,0 +1,5 @@
+C:\Users\Marko Grbic\Desktop\ProjektniZadatakSBES\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Marko Grbic\Desktop\ProjektniZadatakSBES\Common\bin\Debug\Common.dll
+C:\Users\Marko Grbic\Desktop\ProjektniZadatakSBES\Common\bin\Debug\Common.pdb
+C:\Users\Marko Grbic\Desktop\ProjektniZadatakSBES\Common\obj\Debug\Common.dll
+C:\Users\Marko Grbic\Desktop\ProjektniZadatakSBES\Common\obj\Debug\Common.pdb
