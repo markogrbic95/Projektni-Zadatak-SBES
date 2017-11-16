@@ -25,10 +25,7 @@ namespace ProjektniZadatakSBES
         public MainWindow()
         {
             InitializeComponent();
-            FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata
-            {
-                DefaultValue = FindResource(typeof(Window))
-            });
+            ContentArea.Content = new Login();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -40,6 +37,9 @@ namespace ProjektniZadatakSBES
         private void signInButton_Click(object sender, RoutedEventArgs e)
         {
             activeButton = 1;
+
+            ContentArea.Content = new Login();
+
             registerButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
             registerButton.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
         }
@@ -47,23 +47,11 @@ namespace ProjektniZadatakSBES
         private void registerButton_Click(object sender, RoutedEventArgs e)
         {
             activeButton = 0;
+
+            ContentArea.Content = new Registration();
+
             signInButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
             signInButton.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
-        }
-
-        private void exitBtn_MouseEnter(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Hand;
-        }
-
-        private void exitBtn_MouseLeave(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Arrow;
-        }
-
-        private void exitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
