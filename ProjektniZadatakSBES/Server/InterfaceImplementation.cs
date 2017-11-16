@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class Program
+    class InterfaceImplementation
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("AA");
-        }
     }
 }
