@@ -1,40 +1,53 @@
-# Compiled source #
-###################
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
+# Composer
+vendor
+composer.phar
 
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+# IntelliJ - PhpStorm and PyCharm
+.idea
+*.ipr
+*.iws
 
-# Logs and databases #
-######################
-*.log
-*.sql
-*.sqlite
+# Eclipse
+/.project
+/.settings
+/.classpath
 
-# OS generated files #
-######################
+# Logs
+logs
+error.log
+access.log
+
+# Netbeans
+nbproject
+.nbproject
+.nbproject/*
+nbproject/*
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Mac OSX
 .DS_Store
-.DS_Store?
+# Thumbnails
 ._*
+# Files that might appear on external disk
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
-ProjektniZadatakSBES/ProjektniZadatakSBES/obj/Debug/ProjektniZadatakSBES.csproj.FileListAbsolute.txt
-ProjektniZadatakSBES/ProjektniZadatakSBES/bin/Debug/ProjektniZadatakSBES.exe.config
-ProjektniZadatakSBES/ProjektniZadatakSBES/bin/Debug/ProjektniZadatakSBES.exe.config
+
+# SublimeText project files
+/*.sublime-project
+*.sublime-workspace
+
+# Dart
+packages
+packages/*
+
+# Vagrant
+.vagrant
+.vagrant/*
+
+.env
