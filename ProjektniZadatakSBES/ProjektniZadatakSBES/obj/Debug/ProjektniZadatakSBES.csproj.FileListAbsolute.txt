@@ -26,3 +26,6 @@ C:\Users\Marko Grbic\Desktop\SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\
 C:\Users\Marko Grbic\Desktop\SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\Debug\ProjektniZadatakSBES.g.resources
 C:\Users\Marko Grbic\Desktop\SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\Debug\ProjektniZadatakSBES.Properties.Resources.resources
 C:\Users\Marko Grbic\Desktop\SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\Debug\ProjektniZadatakSBES.csproj.GenerateResource.Cache
+C:\Users\Administrator.DOMAINADMINS0\Desktop\Projektni-Zadatak-SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\bin\Debug\ProjektniZadatakSBES.exe.config
+C:\Users\Administrator.DOMAINADMINS0\Desktop\Projektni-Zadatak-SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\Debug\ProjektniZadatakSBES.exe
+C:\Users\Administrator.DOMAINADMINS0\Desktop\Projektni-Zadatak-SBES\ProjektniZadatakSBES\ProjektniZadatakSBES\obj\Debug\ProjektniZadatakSBES.pdb
