@@ -12,15 +12,15 @@ namespace Common
     public interface Interface
     {
         [OperationContract]
-        bool registration(string name, string surname, string email, string phoneNumber, string accNumber, string username, SecureString password);
+        bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password);
 
         [OperationContract]
-        bool changePassword(string username, SecureString oldPassword, SecureString newPassword);
+        bool ChangePassword(string username, string oldPassword, string newPassword);
 
         [OperationContract]
-        bool login(string username, SecureString password);
+        bool Login(string username, string password);
 
         [OperationContract]
-        bool logout(string username);
+        bool Logout(string username);
     }
 }
