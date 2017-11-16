@@ -4,8 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AA864656-978F-40B0-B985-639C1B327EF0}</ProjectGuid>
-    <ProjectGuid>{AA864656-978F-40B0-B985-639C1B327EF0}</ProjectGuid>
+    <ProjectGuid>{0475530F-68A2-4710-A866-1ADDDCC3002F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Server</RootNamespace>
@@ -53,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{A914AC6D-A31D-4EA5-9785-51FC6BCC7E31}</Project>
+      <Project>{a914ac6d-a31d-4ea5-9785-51fc6bcc7e31}</Project>
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
