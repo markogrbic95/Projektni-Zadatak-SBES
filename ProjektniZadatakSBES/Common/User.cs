@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Common
 {
     [DataContract]
+    [Serializable]
     public class User
     {
         private string name = string.Empty;
@@ -32,6 +33,11 @@ namespace Common
             this.username = username;
             this.password = password;
             this.logged = false;
+        }
+
+        public User()
+        {
+
         }
 
         [DataMember]
