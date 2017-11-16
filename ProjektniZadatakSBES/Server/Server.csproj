@@ -4,7 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+<<<<<<< HEAD
     <ProjectGuid>{AA864656-978F-40B0-B985-639C1B327EF0}</ProjectGuid>
+=======
+    <ProjectGuid>{BEAB8E55-8BF4-4244-98D2-A179AD1F0A16}</ProjectGuid>
+>>>>>>> d422c6d8d946b93b970a5f1aaa40dec0f19c91ce
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Server</RootNamespace>
@@ -43,12 +47,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Compile Include="InterfaceImplementation.cs" />
+>>>>>>> d422c6d8d946b93b970a5f1aaa40dec0f19c91ce
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{A914AC6D-A31D-4EA5-9785-51FC6BCC7E31}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+>>>>>>> d422c6d8d946b93b970a5f1aaa40dec0f19c91ce
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

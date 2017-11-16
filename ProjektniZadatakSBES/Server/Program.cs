@@ -10,6 +10,10 @@ namespace Server
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
+=======
+            Console.WriteLine("AA");
+>>>>>>> d422c6d8d946b93b970a5f1aaa40dec0f19c91ce
         }
     }
 }
