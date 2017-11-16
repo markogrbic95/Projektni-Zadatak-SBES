@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Server
 {
@@ -25,31 +26,36 @@ namespace Server
             throw new NotImplementedException();
         }
 
-        public bool Registration(string name, string surname, string email, string phoneNumber, string accNumber, string username, string password)
+        public bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
+            Dictionary<string,User> users = ReadFile();
 
-
-            return true;
+            if(users.ContainsKey(username))
+            {
+                Console.WriteLine("Ovaj user vec postoji");
+                return false;
+            }
+            else
+            {
+                users.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
+                WriteFile(users);
+                return true;
+            }
+            
         }
 
-        public string ReadFile(string fileName)
+        public Dictionary<string,User> ReadFile()
         {
-            string ret = "";
-
+           
+            Dictionary<string,User> users = new Dictionary<string, User>();
             try
             {
-                // Create an instance of StreamReader to read from a file.
-                // The using statement also closes the StreamReader.
-                using (StreamReader sr = new StreamReader(fileName))
-                {
-                    string line;
-                    // Read and display lines from the file until the end of 
-                    // the file is reached.
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(line);
-                    }
-                }
+                
+                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
+                StreamReader sr = new StreamReader(@"../../../users.xml");
+                users = (Dictionary<string, User>)ser.Deserialize(sr);
+                sr.Close();
+
             }
             catch (Exception e)
             {
@@ -58,7 +64,31 @@ namespace Server
                 Console.WriteLine(e.Message);
             }
 
-            return ret;
+            return users;
+        }
+
+
+        public void WriteFile(Dictionary<string, User> users)
+        {
+
+            
+            try
+            {
+
+                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
+                StreamWriter sw = new StreamWriter(@"../../../users.xml");
+                ser.Serialize(sw, users);
+                sw.Close();
+
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+
+           
         }
     }
 }
