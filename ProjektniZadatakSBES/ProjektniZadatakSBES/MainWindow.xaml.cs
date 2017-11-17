@@ -35,9 +35,7 @@ namespace ProjektniZadatakSBES
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            ContentArea.Content = new Login();
+            InitializeComponent();            
             ContentArea.Content = login;
         }
 
@@ -166,6 +164,11 @@ namespace ProjektniZadatakSBES
                 Console.WriteLine("Error: {0}", e.Message);
             }
             return result;
+        }
+
+        public bool AddUsersToGroup(string groupName, string owner, string username)
+        {
+            return factory.AddUsersToGroup(groupName, owner, username);
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)

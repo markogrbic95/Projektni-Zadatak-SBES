@@ -51,6 +51,9 @@ namespace ProjektniZadatakSBES
                 {
                     errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
                     errorlabel.Content = "Success!";
+
+                    MainUserWindow muw = new MainUserWindow();
+                    muw.Show();
                     return;
                 }
 

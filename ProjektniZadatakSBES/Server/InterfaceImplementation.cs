@@ -31,7 +31,6 @@ namespace Server
                     Console.WriteLine("Old password is incorrect!");
                     return false;
                 }
-
             }
             else
             {
@@ -175,7 +174,6 @@ namespace Server
 
         public bool AddGroup(string groupName, string owner)
         {
-
             grupe = ReadGroups();
 
             foreach (var item in grupe)
@@ -186,19 +184,17 @@ namespace Server
                     {
                         return false;
                     }
-                }
-                
-            }
-            
+                }                
+            }            
 
-                Group g = new Group();
-                g.GroupName = groupName;
-                g.Owner = owner;
-                g.ListaKorisnika = null;
+            Group g = new Group();
+            g.GroupName = groupName;
+            g.Owner = owner;
+            g.ListaKorisnika = null;
 
-                grupe.Add(g);
-                WriteGroups();
-                return true;
+            grupe.Add(g);
+            WriteGroups();
+            return true;
             
             /*
                 Group g = new Group();
@@ -215,7 +211,6 @@ namespace Server
 
         public bool DeleteGroup(string groupName, string owner)
         {
-
             grupe = ReadGroups();
 
             foreach (var item in grupe)
@@ -229,12 +224,14 @@ namespace Server
                         return true;
                     }
                 }
-
             }
 
             return false;
-
         }
 
+        public bool AddUsersToGroup(string groupName, string owner, string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
