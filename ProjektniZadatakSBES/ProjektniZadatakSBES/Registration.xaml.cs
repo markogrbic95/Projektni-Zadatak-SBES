@@ -27,6 +27,9 @@ namespace ProjektniZadatakSBES
 
         public void regGrid_KeyUp(object sender, KeyEventArgs e)
         {
+            errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(204, 0, 0));
+            errorlabel.Content = "";
+
             if (e.Key == Key.Enter)
             {
                 foreach (Object tb in regGrid.Children)
@@ -44,11 +47,26 @@ namespace ProjektniZadatakSBES
                     }
                 }
 
-                errorlabel.Content = "";
-
                 string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, addressTextBox.Text, phoneTextBox.Text, bankaccTextBox.Text, usernameTextBox.Text, passwordTextBox.Password);
-                
 
+                if (msg != "Success")
+                {
+                    errorlabel.Content = msg;
+                    return;
+                }
+
+                foreach (Object tb in regGrid.Children)
+                {
+                    if (tb is TextBox)                    
+                        ((TextBox)tb).Text = "";
+                    
+
+                    if (tb is PasswordBox)                    
+                        ((PasswordBox)tb).Password = null;                    
+                }
+
+                errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
+                errorlabel.Content = "Success!";
             }
         }
     }

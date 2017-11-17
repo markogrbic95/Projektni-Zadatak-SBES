@@ -29,7 +29,7 @@ namespace ProjektniZadatakSBES
 
 
         public static NetTcpBinding binding = new NetTcpBinding();
-        public static string address = "net.tcp://localhost:9999/InterfaceImplementation";
+        public static string address = "net.tcp://localhost:25001/InterfaceImplementation";
 
         public static ClientProxy proxy = new ClientProxy(binding, address);
 
@@ -159,11 +159,7 @@ namespace ProjektniZadatakSBES
             bool result = false;
             try
             {
-<<<<<<< HEAD
                 result = factory.AddGroup(groupName, owner);
-=======
-                result = factory.AddGroup(groupName,owner);
->>>>>>> f5f5735909bf951c19f1cdadd9159a4770dacd43
             }
             catch (Exception e)
             {
