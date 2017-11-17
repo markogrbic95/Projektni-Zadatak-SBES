@@ -45,11 +45,6 @@ namespace ProjektniZadatakSBES
                 }
 
                 errorlabel.Content = "";
-
-                //string username = usernameTextBox.Text;
-                //string pass = passwordTextBox.Password;
-
-                //ovde sad sibamo query na bazu da proverimo da li korisnik postoji, ako postoji login ako ne errorlabel.Content = "Wrong username/password combination!"
             }
         }
     }

@@ -31,18 +31,14 @@ namespace ProjektniZadatakSBES
         public static NetTcpBinding binding = new NetTcpBinding();
         public static string address = "net.tcp://localhost:9999/InterfaceImplementation";
 
-        ClientProxy proxy = new ClientProxy(binding, address);
+        public static ClientProxy proxy = new ClientProxy(binding, address);
 
         public MainWindow()
         {
             InitializeComponent();
-<<<<<<< HEAD
-
 
             ContentArea.Content = new Login();
-=======
             ContentArea.Content = login;
->>>>>>> 723431411e8d8cddab2a571234de1411b09dce25
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -149,13 +145,27 @@ namespace ProjektniZadatakSBES
         }
     }
 
-    internal class ClientProxy : ChannelFactory<Interface>, Interface, IDisposable
+    public class ClientProxy : ChannelFactory<Interface>, Interface, IDisposable
     {
         Interface factory;
 
         public ClientProxy(NetTcpBinding binding, string address) : base(binding, address)
         {
             factory = this.CreateChannel();
+        }
+
+        public bool AddGroup(string groupName, string owner)
+        {
+            bool result = false;
+            try
+            {
+                result = factory.AddGroup(groupName,owner);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)
@@ -200,9 +210,9 @@ namespace ProjektniZadatakSBES
             return result;
         }
 
-        public bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
+        public string Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
-            bool result = false;
+            string result = "";
             try
             {
                 result = factory.Registration(name, lastname, address, phoneNumber, accNumber, username, password);
@@ -210,6 +220,7 @@ namespace ProjektniZadatakSBES
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
+                result = String.Format("Error: {0}", e.Message);
             }
             return result;
         }

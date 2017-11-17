@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Server
@@ -78,20 +79,20 @@ namespace Server
             }
         }
 
-        public bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
+        public string Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
             registeredUsers = ReadFile();
 
             if(registeredUsers.ContainsKey(username))
             {
                 Console.WriteLine("This user already exist!");
-                return false;
+                return "This user already exist!";
             }
             else
             {
                 registeredUsers.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
                 WriteFile();
-                return true;
+                return "Success";
             }
         }
 
@@ -99,10 +100,12 @@ namespace Server
         {
             try
             {
-                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
-                StreamReader sr = new StreamReader(@"../../../users.xml");
-                registeredUsers = (Dictionary<string, User>)ser.Deserialize(sr);
-                sr.Close();
+                    XmlSerializer ser = new XmlSerializer(typeof(List<User>));
+                    StreamReader sr = new StreamReader(@"../../../users.xml");
+                    var tempList = (List<User>)ser.Deserialize(sr);
+                    registeredUsers = tempList.ToDictionary(x => x.Username);
+
+                    sr.Close();
             }
             catch (Exception e)
             {
@@ -139,9 +142,10 @@ namespace Server
         {
             try
             {
-                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
+                XmlSerializer ser = new XmlSerializer(typeof(List<User>));
                 StreamWriter sw = new StreamWriter(@"../../../users.xml");
-                ser.Serialize(sw, registeredUsers);
+                var tempList = registeredUsers.Select(kvp => kvp.Value).ToList();
+                ser.Serialize(sw, tempList);
                 sw.Close();
             }
             catch (Exception e)
