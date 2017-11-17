@@ -24,6 +24,7 @@
         <Label x:Name="bankLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Bank acc:" HorizontalAlignment="Left" Margin="45,295,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
         <Label x:Name="usernameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Username:" HorizontalAlignment="Left" Margin="375,295,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
         <Label x:Name="passwordLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Password:" HorizontalAlignment="Left" Margin="45,355,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
+        
         <Label x:Name="errorlabel" Content="" FontSize="14" Foreground="#cc0000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="375,72,0,0"/>
 
     </Grid>
