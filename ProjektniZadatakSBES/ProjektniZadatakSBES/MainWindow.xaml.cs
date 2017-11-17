@@ -22,11 +22,13 @@ namespace ProjektniZadatakSBES
     public partial class MainWindow : Window
     {
         int activeButton = 1;
+        Login login = new Login();
+        Registration reg = new Registration();
 
         public MainWindow()
         {
             InitializeComponent();
-            ContentArea.Content = new Login();
+            ContentArea.Content = login;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -52,26 +54,38 @@ namespace ProjektniZadatakSBES
 
         private void signInButton_Click(object sender, RoutedEventArgs e)
         {
-            activeButton = 1;
+            if(activeButton == 0)
+            {
+                activeButton = 1;
 
-            SetWindowHeight();
+                SetWindowHeight();
 
-            ContentArea.Content = new Login();
+                ContentArea.Content = login;
 
-            registerButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
-            registerButton.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
+                registerButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
+                registerButton.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
+                return;
+            }
+
+            ((Login)ContentArea.Content).loginGrid_KeyUp(sender, new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Enter));
         }
 
         private void registerButton_Click(object sender, RoutedEventArgs e)
         {
-            activeButton = 0;
+            if(activeButton == 1)
+            {
+                activeButton = 0;
 
-            SetWindowHeight();
+                SetWindowHeight();
 
-            ContentArea.Content = new Registration();
+                ContentArea.Content = reg;
 
-            signInButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
-            signInButton.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
+                signInButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
+                signInButton.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
+                return;
+            }
+
+            ((Registration)ContentArea.Content).regGrid_KeyUp(sender, new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource, 0, Key.Enter));
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
