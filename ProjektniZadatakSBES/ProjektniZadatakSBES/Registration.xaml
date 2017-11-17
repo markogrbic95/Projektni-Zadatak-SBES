@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ProjektniZadatakSBES"
              mc:Ignorable="d" 
              d:DesignHeight="490" d:DesignWidth="700">
-    <Grid>
+    <Grid x:Name="regGrid" KeyUp="regGrid_KeyUp">
         <Label x:Name="menuLabel" Foreground="#494041" FontSize="40" FontWeight="Light" Content="REGISTRATION" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
        
         <TextBox x:Name="nameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
@@ -14,7 +14,7 @@
         <TextBox x:Name="addressTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="125,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
         <TextBox x:Name="phoneTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="455,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
         <TextBox x:Name="bankaccTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
-        <TextBox x:Name="usernsameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="455,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <TextBox x:Name="usernameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="455,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
         <PasswordBox x:Name="passwordTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="14" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="125,360,0,0" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
 
         <Label x:Name="nameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Name:" HorizontalAlignment="Left" Margin="45,175,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>

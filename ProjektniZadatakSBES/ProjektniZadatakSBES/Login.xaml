@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ProjektniZadatakSBES"
              mc:Ignorable="d" 
              d:DesignHeight="380" d:DesignWidth="700">
-    <Grid>
+    <Grid x:Name="loginGrid" KeyUp="loginGrid_KeyUp">
         <Label x:Name="menuLabel" Foreground="#494041" FontSize="40" FontWeight="Light" Content="LOGIN" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
 
         <TextBox x:Name="usernameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="90,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
