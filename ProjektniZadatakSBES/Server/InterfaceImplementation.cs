@@ -211,10 +211,30 @@ namespace Server
                 return true;
             
             */
+        }
 
+        public bool DeleteGroup(string groupName, string owner)
+        {
 
-           
+            grupe = ReadGroups();
+
+            foreach (var item in grupe)
+            {
+                if (item.GroupName == groupName)
+                {
+                    if (item.Owner == owner)
+                    {
+                        grupe.Remove(item);
+                        WriteGroups();
+                        return true;
+                    }
+                }
+
+            }
+
+            return false;
 
         }
+
     }
 }
