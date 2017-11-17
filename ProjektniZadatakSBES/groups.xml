@@ -3,11 +3,20 @@
   <Group>
     <GroupName>grupa1</GroupName>
     <Owner>sokiSole</Owner>
-    <ListaKorisnika />
+    <ListaKorisnika>
+      <string>grba</string>
+    </ListaKorisnika>
   </Group>
   <Group>
     <GroupName>grupa1</GroupName>
     <Owner>Dex</Owner>
     <ListaKorisnika />
+  </Group>
+  <Group>
+    <GroupName>grupa2</GroupName>
+    <Owner>sokiSole</Owner>
+    <ListaKorisnika>
+      <string>grbas</string>
+    </ListaKorisnika>
   </Group>
 </ArrayOfGroup>

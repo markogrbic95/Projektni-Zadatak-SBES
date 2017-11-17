@@ -13,9 +13,9 @@ namespace Server
     {
         static void Main(string[] args)
 
+
         {               
 
-        
 
 
 
@@ -24,7 +24,9 @@ namespace Server
             bool upitnik1 = i.AddGroup("grupa1", "Dex");
             bool upitnik3 = i.AddGroup("grupa2", "sokiSole");
             bool upitnik4= i.AddGroup("grupa1", "sokiSole");
-            i.DeleteGroup("grupa2", "sokiSole");
+            
+            i.AddUsersToGroup("grupa2", "sokiSole","grba");
+            i.DeleteUsersFromGroup("grupa2", "sokiSole", "grba");
             /*
             List<User> users = new List<User>();
             users.Add(new User("Nenad", "Grini", "A", "1", "1", "1", "1"));
