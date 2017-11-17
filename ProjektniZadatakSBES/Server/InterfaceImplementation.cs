@@ -13,8 +13,7 @@ namespace Server
     public class InterfaceImplementation : Interface
     {
         public static Dictionary<string,User> registeredUsers = new Dictionary<string, User>();
-        public static Dictionary<string, List<Group>> listaGrupa = new Dictionary<string, List<Group>>();
-        public static List<Group> grupe = new List<Group>();
+        public static List<Group> groupList = new List<Group>();
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             if (registeredUsers.ContainsKey(username))
@@ -100,12 +99,12 @@ namespace Server
         {
             try
             {
-                    XmlSerializer ser = new XmlSerializer(typeof(List<User>));
-                    StreamReader sr = new StreamReader(@"../../../users.xml");
-                    var tempList = (List<User>)ser.Deserialize(sr);
-                    registeredUsers = tempList.ToDictionary(x => x.Username);
+                XmlSerializer ser = new XmlSerializer(typeof(List<User>));
+                StreamReader sr = new StreamReader(@"../../../users.xml");
+                var tempList = (List<User>)ser.Deserialize(sr);
+                registeredUsers = tempList.ToDictionary(x => x.Username);
 
-                    sr.Close();
+                sr.Close();
             }
             catch (Exception e)
             {
@@ -123,7 +122,7 @@ namespace Server
             {
                 XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
                 StreamReader sr = new StreamReader(@"../../../groups.xml");
-                grupe = (List<Group>)ser.Deserialize(sr);
+                groupList = (List<Group>)ser.Deserialize(sr);
                 sr.Close();
             }
             catch (Exception e)
@@ -133,7 +132,7 @@ namespace Server
                 Console.WriteLine(e.Message);
             }
 
-            return grupe;
+            return groupList;
         }
 
 
@@ -162,7 +161,7 @@ namespace Server
             {
                 XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
                 StreamWriter sw = new StreamWriter(@"../../../groups.xml");
-                ser.Serialize(sw, grupe);
+                ser.Serialize(sw, groupList);
                 sw.Close();
             }
             catch (Exception e)
@@ -175,10 +174,9 @@ namespace Server
 
         public bool AddGroup(string groupName, string owner)
         {
+            groupList = ReadGroups();
 
-            grupe = ReadGroups();
-
-            foreach (var item in grupe)
+            foreach (var item in groupList)
             {
                 if (item.GroupName==groupName)
                 {
@@ -189,14 +187,23 @@ namespace Server
                 }
                 
             }
-                Group g = new Group();
-                g.GroupName = groupName;
-                g.Owner = owner;
-                g.ListaKorisnika = null;
+            Group g = new Group();
+            g.GroupName = groupName;
+            g.Owner = owner;
+            g.UsersList = null;
 
-                grupe.Add(g);
-                WriteGroups();
-                return true;
+            groupList.Add(g);
+            WriteGroups();
+
+            return true;
+        }
+
+        public List<User> AllUsersList()
+        {
+            var tempDict =  ReadFile();
+            var tempList = tempDict.Select(kvp => kvp.Value).ToList();
+
+            return tempList;
         }
     }
 }

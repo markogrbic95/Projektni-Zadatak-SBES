@@ -25,5 +25,8 @@ namespace Common
 
         [OperationContract]
         bool AddGroup(string groupName, string owner);
+
+        [OperationContract]
+        List<User> AllUsersList();
     }
 }

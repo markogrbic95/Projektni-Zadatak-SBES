@@ -168,6 +168,20 @@ namespace ProjektniZadatakSBES
             return result;
         }
 
+        public List<User> AllUsersList()
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                users = factory.AllUsersList();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return users;
+        }
+
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             bool result = false;
