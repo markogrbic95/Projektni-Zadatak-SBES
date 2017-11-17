@@ -29,15 +29,13 @@ namespace ProjektniZadatakSBES
 
 
         public static NetTcpBinding binding = new NetTcpBinding();
-        public static string address = "net.tcp://localhost:9999/InterfaceImplementation";
+        public static string address = "net.tcp://localhost:25001/InterfaceImplementation";
 
         public static ClientProxy proxy = new ClientProxy(binding, address);
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            ContentArea.Content = new Login();
+            InitializeComponent();            
             ContentArea.Content = login;
         }
 
@@ -160,13 +158,21 @@ namespace ProjektniZadatakSBES
             try
             {
                 result = factory.AddGroup(groupName, owner);
+<<<<<<< HEAD
                 result = factory.AddGroup(groupName,owner);
+=======
+>>>>>>> 8d72d2989348316b8741b7329c01843fb2232905
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
             return result;
+        }
+
+        public bool AddUsersToGroup(string groupName, string owner, string username)
+        {
+            return factory.AddUsersToGroup(groupName, owner, username);
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)
@@ -181,6 +187,11 @@ namespace ProjektniZadatakSBES
                 Console.WriteLine("Error: {0}", e.Message);
             }
             return result;
+        }
+
+        public bool DeleteGroup(string groupName, string owner)
+        {
+            return factory.DeleteGroup(groupName, owner);
         }
 
         public bool Login(string username, string password)

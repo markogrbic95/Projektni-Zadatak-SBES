@@ -34,7 +34,6 @@ namespace Server
                     Console.WriteLine("Old password is incorrect!");
                     return false;
                 }
-
             }
             else
             {
@@ -178,7 +177,6 @@ namespace Server
 
         public bool AddGroup(string groupName, string owner)
         {
-
             grupe = ReadGroups();
 
             foreach (var item in grupe)
@@ -189,19 +187,17 @@ namespace Server
                     {
                         return false;
                     }
-                }
-                
-            }
-            
+                }                
+            }            
 
-                Group g = new Group();
-                g.GroupName = groupName;
-                g.Owner = owner;
-                g.ListaKorisnika = null;
+            Group g = new Group();
+            g.GroupName = groupName;
+            g.Owner = owner;
+            g.ListaKorisnika = null;
 
-                grupe.Add(g);
-                WriteGroups();
-                return true;
+            grupe.Add(g);
+            WriteGroups();
+            return true;
             
             /*
                 Group g = new Group();
@@ -214,12 +210,47 @@ namespace Server
                 return true;
             
             */
+        }
 
+        public bool AddUsersToGroup(string groupName, string owner,string username)
+        {
+
+            grupe = ReadGroups();
+
+            registeredUsers = ReadFile();
+
+            foreach (var item in grupe)
+            {
+                if (item.GroupName == groupName)
+                {
+                    if (item.Owner == owner)
+                    {
+                       
+                        foreach (var item1 in registeredUsers.Values)
+                        {
+                            if(item1.Username==username)
+                            {
+                                foreach (var item2 in item.ListaKorisnika)
+                                {
+                                    if (item2 == username)
+                                        return false;
+                                }
+                                item.ListaKorisnika.Add(item1.Username);
+                                WriteGroups();
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+            }
+            return false;
 
            
 
         }
 
+<<<<<<< HEAD
         public string PasswordCheck(string password)
         {
             string retVal;
@@ -364,6 +395,72 @@ namespace Server
                 retVal = "Your Banking Account must have 20 characters";
                 return retVal;
             }
+=======
+        public bool DeleteUsersFromGroup(string groupName, string owner, string username)
+        {
+
+            grupe = ReadGroups();
+
+            registeredUsers = ReadFile();
+
+            foreach (var item in grupe)
+            {
+                if (item.GroupName == groupName)
+                {
+                    if (item.Owner == owner)
+                    {
+
+                        foreach (var item1 in registeredUsers.Values)
+                        {
+                            if (item1.Username == username)
+                            {
+                                foreach (var item2 in item.ListaKorisnika)
+                                {
+                                    if (item2 == username)
+                                    {
+                                        item.ListaKorisnika.Remove(item2);
+                                        WriteGroups();
+                                        return true;
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+
+            }
+            return false;
+
+
+
+        }
+
+        public bool DeleteGroup(string groupName, string owner)
+        {
+            grupe = ReadGroups();
+
+            foreach (var item in grupe)
+            {
+                if (item.GroupName == groupName)
+                {
+                    if (item.Owner == owner)
+                    {
+                        grupe.Remove(item);
+                        WriteGroups();
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool AddUsersToGroup(string groupName, string owner, string username)
+        {
+            throw new NotImplementedException();
+>>>>>>> 8d72d2989348316b8741b7329c01843fb2232905
         }
     }
 }
