@@ -29,5 +29,8 @@ namespace Common
         [OperationContract]
         bool DeleteGroup(string groupName, string owner);
 
+        [OperationContract]
+        bool AddUsersToGroup(string groupName, string owner,string username);
+
     }
 }

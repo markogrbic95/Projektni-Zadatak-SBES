@@ -12,9 +12,10 @@ namespace Server
     public class Program
     {
         static void Main(string[] args)
-        {
-<<<<<<< HEAD
-=======
+
+        {               
+
+        
 
 
 
@@ -33,8 +34,7 @@ namespace Server
             */
 
 
-            
->>>>>>> 13da13ea41d01c024d3be79a9c71a3d2f7e3d8d8
+
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:25001/InterfaceImplementation";
 
@@ -51,10 +51,7 @@ namespace Server
 
             Console.ReadLine();
             host.Close();
-<<<<<<< HEAD
-=======
 
->>>>>>> 13da13ea41d01c024d3be79a9c71a3d2f7e3d8d8
         }
     }
 }
