@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Group>
+    <GroupName>grupa1</GroupName>
+    <Owner>sokiSole</Owner>
+    <ListaKorisnika>
+      <string>grba</string>
+    </ListaKorisnika>
+  </Group>
+  <Group>
+    <GroupName>grupa1</GroupName>
+    <Owner>Dex</Owner>
+    <ListaKorisnika />
+  </Group>
+  <Group>
+    <GroupName>grupa2</GroupName>
+    <Owner>sokiSole</Owner>
+    <ListaKorisnika>
+      <string>grbas</string>
+    </ListaKorisnika>
+  </Group>
+</ArrayOfGroup>

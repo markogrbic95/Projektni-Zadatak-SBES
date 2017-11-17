@@ -209,6 +209,85 @@ namespace Server
             */
         }
 
+        public bool AddUsersToGroup(string groupName, string owner,string username)
+        {
+
+            grupe = ReadGroups();
+
+            registeredUsers = ReadFile();
+
+            foreach (var item in grupe)
+            {
+                if (item.GroupName == groupName)
+                {
+                    if (item.Owner == owner)
+                    {
+                       
+                        foreach (var item1 in registeredUsers.Values)
+                        {
+                            if(item1.Username==username)
+                            {
+                                foreach (var item2 in item.ListaKorisnika)
+                                {
+                                    if (item2 == username)
+                                        return false;
+                                }
+                                item.ListaKorisnika.Add(item1.Username);
+                                WriteGroups();
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+            }
+            return false;
+
+           
+
+        }
+
+        public bool DeleteUsersFromGroup(string groupName, string owner, string username)
+        {
+
+            grupe = ReadGroups();
+
+            registeredUsers = ReadFile();
+
+            foreach (var item in grupe)
+            {
+                if (item.GroupName == groupName)
+                {
+                    if (item.Owner == owner)
+                    {
+
+                        foreach (var item1 in registeredUsers.Values)
+                        {
+                            if (item1.Username == username)
+                            {
+                                foreach (var item2 in item.ListaKorisnika)
+                                {
+                                    if (item2 == username)
+                                    {
+                                        item.ListaKorisnika.Remove(item2);
+                                        WriteGroups();
+                                        return true;
+                                    }
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+
+            }
+            return false;
+
+
+
+        }
+
         public bool DeleteGroup(string groupName, string owner)
         {
             grupe = ReadGroups();
