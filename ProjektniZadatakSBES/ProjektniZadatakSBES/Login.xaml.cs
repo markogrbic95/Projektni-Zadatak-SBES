@@ -46,29 +46,19 @@ namespace ProjektniZadatakSBES
                         return;
                     }
                 }
-
-<<<<<<< HEAD
                 errorlabel.Content = "";
-
-                //string username = usernameTextBox.Text;
-                //string pass = passwordTextBox.Password;
-=======
+                
                 if (MainWindow.proxy.Login(usernameTextBox.Text, passwordTextBox.Password))
                 {
                     errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
                     errorlabel.Content = "Success!";
->>>>>>> 8d72d2989348316b8741b7329c01843fb2232905
 
                     MainUserWindow muw = new MainUserWindow();
                     muw.Show();
                     return;
                 }
-
-<<<<<<< HEAD
-                //ovde sad sibamo query na bazu da proverimo da li korisnik postoji, ako postoji login ako ne errorlabel.Content = "Wrong username/password combination!"
-=======
                 errorlabel.Content = "Wrong username/password combination!";
->>>>>>> 8d72d2989348316b8741b7329c01843fb2232905
+
             }
         }
     }
