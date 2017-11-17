@@ -12,11 +12,11 @@ namespace Common
     {
         private string groupName;
         private string owner;
-        private List<string> listaKorisnika= new List<string>();
+        private List<string> usersList= new List<string>();
 
         public Group()
         {
-            listaKorisnika = new List<string>();
+            usersList = new List<string>();
         }
 
         [DataMember]
@@ -46,16 +46,16 @@ namespace Common
             }
         }
         [DataMember]
-        public List<string> ListaKorisnika
+        public List<string> UsersList
         {
             get
             {
-                return listaKorisnika;
+                return usersList;
             }
 
             set
             {
-                listaKorisnika = value;
+                usersList = value;
             }
         }
     }

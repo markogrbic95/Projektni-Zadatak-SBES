@@ -13,8 +13,15 @@ namespace Server
     public class InterfaceImplementation : Interface
     {
         public static Dictionary<string,User> registeredUsers = new Dictionary<string, User>();
+<<<<<<< HEAD
+        public static List<Group> groupList = new List<Group>();
+=======
         public static Dictionary<string, List<Group>> listaGrupa = new Dictionary<string, List<Group>>();
         public static List<Group> grupe = new List<Group>();
+        public static List<string> numberList = new List<string>() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        public static List<string> interpunctionList = new List<string>() { ".", "?", "!", ",", ";", ":", "-" };
+
+>>>>>>> 4cf355c5197097a5057737d018e4a3282ea72606
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             if (registeredUsers.ContainsKey(username))
@@ -99,12 +106,12 @@ namespace Server
         {
             try
             {
-                    XmlSerializer ser = new XmlSerializer(typeof(List<User>));
-                    StreamReader sr = new StreamReader(@"../../../users.xml");
-                    var tempList = (List<User>)ser.Deserialize(sr);
-                    registeredUsers = tempList.ToDictionary(x => x.Username);
+                XmlSerializer ser = new XmlSerializer(typeof(List<User>));
+                StreamReader sr = new StreamReader(@"../../../users.xml");
+                var tempList = (List<User>)ser.Deserialize(sr);
+                registeredUsers = tempList.ToDictionary(x => x.Username);
 
-                    sr.Close();
+                sr.Close();
             }
             catch (Exception e)
             {
@@ -122,7 +129,7 @@ namespace Server
             {
                 XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
                 StreamReader sr = new StreamReader(@"../../../groups.xml");
-                grupe = (List<Group>)ser.Deserialize(sr);
+                groupList = (List<Group>)ser.Deserialize(sr);
                 sr.Close();
             }
             catch (Exception e)
@@ -132,7 +139,7 @@ namespace Server
                 Console.WriteLine(e.Message);
             }
 
-            return grupe;
+            return groupList;
         }
 
 
@@ -161,7 +168,7 @@ namespace Server
             {
                 XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
                 StreamWriter sw = new StreamWriter(@"../../../groups.xml");
-                ser.Serialize(sw, grupe);
+                ser.Serialize(sw, groupList);
                 sw.Close();
             }
             catch (Exception e)
@@ -174,9 +181,15 @@ namespace Server
 
         public bool AddGroup(string groupName, string owner)
         {
+<<<<<<< HEAD
+            groupList = ReadGroups();
+
+            foreach (var item in groupList)
+=======
             grupe = ReadGroups();
 
             foreach (var item in grupe)
+>>>>>>> 4cf355c5197097a5057737d018e4a3282ea72606
             {
                 if (item.GroupName==groupName)
                 {
@@ -184,6 +197,21 @@ namespace Server
                     {
                         return false;
                     }
+<<<<<<< HEAD
+                }
+                
+            }
+            Group g = new Group();
+            g.GroupName = groupName;
+            g.Owner = owner;
+            g.UsersList = null;
+
+            groupList.Add(g);
+            WriteGroups();
+
+            return true;
+        }
+=======
                 }                
             }            
 
@@ -242,11 +270,162 @@ namespace Server
 
             }
             return false;
+>>>>>>> 4cf355c5197097a5057737d018e4a3282ea72606
 
-           
+        public List<User> AllUsersList()
+        {
+            var tempDict =  ReadFile();
+            var tempList = tempDict.Select(kvp => kvp.Value).ToList();
 
+            return tempList;
         }
 
+<<<<<<< HEAD
+        public string PasswordCheck(string password)
+        {
+            string retVal;
+            bool check = false;
+
+            if (password.Length < 10)
+            {
+                retVal = "Password must have at least 10 characters!";
+
+                return retVal;
+            }
+            else if (password.Length > 20)
+            {
+                retVal = "Password can't have over 20 characters!";
+
+                return retVal;
+            }
+
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (char.IsLower(password[i]))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one lower case character!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (char.IsUpper(password[i]))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one upper case character!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            foreach (var item in numberList)
+            {
+                if (password.Contains(item))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one number!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            foreach (var item in interpunctionList)
+            {
+                if (password.Contains(item))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one interpunction character!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            retVal = "Your password is good!";
+
+            return retVal;
+        }
+
+        public string BankingAccountCheck(string acc)
+        {
+            string retVal;
+            bool check = false;
+
+            if (acc.Length == 20)
+            {
+                for (int i = 0; i < acc.Length; i++)
+                {
+                    if (i == 3 || i == 17)
+                    {
+                        if (acc[i] == '-')
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            retVal = "Fourth and Eighteenth character must have be a -";
+                            return retVal;
+                        }
+                    }
+
+                    foreach (var item in numberList)
+                    {
+                        if (acc[i].ToString() == item)
+                        {
+                            check = true;
+                            break;
+                        }
+                    }
+
+                    if (check == false)
+                    {
+                        retVal = i+1 + "." + " digit of yours Banking Account must have be a number";
+                        return retVal;
+                    }
+
+                    check = false;
+                }
+                
+
+                retVal = "Your Banking Account is good!";
+                return retVal;
+            }
+            else
+            {
+                retVal = "Your Banking Account must have 20 characters";
+                return retVal;
+            }
+=======
         public bool DeleteUsersFromGroup(string groupName, string owner, string username)
         {
 
@@ -307,5 +486,14 @@ namespace Server
 
             return false;
         }
+<<<<<<< HEAD
+=======
+
+        public bool AddUsersToGroup(string groupName, string owner, string username)
+        {
+            throw new NotImplementedException();
+>>>>>>> 8d72d2989348316b8741b7329c01843fb2232905
+        }
+>>>>>>> e97ae4432e7354888166648ae4b24092eecc8664
     }
 }

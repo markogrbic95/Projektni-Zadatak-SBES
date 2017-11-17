@@ -27,6 +27,9 @@ namespace Common
         bool AddGroup(string groupName, string owner);
 
         [OperationContract]
+<<<<<<< HEAD
+        List<User> AllUsersList();
+=======
         bool DeleteGroup(string groupName, string owner);
 
         [OperationContract]
@@ -35,5 +38,6 @@ namespace Common
         [OperationContract]
         bool DeleteUsersFromGroup(string groupName, string owner, string username);
 
+>>>>>>> 4cf355c5197097a5057737d018e4a3282ea72606
     }
 }
