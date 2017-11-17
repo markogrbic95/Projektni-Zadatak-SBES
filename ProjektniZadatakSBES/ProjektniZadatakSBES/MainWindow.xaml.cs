@@ -154,6 +154,20 @@ namespace ProjektniZadatakSBES
             factory = this.CreateChannel();
         }
 
+        public bool AddGroup(string groupName, string owner)
+        {
+            bool result = false;
+            try
+            {
+                result = factory.AddGroup(groupName, owner);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
+        }
+
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             bool result = false;
