@@ -13,7 +13,6 @@ namespace Server
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
             
 
 
@@ -27,7 +26,7 @@ namespace Server
             i.ReadFile();
             */
             Console.ReadKey();
-=======
+
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/InterfaceImplementation";
 
@@ -44,7 +43,7 @@ namespace Server
 
             Console.ReadLine();
             host.Close();
->>>>>>> 9df0d25e86b68a28ec4c3a62d82b78a66ce9bb5f
+
         }
     }
 }

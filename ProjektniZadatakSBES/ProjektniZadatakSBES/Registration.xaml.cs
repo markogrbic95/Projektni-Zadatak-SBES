@@ -27,9 +27,9 @@ namespace ProjektniZadatakSBES
 
         public void regGrid_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                foreach(Object tb in regGrid.Children)
+                foreach (Object tb in regGrid.Children)
                 {
                     if (tb is TextBox && String.IsNullOrEmpty(((TextBox)tb).Text))
                     {
@@ -37,26 +37,18 @@ namespace ProjektniZadatakSBES
                         return;
                     }
 
-                    if(tb is PasswordBox && ((PasswordBox)tb).Password.Equals("", StringComparison.CurrentCulture))
+                    if (tb is PasswordBox && ((PasswordBox)tb).Password.Equals("", StringComparison.CurrentCulture))
                     {
                         errorlabel.Content = "You must set a password!";
                         return;
                     }
-                }                
+                }
 
                 errorlabel.Content = "";
 
-                MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, addressTextBox.Text, phoneTextBox.Text, bankaccTextBox.Text, usernameTextBox.Text, passwordTextBox.Password);
+                string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, addressTextBox.Text, phoneTextBox.Text, bankaccTextBox.Text, usernameTextBox.Text, passwordTextBox.Password);
+                
 
-                //string name = nameTextBox.Text;
-                //string surname = surnameTextBox.Text;
-                //string address = addressTextBox.Text;
-                //string phone = phoneTextBox.Text;
-                //string bankAcc = bankaccTextBox.Text;
-                //string username = usernameTextBox.Text;
-                //string pass = passwordTextBox.Password;
-
-                //evo ti gore podaci sibnes to preko wcf-a
             }
         }
     }

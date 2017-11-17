@@ -79,20 +79,20 @@ namespace Server
             }
         }
 
-        public bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
+        public string Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
             registeredUsers = ReadFile();
 
             if(registeredUsers.ContainsKey(username))
             {
                 Console.WriteLine("This user already exist!");
-                return false;
+                return "This user already exist!";
             }
             else
             {
                 registeredUsers.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
                 WriteFile();
-                return true;
+                return "Success";
             }
         }
 
