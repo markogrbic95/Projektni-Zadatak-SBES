@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -25,9 +27,17 @@ namespace ProjektniZadatakSBES
         Login login = new Login();
         Registration reg = new Registration();
 
+
+        public static NetTcpBinding binding = new NetTcpBinding();
+        public static string address = "net.tcp://localhost:9999/InterfaceImplementation";
+
+        public static ClientProxy proxy = new ClientProxy(binding, address);
+
         public MainWindow()
         {
             InitializeComponent();
+
+            ContentArea.Content = new Login();
             ContentArea.Content = login;
         }
 
@@ -132,6 +142,72 @@ namespace ProjektniZadatakSBES
                         break;
                     }
             }
+        }
+    }
+
+    public class ClientProxy : ChannelFactory<Interface>, Interface, IDisposable
+    {
+        Interface factory;
+
+        public ClientProxy(NetTcpBinding binding, string address) : base(binding, address)
+        {
+            factory = this.CreateChannel();
+        }
+
+        public bool ChangePassword(string username, string oldPassword, string newPassword)
+        {
+            bool result = false;
+            try
+            {
+                result = factory.ChangePassword(username, oldPassword, newPassword);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
+        }
+
+        public bool Login(string username, string password)
+        {
+            bool result = false;
+            try
+            {
+                result = factory.Login(username, password);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
+        }
+
+        public bool Logout(string username)
+        {
+            bool result = false;
+            try
+            {
+                result = factory.Logout(username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
+        }
+
+        public bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
+        {
+            bool result = false;
+            try
+            {
+                result = factory.Registration(name, lastname, address, phoneNumber, accNumber, username, password);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
         }
     }
 }

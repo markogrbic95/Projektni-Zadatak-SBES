@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Server
@@ -12,6 +13,8 @@ namespace Server
     public class InterfaceImplementation : Interface
     {
         public static Dictionary<string,User> registeredUsers = new Dictionary<string, User>();
+        public static Dictionary<string, List<Group>> listaGrupa = new Dictionary<string, List<Group>>();
+        public static List<Group> grupe = new List<Group>();
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             if (registeredUsers.ContainsKey(username))
@@ -97,10 +100,12 @@ namespace Server
         {
             try
             {
-                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
-                StreamReader sr = new StreamReader(@"../../../users.xml");
-                registeredUsers = (Dictionary<string, User>)ser.Deserialize(sr);
-                sr.Close();
+                    XmlSerializer ser = new XmlSerializer(typeof(List<User>));
+                    StreamReader sr = new StreamReader(@"../../../users.xml");
+                    var tempList = (List<User>)ser.Deserialize(sr);
+                    registeredUsers = tempList.ToDictionary(x => x.Username);
+
+                    sr.Close();
             }
             catch (Exception e)
             {
@@ -112,14 +117,35 @@ namespace Server
             return registeredUsers;
         }
 
+        public List<Group> ReadGroups(string owner)
+        {
+            try
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
+                StreamReader sr = new StreamReader(@"../../../"+owner+".xml");
+                grupe = (List<Group>)ser.Deserialize(sr);
+                sr.Close();
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+
+            return grupe;
+        }
+
+
 
         public void WriteFile()
         {
             try
             {
-                XmlSerializer ser = new XmlSerializer(typeof(Dictionary<string, User>));
+                XmlSerializer ser = new XmlSerializer(typeof(List<User>));
                 StreamWriter sw = new StreamWriter(@"../../../users.xml");
-                ser.Serialize(sw, registeredUsers);
+                var tempList = registeredUsers.Select(kvp => kvp.Value).ToList();
+                ser.Serialize(sw, tempList);
                 sw.Close();
             }
             catch (Exception e)
@@ -128,6 +154,67 @@ namespace Server
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
+        }
+
+        public void WriteGroups(string owner)
+        {
+            try
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
+                StreamWriter sw = new StreamWriter(@"../../../"+owner+".xml");
+                ser.Serialize(sw, grupe);
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public bool AddGroup(string groupName, string owner)
+        {
+
+            grupe = ReadGroups(owner);
+
+            foreach (var item in grupe)
+            {
+                if (item.GroupName==groupName)
+                {
+                    if(item.Owner == owner)
+                    {
+                        return false;
+                    }
+                }
+                
+            }
+            
+
+                Group g = new Group();
+                g.GroupName = groupName;
+                g.Owner = owner;
+                g.ListaKorisnika = null;
+
+                grupe.Add(g);
+                WriteGroups(owner);
+                return true;
+            
+            /*
+                Group g = new Group();
+                g.GroupName = groupName;
+                g.ListaKorisnika = null;
+                List<Group> pomocna = new List<Group>();
+                pomocna.Add(g);
+                listaGrupa.Add(owner, pomocna);
+                WriteGroups(owner);
+                return true;
+            
+            */
+
+
+           
+
         }
     }
 }

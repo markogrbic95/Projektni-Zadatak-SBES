@@ -22,5 +22,8 @@ namespace Common
 
         [OperationContract]
         bool Logout(string username);
+
+        [OperationContract]
+        bool AddGroup(string groupName, string owner);
     }
 }

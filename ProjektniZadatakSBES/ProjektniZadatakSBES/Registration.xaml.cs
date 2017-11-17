@@ -46,6 +46,8 @@ namespace ProjektniZadatakSBES
 
                 errorlabel.Content = "";
 
+                MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, addressTextBox.Text, phoneTextBox.Text, bankaccTextBox.Text, usernameTextBox.Text, passwordTextBox.Password);
+
                 //string name = nameTextBox.Text;
                 //string surname = surnameTextBox.Text;
                 //string address = addressTextBox.Text;
