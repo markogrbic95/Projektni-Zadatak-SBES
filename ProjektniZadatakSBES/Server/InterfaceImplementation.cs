@@ -15,6 +15,9 @@ namespace Server
         public static Dictionary<string,User> registeredUsers = new Dictionary<string, User>();
         public static Dictionary<string, List<Group>> listaGrupa = new Dictionary<string, List<Group>>();
         public static List<Group> grupe = new List<Group>();
+        public static List<string> numberList = new List<string>() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        public static List<string> interpunctionList = new List<string>() { ".", "?", "!", ",", ";", ":", "-" };
+
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             if (registeredUsers.ContainsKey(username))
@@ -215,6 +218,152 @@ namespace Server
 
            
 
+        }
+
+        public string PasswordCheck(string password)
+        {
+            string retVal;
+            bool check = false;
+
+            if (password.Length < 10)
+            {
+                retVal = "Password must have at least 10 characters!";
+
+                return retVal;
+            }
+            else if (password.Length > 20)
+            {
+                retVal = "Password can't have over 20 characters!";
+
+                return retVal;
+            }
+
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (char.IsLower(password[i]))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one lower case character!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            for (int i = 0; i < password.Length; i++)
+            {
+                if (char.IsUpper(password[i]))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one upper case character!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            foreach (var item in numberList)
+            {
+                if (password.Contains(item))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one number!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            foreach (var item in interpunctionList)
+            {
+                if (password.Contains(item))
+                {
+                    check = true;
+                    break;
+                }
+            }
+
+            if (check == false)
+            {
+                retVal = "Password must have at least one interpunction character!";
+
+                return retVal;
+            }
+
+            check = false;
+
+            retVal = "Your password is good!";
+
+            return retVal;
+        }
+
+        public string BankingAccountCheck(string acc)
+        {
+            string retVal;
+            bool check = false;
+
+            if (acc.Length == 20)
+            {
+                for (int i = 0; i < acc.Length; i++)
+                {
+                    if (i == 3 || i == 17)
+                    {
+                        if (acc[i] == '-')
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            retVal = "Fourth and Eighteenth character must have be a -";
+                            return retVal;
+                        }
+                    }
+
+                    foreach (var item in numberList)
+                    {
+                        if (acc[i].ToString() == item)
+                        {
+                            check = true;
+                            break;
+                        }
+                    }
+
+                    if (check == false)
+                    {
+                        retVal = i+1 + "." + " digit of yours Banking Account must have be a number";
+                        return retVal;
+                    }
+
+                    check = false;
+                }
+                
+
+                retVal = "Your Banking Account is good!";
+                return retVal;
+            }
+            else
+            {
+                retVal = "Your Banking Account must have 20 characters";
+                return retVal;
+            }
         }
     }
 }
