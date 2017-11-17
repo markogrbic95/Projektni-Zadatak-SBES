@@ -159,11 +159,7 @@ namespace ProjektniZadatakSBES
             bool result = false;
             try
             {
-<<<<<<< HEAD
                 result = factory.AddGroup(groupName, owner);
-=======
-                result = factory.AddGroup(groupName,owner);
->>>>>>> f5f5735909bf951c19f1cdadd9159a4770dacd43
             }
             catch (Exception e)
             {

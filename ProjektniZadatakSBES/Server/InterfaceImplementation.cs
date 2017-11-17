@@ -189,7 +189,6 @@ namespace Server
                 }
                 
             }
-            
 
                 Group g = new Group();
                 g.GroupName = groupName;
@@ -199,22 +198,8 @@ namespace Server
                 grupe.Add(g);
                 WriteGroups(owner);
                 return true;
-            
-            /*
-                Group g = new Group();
-                g.GroupName = groupName;
-                g.ListaKorisnika = null;
-                List<Group> pomocna = new List<Group>();
-                pomocna.Add(g);
-                listaGrupa.Add(owner, pomocna);
-                WriteGroups(owner);
-                return true;
-            
-            */
-
-
            
-
         }
+
     }
 }
