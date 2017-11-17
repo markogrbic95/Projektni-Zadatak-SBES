@@ -31,18 +31,14 @@ namespace ProjektniZadatakSBES
         public static NetTcpBinding binding = new NetTcpBinding();
         public static string address = "net.tcp://localhost:9999/InterfaceImplementation";
 
-        ClientProxy proxy = new ClientProxy(binding, address);
+        public static ClientProxy proxy = new ClientProxy(binding, address);
 
         public MainWindow()
         {
             InitializeComponent();
-<<<<<<< HEAD
-
 
             ContentArea.Content = new Login();
-=======
             ContentArea.Content = login;
->>>>>>> 723431411e8d8cddab2a571234de1411b09dce25
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -149,7 +145,7 @@ namespace ProjektniZadatakSBES
         }
     }
 
-    internal class ClientProxy : ChannelFactory<Interface>, Interface, IDisposable
+    public class ClientProxy : ChannelFactory<Interface>, Interface, IDisposable
     {
         Interface factory;
 
