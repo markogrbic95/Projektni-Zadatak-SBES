@@ -35,9 +35,7 @@ namespace ProjektniZadatakSBES
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            ContentArea.Content = new Login();
+            InitializeComponent();            
             ContentArea.Content = login;
         }
 
@@ -160,6 +158,10 @@ namespace ProjektniZadatakSBES
             try
             {
                 result = factory.AddGroup(groupName, owner);
+<<<<<<< HEAD
+                result = factory.AddGroup(groupName,owner);
+=======
+>>>>>>> 8d72d2989348316b8741b7329c01843fb2232905
             }
             catch (Exception e)
             {
@@ -168,6 +170,7 @@ namespace ProjektniZadatakSBES
             return result;
         }
 
+<<<<<<< HEAD
         public List<User> AllUsersList()
         {
             List<User> users = new List<User>();
@@ -180,6 +183,11 @@ namespace ProjektniZadatakSBES
                 Console.WriteLine("Error: {0}", e.Message);
             }
             return users;
+=======
+        public bool AddUsersToGroup(string groupName, string owner, string username)
+        {
+            return factory.AddUsersToGroup(groupName, owner, username);
+>>>>>>> 4cf355c5197097a5057737d018e4a3282ea72606
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)
@@ -194,6 +202,11 @@ namespace ProjektniZadatakSBES
                 Console.WriteLine("Error: {0}", e.Message);
             }
             return result;
+        }
+
+        public bool DeleteGroup(string groupName, string owner)
+        {
+            return factory.DeleteGroup(groupName, owner);
         }
 
         public bool Login(string username, string password)
