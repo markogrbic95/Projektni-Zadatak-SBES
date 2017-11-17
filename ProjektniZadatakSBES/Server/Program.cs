@@ -12,7 +12,10 @@ namespace Server
     public class Program
     {
         static void Main(string[] args)
-        {
+
+        {               
+
+        
 
 
 
@@ -31,7 +34,7 @@ namespace Server
             */
 
 
-            
+
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:25001/InterfaceImplementation";
 
