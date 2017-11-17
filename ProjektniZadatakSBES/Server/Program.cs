@@ -31,6 +31,7 @@ namespace Server
             */
             Console.ReadKey();
 
+
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/InterfaceImplementation";
 
