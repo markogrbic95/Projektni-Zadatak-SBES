@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,15 +13,22 @@ namespace Server
     {
         static void Main(string[] args)
         {
+            NetTcpBinding binding = new NetTcpBinding();
+            string address = "net.tcp://localhost:9999/InterfaceImplementation";
 
-           /* InterfaceImplementation i = new InterfaceImplementation();
+            ServiceHost host = new ServiceHost(typeof(InterfaceImplementation));
+            host.AddServiceEndpoint(typeof(Interface), binding, address);
 
-            List<User> users = new List<User>();
-            users.Add(new User("Nenad", "Grini", "A", "1", "1", "1", "1"));
-            i.WriteFile(users);
+            host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
-            i.ReadFile();
-            */
+            host.Open();
+
+            Console.WriteLine("Server is started.");
+            Console.WriteLine("Press <enter> to stop server...");
+
+            Console.ReadLine();
+            host.Close();
         }
     }
 }
