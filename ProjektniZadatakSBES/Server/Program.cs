@@ -13,6 +13,27 @@ namespace Server
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
+=======
+
+            
+
+
+            InterfaceImplementation i = new InterfaceImplementation();
+            bool upitnik=i.AddGroup("grupa1", "sokiSole");
+            bool upitnik1 = i.AddGroup("grupa1", "Dex");
+            bool upitnik3 = i.AddGroup("grupa2", "sokiSole");
+            bool upitnik4= i.AddGroup("grupa1", "sokiSole");
+            /*
+            List<User> users = new List<User>();
+            users.Add(new User("Nenad", "Grini", "A", "1", "1", "1", "1"));
+            i.WriteFile(users);
+
+            i.ReadFile();
+            */
+            Console.ReadKey();
+
+>>>>>>> cbb4f285e766827690ec8716caa87ca51aee56b3
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:25001/InterfaceImplementation";
 
@@ -29,6 +50,10 @@ namespace Server
 
             Console.ReadLine();
             host.Close();
+<<<<<<< HEAD
+=======
+
+>>>>>>> cbb4f285e766827690ec8716caa87ca51aee56b3
         }
     }
 }
