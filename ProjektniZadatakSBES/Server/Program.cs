@@ -14,7 +14,6 @@ namespace Server
         static void Main(string[] args)
         {
 
-            
 
 
             InterfaceImplementation i = new InterfaceImplementation();
@@ -22,6 +21,7 @@ namespace Server
             bool upitnik1 = i.AddGroup("grupa1", "Dex");
             bool upitnik3 = i.AddGroup("grupa2", "sokiSole");
             bool upitnik4= i.AddGroup("grupa1", "sokiSole");
+            i.DeleteGroup("grupa2", "sokiSole");
             /*
             List<User> users = new List<User>();
             users.Add(new User("Nenad", "Grini", "A", "1", "1", "1", "1"));
@@ -29,11 +29,11 @@ namespace Server
 
             i.ReadFile();
             */
-            Console.ReadKey();
 
 
+            
             NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:9999/InterfaceImplementation";
+            string address = "net.tcp://localhost:25001/InterfaceImplementation";
 
             ServiceHost host = new ServiceHost(typeof(InterfaceImplementation));
             host.AddServiceEndpoint(typeof(Interface), binding, address);

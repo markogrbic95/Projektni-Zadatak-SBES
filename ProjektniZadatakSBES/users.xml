@@ -60,4 +60,14 @@
     <Password>ads</Password>
     <Logged>false</Logged>
   </User>
+  <User>
+    <Name>asf</Name>
+    <LastName>asf</LastName>
+    <Address>asf</Address>
+    <PhoneNumber>asf</PhoneNumber>
+    <AccountNumber>asf</AccountNumber>
+    <Username>asf</Username>
+    <Password>asf</Password>
+    <Logged>false</Logged>
+  </User>
 </ArrayOfUser>

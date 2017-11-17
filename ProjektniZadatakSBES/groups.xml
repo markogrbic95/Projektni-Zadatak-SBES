@@ -10,8 +10,4 @@
     <Owner>Dex</Owner>
     <ListaKorisnika />
   </Group>
-  <Group>
-    <GroupName>grupa2</GroupName>
-    <Owner>sokiSole</Owner>
-  </Group>
 </ArrayOfGroup>
