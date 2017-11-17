@@ -307,10 +307,5 @@ namespace Server
 
             return false;
         }
-
-        public bool AddUsersToGroup(string groupName, string owner, string username)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
