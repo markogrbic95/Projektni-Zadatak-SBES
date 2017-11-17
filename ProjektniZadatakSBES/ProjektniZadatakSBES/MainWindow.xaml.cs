@@ -159,7 +159,11 @@ namespace ProjektniZadatakSBES
             bool result = false;
             try
             {
+<<<<<<< HEAD
                 result = factory.AddGroup(groupName, owner);
+=======
+                result = factory.AddGroup(groupName,owner);
+>>>>>>> f5f5735909bf951c19f1cdadd9159a4770dacd43
             }
             catch (Exception e)
             {
@@ -210,9 +214,9 @@ namespace ProjektniZadatakSBES
             return result;
         }
 
-        public bool Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
+        public string Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
-            bool result = false;
+            string result = "";
             try
             {
                 result = factory.Registration(name, lastname, address, phoneNumber, accNumber, username, password);
@@ -220,6 +224,7 @@ namespace ProjektniZadatakSBES
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
+                result = String.Format("Error: {0}", e.Message);
             }
             return result;
         }
