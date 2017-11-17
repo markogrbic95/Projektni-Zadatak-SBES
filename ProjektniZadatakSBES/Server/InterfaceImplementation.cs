@@ -114,12 +114,12 @@ namespace Server
             return registeredUsers;
         }
 
-        public List<Group> ReadGroups(string owner)
+        public List<Group> ReadGroups()
         {
             try
             {
                 XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
-                StreamReader sr = new StreamReader(@"../../../"+owner+".xml");
+                StreamReader sr = new StreamReader(@"../../../groups.xml");
                 grupe = (List<Group>)ser.Deserialize(sr);
                 sr.Close();
             }
@@ -152,12 +152,12 @@ namespace Server
             }
         }
 
-        public void WriteGroups(string owner)
+        public void WriteGroups()
         {
             try
             {
                 XmlSerializer ser = new XmlSerializer(typeof(List<Group>));
-                StreamWriter sw = new StreamWriter(@"../../../"+owner+".xml");
+                StreamWriter sw = new StreamWriter(@"../../../groups.xml");
                 ser.Serialize(sw, grupe);
                 sw.Close();
             }
@@ -172,7 +172,7 @@ namespace Server
         public bool AddGroup(string groupName, string owner)
         {
 
-            grupe = ReadGroups(owner);
+            grupe = ReadGroups();
 
             foreach (var item in grupe)
             {
@@ -193,7 +193,7 @@ namespace Server
                 g.ListaKorisnika = null;
 
                 grupe.Add(g);
-                WriteGroups(owner);
+                WriteGroups();
                 return true;
             
             /*
