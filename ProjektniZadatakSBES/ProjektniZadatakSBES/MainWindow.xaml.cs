@@ -182,6 +182,11 @@ namespace ProjektniZadatakSBES
             return result;
         }
 
+        public bool DeleteGroup(string groupName, string owner)
+        {
+            return factory.DeleteGroup(groupName, owner);
+        }
+
         public bool Login(string username, string password)
         {
             bool result = false;
