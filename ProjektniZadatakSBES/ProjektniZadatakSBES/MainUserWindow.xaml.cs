@@ -60,10 +60,10 @@ namespace ProjektniZadatakSBES
             List<Group> userGroups = clientProxy.GetUserGroups(loggedUser.Username);
 
             foreach (User user in users)            
-                usersStackPanel.Children.Add(new miniUserInfo(user.Username));
+                usersStackPanel.Children.Add(new MiniUserInfo(user.Username));
 
-            foreach (Group group in userGroups)
-                groupsStackPanel.Children.Add(new miniGroupInfo(group.GroupName));
+            //foreach (Group group in userGroups)
+                //myGroupsStackPanel.Children.Add(new miniGroupInfo(group.GroupName));
         }
 
         private void addGroupButton_Click(object sender, RoutedEventArgs e)
@@ -80,9 +80,54 @@ namespace ProjektniZadatakSBES
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
-
             ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
             ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));           
+        }
+
+        private void myGroupsButton_Click(object sender, RoutedEventArgs e)
+        {   
+            if(usersScrollViewer.ActualHeight != 0)
+            {
+                if (myGroupsScrollViewer.ActualHeight == 0)
+                {
+                    myGroupsScrollViewer.Height = 225;
+                    myGroupsScrollViewer.Margin = new Thickness(0, 305, 520, 0);
+                    myGroupsButton.Margin = new Thickness(0, 265, 520, 225);
+                    usersScrollViewer.Height = 225;
+                    return;
+                }
+                else
+                {
+                    myGroupsScrollViewer.Height = 0;
+                    myGroupsScrollViewer.Margin = new Thickness(0, 530, 0, 0);
+                    myGroupsButton.Margin = new Thickness(0, 490, 520, 0);
+                    usersScrollViewer.Height = 450;
+                    return;
+                }
+            } 
+        }
+
+        private void usersButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (myGroupsScrollViewer.ActualHeight != 0)
+            {
+                if (usersScrollViewer.ActualHeight == 0)
+                {
+                    usersScrollViewer.Height = 225;
+                    myGroupsScrollViewer.Margin = new Thickness(0, 305, 520, 0);
+                    myGroupsButton.Margin = new Thickness(0, 265, 520, 225);
+                    usersScrollViewer.Height = 225;
+                    return;
+                }
+                else
+                {
+                    usersScrollViewer.Height = 0;
+                    myGroupsButton.Margin = new Thickness(0, 40, 520, 450);
+                    myGroupsScrollViewer.Height = 450;
+                    myGroupsScrollViewer.Margin = new Thickness(0, 80, 0, 0);
+                    return;
+                }
+            }
         }
     }
 }

@@ -16,33 +16,36 @@ using System.Windows.Shapes;
 namespace ProjektniZadatakSBES
 {
     /// <summary>
-    /// Interaction logic for miniUserInfo.xaml
+    /// Interaction logic for MiniUserInfo.xaml
     /// </summary>
-    public partial class miniUserInfo : UserControl
+    public partial class MiniUserInfo : UserControl
     {
-        public miniUserInfo(string uname)
+        public MiniUserInfo(string username)
         {
             InitializeComponent();
-            unameLabel.Content = uname;        
+            userButton.Content = username;
         }
 
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        private void userButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
-            unameLabel.Foreground = new SolidColorBrush(Color.FromRgb(255,255,255));
-            userImage.Source = new BitmapImage(new Uri(@"\Resources\userWhite.png", UriKind.RelativeOrAbsolute)); 
+            Console.WriteLine(this.Parent.ToString());
         }
 
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        private void userButton_MouseEnter(object sender, MouseEventArgs e)
         {
-            this.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
-            unameLabel.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
+            userImage.Source = new BitmapImage(new Uri(@"\Resources\userWhite.png", UriKind.RelativeOrAbsolute));
+            userStackPanel.Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
+            userButton.Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
+            userButton.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+
+        }
+
+        private void userButton_MouseLeave(object sender, MouseEventArgs e)
+        {
             userImage.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
-        }
-
-        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-
+            userStackPanel.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
+            userButton.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
+            userButton.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
         }
     }
 }
