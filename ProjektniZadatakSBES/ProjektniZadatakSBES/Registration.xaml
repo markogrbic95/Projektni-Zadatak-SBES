@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="490" d:DesignWidth="700">
     <Grid x:Name="regGrid" KeyUp="regGrid_KeyUp">
-        <Label x:Name="menuLabel" Foreground="#494041" FontSize="40" FontWeight="Light" Content="REGISTRATION" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="menuLabel" Foreground="#494041" FontSize="40" FontWeight="Light" Content="REGISTRATION" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top"/>
        
         <TextBox x:Name="nameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
         <TextBox x:Name="surnameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="455,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
@@ -25,7 +25,7 @@
         <Label x:Name="usernameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Username:" HorizontalAlignment="Left" Margin="375,295,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
         <Label x:Name="passwordLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Password:" HorizontalAlignment="Left" Margin="45,355,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
         
-        <Label x:Name="errorlabel" Content="" FontSize="14" Foreground="#cc0000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="345,72,0,0"/>
+        <Label x:Name="errorlabel" Content="" FontSize="14" Foreground="#cc0000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,100,0,0"/>
 
     </Grid>
 </UserControl>
