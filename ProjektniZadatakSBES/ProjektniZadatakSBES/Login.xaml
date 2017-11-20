@@ -13,7 +13,7 @@
         <PasswordBox x:Name="passwordTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="14" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="90,250,0,0" VerticalAlignment="Top" Width="520" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
         <Image x:Name="usernameImage" Source="Resources/username.png" HorizontalAlignment="Left" Height="30" Margin="50,180,0,0" VerticalAlignment="Top" Width="30"/>
         <Image x:Name="passwordImage" Source="Resources/password.png" HorizontalAlignment="Left" Height="30" Margin="50,250,0,0" VerticalAlignment="Top" Width="30"/>
-        <Label x:Name="errorlabel" Content="" FontSize="14" Foreground="#cc0000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="375,72,0,0"/>
+        <Label x:Name="errorlabel" Content="" FontSize="14" Foreground="#cc0000" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="345,72,0,0"/>
 
     </Grid>
 </UserControl>

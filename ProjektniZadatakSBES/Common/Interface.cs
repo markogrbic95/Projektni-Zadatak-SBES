@@ -18,7 +18,7 @@ namespace Common
         bool ChangePassword(string username, string oldPassword, string newPassword);
 
         [OperationContract]
-        bool Login(string username, string password);
+        User Login(string username, string password);
 
         [OperationContract]
         bool Logout(string username);

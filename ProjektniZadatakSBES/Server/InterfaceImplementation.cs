@@ -44,7 +44,7 @@ namespace Server
             }
         }
 
-        public bool Login(string username, string password)
+        public User Login(string username, string password)
         {
             if (registeredUsers.ContainsKey(username))
             {
@@ -53,18 +53,18 @@ namespace Server
                     registeredUsers[username].Logged = true;
                     Console.WriteLine("{0} logged successfully!",username);
 
-                    return true;
+                    return registeredUsers[username];
                 }
                 else
                 {
                     Console.WriteLine("Incorrect password!");
-                    return false;
+                    return null;
                 }
             }
             else
             {
                 Console.WriteLine("Incorrect username!");
-                return false;
+                return null;
             }
         }
 
@@ -406,7 +406,7 @@ namespace Server
             {
                 if (item.GroupName == groupName)
                 {
-                    if (item.Owner == owner)
+                    if (item.Owner == owner) 
                     {
 
                         foreach (var item1 in registeredUsers.Values)

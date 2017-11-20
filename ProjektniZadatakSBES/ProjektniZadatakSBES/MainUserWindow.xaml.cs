@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class MainUserWindow : Window
     {
-        public MainUserWindow()
+        User loggedUser;
+
+        public MainUserWindow(User user)
         {
             InitializeComponent();
+            loggedUser = user;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

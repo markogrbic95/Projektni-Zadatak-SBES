@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,20 +47,30 @@ namespace ProjektniZadatakSBES
                         return;
                     }
                 }
+
                 errorlabel.Content = "";
-                
-                if (MainWindow.proxy.Login(usernameTextBox.Text, passwordTextBox.Password))
+
+                User loggedUser = MainWindow.proxy.Login(usernameTextBox.Text, passwordTextBox.Password);
+
+                if (loggedUser != null)
                 {
                     errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
-                    errorlabel.Content = "Success!";
-
-                    MainUserWindow muw = new MainUserWindow();
+                    errorlabel.Content = "Success!";                   
+                    
+                    MainUserWindow muw = new MainUserWindow(loggedUser);
                     muw.Show();
+
+                    ((Window)this.Parent).Close();
                     return;
                 }
-                errorlabel.Content = "Wrong username/password combination!";
 
+                errorlabel.Content = "Wrong username/password combination!";
             }
         }
     }
 }
+
+
+// Ispravljen login
+// Zajebava prozor kad se uloguje korisnik, ostaje register i login
+// Prosiri prozor zbog ispisa

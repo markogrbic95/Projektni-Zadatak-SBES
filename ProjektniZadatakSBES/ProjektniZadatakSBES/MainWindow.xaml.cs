@@ -24,13 +24,12 @@ namespace ProjektniZadatakSBES
     public partial class MainWindow : Window
     {
         int activeButton = 1;
+
         Login login = new Login();
         Registration reg = new Registration();
 
-
         public static NetTcpBinding binding = new NetTcpBinding();
         public static string address = "net.tcp://localhost:25001/InterfaceImplementation";
-
         public static ClientProxy proxy = new ClientProxy(binding, address);
 
         public MainWindow()
@@ -209,18 +208,18 @@ namespace ProjektniZadatakSBES
             return factory.DeleteUsersFromGroup(groupName, owner, username);
         }
 
-        public bool Login(string username, string password)
+        public User Login(string username, string password)
         {
-            bool result = false;
+            User tempUser = new User();
             try
             {
-                result = factory.Login(username, password);
+                tempUser = factory.Login(username, password);
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
-            return result;
+            return tempUser;
         }
 
         public bool Logout(string username)
