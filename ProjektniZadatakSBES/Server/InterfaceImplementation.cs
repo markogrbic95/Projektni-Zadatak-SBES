@@ -156,6 +156,20 @@ namespace Server
             return groupList;
         }
 
+        public List<Group> GetUserGroups(string username)
+        {
+            var tempList = ReadGroups();
+            List<Group> userGroupList = new List<Group>();
+            foreach (var item in tempList)
+            {
+                if(item.Owner==username)
+                {
+                    userGroupList.Add(item);
+                }
+            }
+            return userGroupList;
+        }
+
         public void WriteFile()
         {
             try
@@ -404,7 +418,6 @@ namespace Server
                         return retVal;
                     }
                 }
-
                 retVal = "Success!";
                 return retVal;
             }

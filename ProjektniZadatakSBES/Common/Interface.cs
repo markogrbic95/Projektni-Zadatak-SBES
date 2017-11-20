@@ -35,5 +35,8 @@ namespace Common
 
         [OperationContract]
         bool DeleteUsersFromGroup(string groupName, string owner, string username);
+
+        [OperationContract]
+        List<Group> GetUserGroups(string username);
     }
 }
