@@ -140,8 +140,6 @@ namespace Server
             return groupList;
         }
 
-
-
         public void WriteFile()
         {
             try
@@ -215,26 +213,23 @@ namespace Server
 
             foreach (var item in grupe)
             {
-                if (item.GroupName == groupName)
+                if (item.GroupName == groupName && item.Owner == owner)
                 {
-                    if (item.Owner == owner)
-                    {
-                        foreach (var item1 in registeredUsers.Values)
-                        {
-                            if (item1.Username == username)
-                            {
-                                foreach (var item2 in item.UsersList)
-                                {
-                                    if (item2 == username)
-                                        return false;
-                                }
+                  foreach (var item1 in registeredUsers.Values)
+                  {
+                      if (item1.Username == username)
+                      {
+                          foreach (var item2 in item.UsersList)
+                          {
+                              if (item2 == username)
+                                  return false;
+                          }
 
-                                item.UsersList.Add(item1.Username);
-                                WriteGroups();
-                                return true;
-                            }
-                        }
-                    }
+                          item.UsersList.Add(item1.Username);
+                          WriteGroups();
+                          return true;
+                      }
+                  }
                 }
             }
 
@@ -397,43 +392,32 @@ namespace Server
 
         public bool DeleteUsersFromGroup(string groupName, string owner, string username)
         {
-
             grupe = ReadGroups();
 
             registeredUsers = ReadFile();
 
             foreach (var item in grupe)
             {
-                if (item.GroupName == groupName)
+                if (item.GroupName == groupName && item.Owner == owner)
                 {
-                    if (item.Owner == owner) 
+                    foreach (var item1 in registeredUsers.Values)
                     {
-
-                        foreach (var item1 in registeredUsers.Values)
+                        if (item1.Username == username)
                         {
-                            if (item1.Username == username)
+                            foreach (var item2 in item.UsersList)
                             {
-                                foreach (var item2 in item.UsersList)
+                                if (item2 == username)
                                 {
-                                    if (item2 == username)
-                                    {
-                                        item.UsersList.Remove(item2);
-                                        WriteGroups();
-                                        return true;
-                                    }
-                                    
+                                    item.UsersList.Remove(item2);
+                                    WriteGroups();
+                                    return true;
                                 }
-                                
                             }
                         }
                     }
                 }
-
             }
             return false;
-
-
-
         }
 
         public bool DeleteGroup(string groupName, string owner)
@@ -442,17 +426,13 @@ namespace Server
 
             foreach (var item in grupe)
             {
-                if (item.GroupName == groupName)
+                if (item.GroupName == groupName && item.Owner == owner)
                 {
-                    if (item.Owner == owner)
-                    {
-                        grupe.Remove(item);
-                        WriteGroups();
-                        return true;
-                    }
+                    grupe.Remove(item);
+                    WriteGroups();
+                    return true;
                 }
             }
-
             return false;
         }
     }
