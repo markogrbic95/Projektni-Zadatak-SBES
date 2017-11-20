@@ -40,21 +40,20 @@
                 </Style>
             </Button.Style>
         </Button>
-        
-        <ScrollViewer HorizontalAlignment="Left" Height="215" VerticalAlignment="Top" Width="150">
-            <StackPanel Background="#ecf0f1">
-                <StackPanel Height="40" Width="133" Background="#e3634f">
-                    <Label x:Name="usersLabel" Foreground="#fff" FontSize="20" FontWeight="Light" Content="Users" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
-        <ScrollViewer HorizontalAlignment="Left" Height="215" VerticalAlignment="Top" Width="150" Margin="0,215,0,0">
-            <StackPanel Background="#ecf0f1">
-                <StackPanel Height="40" Width="133" Background="#e3634f">
-                    <Label x:Name="groupsLabel" Foreground="#fff" FontSize="20" FontWeight="Light" Content="Groups" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
 
+        <StackPanel Height="40" Background="#e3634f" Margin="0,0,550,390">
+            <Label x:Name="usersLabel" Foreground="#fff" FontSize="20" FontWeight="Light" Content="Users" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <ScrollViewer HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="150" Margin="0,40,0,0">
+            <StackPanel x:Name="usersStackPanel" Background="#ecf0f1">
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Background="#e3634f" Margin="0,215,550,175">
+            <Label x:Name="groupsLabel" Foreground="#fff" FontSize="20" FontWeight="Light" Content="Groups" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+        <ScrollViewer HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="150" Margin="0,255,0,0">
+            <StackPanel x:Name="groupsStackPanel" Background="#ecf0f1"/>
+        </ScrollViewer>
     </Grid>
 </Window>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,10 +23,17 @@ namespace ProjektniZadatakSBES
     {
         User loggedUser;
 
-        public MainUserWindow(User user)
+        public static NetTcpBinding binding = new NetTcpBinding();
+        public static string address = "net.tcp://localhost:25001/InterfaceImplementation";
+        public static ClientProxy clientProxy;
+
+        public MainUserWindow(User user, ClientProxy proxy)
         {
             InitializeComponent();
             loggedUser = user;
+            clientProxy = proxy;
+
+            SetUsersAndGroups();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -47,6 +55,14 @@ namespace ProjektniZadatakSBES
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void SetUsersAndGroups()
+        {
+            List<User> users = clientProxy.AllUsersList();
+
+            foreach(User user in users)            
+                usersStackPanel.Children.Add(new miniUserInfo(user.Username));            
         }
     }
 }

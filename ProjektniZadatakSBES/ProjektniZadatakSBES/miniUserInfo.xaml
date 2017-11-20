@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="ProjektniZadatakSBES.miniUserInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjektniZadatakSBES"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="133">
+    <Grid>
+        <Image x:Name="userImage" Source="Resources/username.png" Margin="0,0,90,0" Width="20" Height="20"/>
+        <Label x:Name="unameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalContentAlignment="Center" VerticalAlignment="Center" MaxWidth="80"/>
+    </Grid>
+</UserControl>

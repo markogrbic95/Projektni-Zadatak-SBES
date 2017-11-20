@@ -47,9 +47,7 @@ namespace ProjektniZadatakSBES
                         return;
                     }
                 }
-
-                errorlabel.Content = "";
-
+                
                 User loggedUser = MainWindow.proxy.Login(usernameTextBox.Text, passwordTextBox.Password);
 
                 if (loggedUser != null)
@@ -57,10 +55,11 @@ namespace ProjektniZadatakSBES
                     errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
                     errorlabel.Content = "Success!";                   
                     
-                    MainUserWindow muw = new MainUserWindow(loggedUser);
+                    MainUserWindow muw = new MainUserWindow(loggedUser, MainWindow.proxy);
                     muw.Show();
-
-                    ((Window)this.Parent).Close();
+                    
+                    ((Window)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).Close();
+                        
                     return;
                 }
 
