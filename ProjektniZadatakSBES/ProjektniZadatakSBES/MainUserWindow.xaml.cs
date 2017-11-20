@@ -21,11 +21,8 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class MainUserWindow : Window
     {
-        User loggedUser;
-
-        public static NetTcpBinding binding = new NetTcpBinding();
-        public static string address = "net.tcp://localhost:25001/InterfaceImplementation";
-        public static ClientProxy clientProxy;
+        User loggedUser;        
+        ClientProxy clientProxy;
 
         public MainUserWindow(User user, ClientProxy proxy)
         {
@@ -60,9 +57,32 @@ namespace ProjektniZadatakSBES
         private void SetUsersAndGroups()
         {
             List<User> users = clientProxy.AllUsersList();
+            List<Group> userGroups = clientProxy.GetUserGroups(loggedUser.Username);
 
-            foreach(User user in users)            
-                usersStackPanel.Children.Add(new miniUserInfo(user.Username));            
+            foreach (User user in users)            
+                usersStackPanel.Children.Add(new miniUserInfo(user.Username));
+
+            foreach (Group group in userGroups)
+                groupsStackPanel.Children.Add(new miniGroupInfo(group.GroupName));
+        }
+
+        private void addGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddGroupWindow addGroupWindow = new AddGroupWindow();
+            addGroupWindow.ShowDialog();
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(247, 119, 99));
+            ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+            ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
+            ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));           
         }
     }
 }

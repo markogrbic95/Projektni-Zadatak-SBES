@@ -16,28 +16,27 @@ using System.Windows.Shapes;
 namespace ProjektniZadatakSBES
 {
     /// <summary>
-    /// Interaction logic for miniUserInfo.xaml
+    /// Interaction logic for miniGroupInfo.xaml
     /// </summary>
-    public partial class miniUserInfo : UserControl
+    public partial class miniGroupInfo : UserControl
     {
-        public miniUserInfo(string uname)
+        public miniGroupInfo(string groupName)
         {
             InitializeComponent();
-            unameLabel.Content = uname;        
+            groupNameLabel.Content = groupName;
         }
-
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
             this.Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
-            unameLabel.Foreground = new SolidColorBrush(Color.FromRgb(255,255,255));
-            userImage.Source = new BitmapImage(new Uri(@"\Resources\userWhite.png", UriKind.RelativeOrAbsolute)); 
+            groupNameLabel.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            userImage.Source = new BitmapImage(new Uri(@"\Resources\groupWhite.png", UriKind.RelativeOrAbsolute));
         }
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             this.Background = new SolidColorBrush(Color.FromRgb(236, 240, 241));
-            unameLabel.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
-            userImage.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
+            groupNameLabel.Foreground = new SolidColorBrush(Color.FromRgb(73, 64, 65));
+            userImage.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
         }
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)

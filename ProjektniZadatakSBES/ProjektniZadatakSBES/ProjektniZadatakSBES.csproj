@@ -58,11 +58,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddGroupWindow.xaml.cs">
+      <DependentUpon>AddGroupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainUserWindow.xaml.cs">
       <DependentUpon>MainUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="miniGroupInfo.xaml.cs">
+      <DependentUpon>miniGroupInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="miniUserInfo.xaml.cs">
       <DependentUpon>miniUserInfo.xaml</DependentUpon>
@@ -70,6 +76,10 @@
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddGroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -90,6 +100,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="miniGroupInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="miniUserInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +155,13 @@
       <Project>{A914AC6D-A31D-4EA5-9785-51FC6BCC7E31}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\groupWhite.png" />
+    <Resource Include="Resources\userWhite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
