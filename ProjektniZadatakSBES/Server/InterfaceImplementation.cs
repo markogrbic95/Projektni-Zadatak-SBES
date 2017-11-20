@@ -22,6 +22,8 @@ namespace Server
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
+            registeredUsers = ReadFile();
+
             if (registeredUsers.ContainsKey(username))
             {
                 if (registeredUsers[username].Password == oldPassword)
@@ -46,6 +48,8 @@ namespace Server
 
         public User Login(string username, string password)
         {
+            registeredUsers = ReadFile();
+
             if (registeredUsers.ContainsKey(username))
             {
                 if(registeredUsers[username].Password == password)
@@ -70,6 +74,8 @@ namespace Server
 
         public bool Logout(string username)
         {
+            registeredUsers = ReadFile();
+
             if (registeredUsers[username].Logged)
             {
                 registeredUsers[username].Logged = false;
@@ -85,6 +91,8 @@ namespace Server
 
         public string Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
+            string retVal = string.Empty;
+
             registeredUsers = ReadFile();
 
             if(registeredUsers.ContainsKey(username))
@@ -94,9 +102,17 @@ namespace Server
             }
             else
             {
+                retVal = PasswordCheck(password);
+                if (retVal != "Success!")
+                    return retVal;
+
+                retVal = BankingAccountCheck(accNumber);
+                if (retVal != "Success!")
+                    return retVal;
+
                 registeredUsers.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
                 WriteFile();
-                return "Success";
+                return "Success!";
             }
         }
 
@@ -339,7 +355,7 @@ namespace Server
 
             check = false;
 
-            retVal = "Your password is good!";
+            retVal = "Success!";
 
             return retVal;
         }
@@ -384,8 +400,17 @@ namespace Server
                     check = false;
                 }
 
+                registeredUsers = ReadFile();
+                foreach (var item in registeredUsers)
+                {
+                    if (item.Value.AccountNumber == acc)
+                    { 
+                        retVal = "Banking Account already exist!";
+                        return retVal;
+                    }
+                }
 
-                retVal = "Your Banking Account is good!";
+                retVal = "Success!";
                 return retVal;
             }
             else

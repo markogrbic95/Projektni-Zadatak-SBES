@@ -49,7 +49,7 @@ namespace ProjektniZadatakSBES
 
                 string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, addressTextBox.Text, phoneTextBox.Text, bankaccTextBox.Text, usernameTextBox.Text, passwordTextBox.Password);
 
-                if (msg != "Success")
+                if (msg != "Success!")
                 {
                     errorlabel.Content = msg;
                     return;

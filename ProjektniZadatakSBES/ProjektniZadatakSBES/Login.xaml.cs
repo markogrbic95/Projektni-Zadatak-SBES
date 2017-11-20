@@ -69,8 +69,3 @@ namespace ProjektniZadatakSBES
         }
     }
 }
-
-
-// Ispravljen login
-// Zajebava prozor kad se uloguje korisnik, ostaje register i login
-// Prosiri prozor zbog ispisa
