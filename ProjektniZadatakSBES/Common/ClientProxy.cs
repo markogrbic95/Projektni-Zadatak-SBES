@@ -50,12 +50,12 @@ namespace Common
             return factory.AddUsersToGroup(groupName, owner, username);
         }
 
-        public bool ChangePassword(string username, string oldPassword, string newPassword)
+        public bool ChangePassword(string username, string newPassword)
         {
             bool result = false;
             try
             {
-                result = factory.ChangePassword(username, oldPassword, newPassword);
+                result = factory.ChangePassword(username, newPassword);
             }
             catch (Exception e)
             {

@@ -12,32 +12,50 @@ namespace Server
 {
     public class InterfaceImplementation : Interface
     {
-        public static Dictionary<string,User> registeredUsers = new Dictionary<string, User>();
+        public static Dictionary<string, User> registeredUsers = new Dictionary<string, User>();
         public static List<Group> groupList = new List<Group>();
+        public static List<Password> passwordList = new List<Password>();
         
-        public static List<Group> grupe = new List<Group>();
         public static List<string> numberList = new List<string>() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
         public static List<string> interpunctionList = new List<string>() { ".", "?", "!", ",", ";", ":", "-" };
         
-
-        public bool ChangePassword(string username, string oldPassword, string newPassword)
+        public bool ChangePassword(string username, string newPassword)
         {
             registeredUsers = ReadFile();
+            passwordList = ReadPasswords();
+            string retVal = string.Empty;
+
+            retVal = PasswordCheck(newPassword);
+            if (retVal != "Success!")
+                return false;
 
             if (registeredUsers.ContainsKey(username))
             {
-                if (registeredUsers[username].Password == oldPassword)
-                {
-                    registeredUsers[username].Password = newPassword;
-                    Console.WriteLine("Password has been successfully changed!");
+                List<string> userPasswords = new List<string>();
 
-                    return true;
-                }
-                else
+                foreach (var item in passwordList)
                 {
-                    Console.WriteLine("Old password is incorrect!");
-                    return false;
+                    if (item.User == username)
+                        userPasswords.Add(item.OldPassword);
                 }
+
+                foreach (var item in userPasswords)
+                {
+                    if(item == newPassword)
+                    {
+                        Console.WriteLine("You cant use previous passwords");
+                        return false;
+                    }
+                }
+
+                Password pass = new Password(username,newPassword);
+                passwordList.Add(pass);
+
+                WritePasswords();
+                Console.WriteLine("Password changed successfuly");
+
+                return true;
+
             }
             else
             {
@@ -92,7 +110,7 @@ namespace Server
         public string Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password)
         {
             string retVal = string.Empty;
-
+            passwordList = ReadPasswords();
             registeredUsers = ReadFile();
 
             if(registeredUsers.ContainsKey(username))
@@ -112,6 +130,11 @@ namespace Server
 
                 registeredUsers.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
                 WriteFile();
+
+                Password pass = new Password(username, password);
+                passwordList.Add(pass);
+                WritePasswords();
+
                 return "Success!";
             }
         }
@@ -156,18 +179,23 @@ namespace Server
             return groupList;
         }
 
-        public List<Group> GetUserGroups(string username)
+        public List<Password> ReadPasswords()
         {
-            var tempList = ReadGroups();
-            List<Group> userGroupList = new List<Group>();
-            foreach (var item in tempList)
+            try
             {
-                if(item.Owner==username)
-                {
-                    userGroupList.Add(item);
-                }
+                XmlSerializer ser = new XmlSerializer(typeof(List<Password>));
+                StreamReader sr = new StreamReader(@"../../../passwords.xml");
+                passwordList = (List<Password>)ser.Deserialize(sr);
+                sr.Close();
             }
-            return userGroupList;
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+
+            return passwordList;
         }
 
         public void WriteFile()
@@ -205,23 +233,48 @@ namespace Server
             }
         }
 
+        public void WritePasswords()
+        {
+            try
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(List<Password>));
+                StreamWriter sw = new StreamWriter(@"../../../passwords.xml");
+                ser.Serialize(sw, passwordList);
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                // Let the user know what went wrong.
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public List<Group> GetUserGroups(string username)
+        {
+            var tempList = ReadGroups();
+            List<Group> userGroupList = new List<Group>();
+
+            foreach (var item in tempList)
+            {
+                if (item.Owner == username)
+                {
+                    userGroupList.Add(item);
+                }
+            }
+            return userGroupList;
+        }
+
         public bool AddGroup(string groupName, string owner)
         {
             groupList = ReadGroups();
 
             foreach (var item in groupList)
-            grupe = ReadGroups();
-
-            foreach (var item in grupe)
             {
-                if (item.GroupName==groupName)
+                if (item.GroupName == groupName && item.Owner == owner)
                 {
-                    if(item.Owner == owner)
-                    {
-                        return false;
-                    }
+                    return false;
                 }
-                
             }
 
             Group g = new Group();
@@ -237,29 +290,28 @@ namespace Server
 
         public bool AddUsersToGroup(string groupName, string owner, string username)
         {
-            grupe = ReadGroups();
-
+            groupList = ReadGroups();
             registeredUsers = ReadFile();
 
-            foreach (var item in grupe)
+            foreach (var item in groupList)
             {
                 if (item.GroupName == groupName && item.Owner == owner)
                 {
-                  foreach (var item1 in registeredUsers.Values)
-                  {
-                      if (item1.Username == username)
-                      {
-                          foreach (var item2 in item.UsersList)
-                          {
-                              if (item2 == username)
-                                  return false;
-                          }
+                    foreach (var item1 in registeredUsers.Values)
+                    {
+                        if (item1.Username == username)
+                        {
+                            foreach (var item2 in item.UsersList)
+                            {
+                                if (item2 == username)
+                                    return false;
+                            }
 
-                          item.UsersList.Add(item1.Username);
-                          WriteGroups();
-                          return true;
-                      }
-                  }
+                            item.UsersList.Add(item1.Username);
+                            WriteGroups();
+                            return true;
+                        }
+                    }
                 }
             }
 
@@ -272,6 +324,53 @@ namespace Server
             var tempList = tempDict.Select(kvp => kvp.Value).ToList();
 
             return tempList;
+        }
+
+        public bool DeleteUsersFromGroup(string groupName, string owner, string username)
+        {
+            groupList = ReadGroups();
+            registeredUsers = ReadFile();
+
+            foreach (var item in groupList)
+            {
+                if (item.GroupName == groupName && item.Owner == owner)
+                {
+                    foreach (var item1 in registeredUsers.Values)
+                    {
+                        if (item1.Username == username)
+                        {
+                            foreach (var item2 in item.UsersList)
+                            {
+                                if (item2 == username)
+                                {
+                                    item.UsersList.Remove(item2);
+                                    WriteGroups();
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool DeleteGroup(string groupName, string owner)
+        {
+            groupList = ReadGroups();
+
+            foreach (var item in groupList)
+            {
+                if (item.GroupName == groupName && item.Owner == owner)
+                {
+                    groupList.Remove(item);
+                    WriteGroups();
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public string PasswordCheck(string password)
@@ -413,7 +512,7 @@ namespace Server
                 foreach (var item in registeredUsers)
                 {
                     if (item.Value.AccountNumber == acc)
-                    { 
+                    {
                         retVal = "Banking Account already exist!";
                         return retVal;
                     }
@@ -426,52 +525,6 @@ namespace Server
                 retVal = "Your Banking Account must have 20 characters";
                 return retVal;
             }
-        }
-
-        public bool DeleteUsersFromGroup(string groupName, string owner, string username)
-        {
-            grupe = ReadGroups();
-
-            registeredUsers = ReadFile();
-
-            foreach (var item in grupe)
-            {
-                if (item.GroupName == groupName && item.Owner == owner)
-                {
-                    foreach (var item1 in registeredUsers.Values)
-                    {
-                        if (item1.Username == username)
-                        {
-                            foreach (var item2 in item.UsersList)
-                            {
-                                if (item2 == username)
-                                {
-                                    item.UsersList.Remove(item2);
-                                    WriteGroups();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        public bool DeleteGroup(string groupName, string owner)
-        {
-            grupe = ReadGroups();
-
-            foreach (var item in grupe)
-            {
-                if (item.GroupName == groupName && item.Owner == owner)
-                {
-                    grupe.Remove(item);
-                    WriteGroups();
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }
