@@ -21,7 +21,7 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class MiniInfo : UserControl
     {
-        public string buttonType = "";        
+        public string buttonType = "";    
 
         public MiniInfo(string name, string buttonType)
         {
@@ -35,7 +35,9 @@ namespace ProjektniZadatakSBES
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).SetValues(((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).FindByName(((Button)sender).Content.ToString()));
+            ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).type = buttonType;
+            ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).obj = ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).clientProxy.AllUsersList().Find(u => u.Username == Button.Content.ToString());
+            ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).SetInfo();
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)

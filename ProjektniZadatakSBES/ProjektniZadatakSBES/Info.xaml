@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="520">
     <Grid>
-        <Image x:Name="image" Source = "Resources/username.png" Height = "60" Width = "60" Margin = "210,0,210,160" />
-        <Label x:Name="nameLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" Content = "Marko Grbic - grba" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,50" />
-        <Label x:Name="addressLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" Content = "Some Address" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,10,0,0" />
-        <Label x:Name="phoneLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" Content = "00381643525532" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,70,0,0" />
-        <Label x:Name="bankaccLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" Content = "123-1231231233-33" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,130,0,0" />
-        <Label x:Name="passwordLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" Content = "1234" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,190,0,0" />        
+        <Image x:Name="image" Height = "60" Width = "60" Margin = "210,0,210,160" />
+        <Label x:Name="nameLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,50" />
+        <Label x:Name="addressLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,10,0,0" />
+        <Label x:Name="phoneLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,70,0,0" />
+        <Label x:Name="bankaccLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,130,0,0" />
+        <Label x:Name="passwordLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,190,0,0" />        
     </Grid>
 </UserControl>

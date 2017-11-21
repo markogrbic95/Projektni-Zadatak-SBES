@@ -31,8 +31,7 @@ namespace ProjektniZadatakSBES
             clientProxy = proxy;
 
             SetUsersAndGroups();
-
-            ContentArea.Content = new Info(null,null);
+            ContentArea.Content = new Info(loggedUser,"user");
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -70,9 +69,16 @@ namespace ProjektniZadatakSBES
 
         private void addGroupButton_Click(object sender, RoutedEventArgs e)
         {
-            AddGroupWindow addGroupWindow = new AddGroupWindow();
+            AddGroupWindow addGroupWindow = new AddGroupWindow(new Point(this.Left, this.Top));
             addGroupWindow.Owner = this;
-            addGroupWindow.ShowDialog();
+            addGroupWindow.Show();
+        }
+
+        private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(new Point(this.Left, this.Top));
+            changePasswordWindow.Owner = this;
+            changePasswordWindow.Show();
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
@@ -84,7 +90,7 @@ namespace ProjektniZadatakSBES
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
             ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(227, 99, 79));
-            ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));           
+            ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
         private void myGroupsButton_Click(object sender, RoutedEventArgs e)
@@ -133,11 +139,23 @@ namespace ProjektniZadatakSBES
             }
         }
 
-        private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
+        private void Window_LocationChanged(object sender, EventArgs e)
         {
-            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
-            changePasswordWindow.Owner = this;
-            changePasswordWindow.ShowDialog();
+            try
+            {
+                foreach (Window window in Application.Current.Windows.OfType<ChangePasswordWindow>())
+                {
+                    window.Left = this.Left+720;
+                    window.Top = this.Top+90;
+                }
+
+                foreach (Window window in Application.Current.Windows.OfType<AddGroupWindow>())
+                {
+                    window.Left = this.Left+720;
+                    window.Top = this.Top+90;
+                }
+            }
+            catch { }
         }
     }
 }

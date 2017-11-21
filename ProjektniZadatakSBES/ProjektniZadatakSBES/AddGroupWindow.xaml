@@ -10,7 +10,7 @@
         ResizeMode="NoResize"
         AllowsTransparency="True"
         MouseDown="Window_MouseDown"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="Manual"
         FontSize="14"
         FontWeight="Medium"
         Background="#ecf0f1" 

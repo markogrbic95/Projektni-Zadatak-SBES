@@ -21,48 +21,32 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class Info : UserControl
     {
-        public string buttonType = "";
+        public string type = "";
+        public object obj;
 
-        public Info(string name, string buttonType)
+        public Info(object obj, string type)
         {
             InitializeComponent();
-            this.buttonType = buttonType;
-
-            User u = new User();
-            if (name!=null)
-                u = (User)FindByName(name);
-
-            SetValues(u);
+            this.type = type;
+            this.obj = obj;
+            SetInfo();
         }
 
-        public void SetValues(User user)
+        public void SetInfo()
         {
-            if(user != null)
+            if (type == "user")
             {
-                nameLabel.Content = user.Name + " " + user.LastName + " - " + user.Username;
-                addressLabel.Content = user.Address;
-                phoneLabel.Content = user.PhoneNumber;
-                bankaccLabel.Content = user.AccountNumber;
-                passwordLabel.Content = user.Password;
+                image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
+                nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
+                addressLabel.Content = ((User)obj).Address;
+                bankaccLabel.Content = ((User)obj).AccountNumber;
+                phoneLabel.Content = ((User)obj).PhoneNumber;
+                passwordLabel.Content = ((User)obj).Password;
             }
-        }
-
-        public User FindByName(string name)
-        {
-            List<User> users = new List<User>();
-
-            
-                users = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AllUsersList();
-
-                foreach (User user in users)
-                {
-                    if (user.Username == name)                    
-                        return user;                    
-                }
-
-                return null;
-            
-        
+            else
+            {
+                image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
+            }
         }
     }
 }

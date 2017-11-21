@@ -19,9 +19,12 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class AddGroupWindow : Window
     {
-        public AddGroupWindow()
+        public AddGroupWindow(Point p)
         {
             InitializeComponent();
+            
+            this.Left = p.X+720;
+            this.Top = p.Y+90;
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
