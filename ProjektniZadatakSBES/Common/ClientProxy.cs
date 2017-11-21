@@ -121,5 +121,10 @@ namespace Common
         {
             return factory.GetUserGroups(username);
         }
+
+        public bool ChangeGroupName(string oldName, string newName, string owner)
+        {
+            return factory.ChangeGroupName(oldName, newName, owner);
+        }
     }
 }

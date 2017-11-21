@@ -373,6 +373,32 @@ namespace Server
             return false;
         }
 
+        public bool ChangeGroupName(string oldName, string newName, string owner)
+        {
+            groupList = ReadGroups();
+
+            foreach (var item in groupList)
+            {
+                if (item.GroupName == newName && item.Owner == owner)
+                {
+                    Console.WriteLine("You already have group with this name");
+                    return false;
+                }
+            }
+
+            foreach (var item in groupList)
+            {
+                if (item.GroupName == oldName && item.Owner == owner)
+                {
+                    item.GroupName = newName;
+                    WriteGroups();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public string PasswordCheck(string password)
         {
             string retVal;
