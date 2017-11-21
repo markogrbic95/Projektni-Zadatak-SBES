@@ -48,7 +48,7 @@ namespace ProjektniZadatakSBES
         {
             if (oldPasswordTextBox.Text == "" || ((MainUserWindow)this.Owner).loggedUser.Password != oldPasswordTextBox.Text)
             {
-                errorLabel.Content = "Current password is wrong!";
+                errorLabel.Content = "Current password wrong.";
                 return;
             }
 
@@ -58,8 +58,15 @@ namespace ProjektniZadatakSBES
                 return;
             }
 
+            string message = ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, newPasswordTextBox.Text);
+
+            if(message != "Success")
+            {
+                errorLabel.Content = message;
+                return;
+            }
+
             ((MainUserWindow)this.Owner).loggedUser.Password = newPasswordTextBox.Text;
-            ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, ((MainUserWindow)this.Owner).loggedUser.Password, newPasswordTextBox.Text);
             this.Close();
         }
 

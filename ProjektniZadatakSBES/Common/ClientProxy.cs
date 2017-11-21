@@ -50,9 +50,9 @@ namespace Common
             return factory.AddUsersToGroup(groupName, owner, username);
         }
 
-        public bool ChangePassword(string username, string newPassword)
+        public string ChangePassword(string username, string newPassword)
         {
-            bool result = false;
+            string result = "";
             try
             {
                 result = factory.ChangePassword(username, newPassword);
@@ -60,6 +60,7 @@ namespace Common
             catch (Exception e)
             {
                 Console.WriteLine("Error: {0}", e.Message);
+                result = "Error: {0}" + e.Message;
             }
             return result;
         }
