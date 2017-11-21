@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ProjektniZadatakSBES.MiniUserInfo"
+﻿<UserControl x:Class="ProjektniZadatakSBES.MiniInfo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="163">
     <Grid>
-        <Button x:Name="userButton" FontSize="14" FontWeight="Light" Content="Grba" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="120" Height="30" Click="userButton_Click" MouseEnter="userButton_MouseEnter" MouseLeave="userButton_MouseLeave" Margin="43,0,0,0">
+
+        <Button x:Name="Button" FontSize="14" FontWeight="Light" Content="Grba" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="120" Height="30" Click="Button_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Margin="43,0,0,0">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="#ecf0f1"/>
@@ -30,8 +31,8 @@
                 </Style>
             </Button.Style>
         </Button>
-        <StackPanel x:Name="userStackPanel" Background="#ecf0f1" Margin="0,0,120,0">
-            <Image x:Name="userImage" Source="Resources/username.png" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Margin="0,2.5,0,0"/>
+        <StackPanel x:Name="StackPanel" Background="#ecf0f1" Margin="0,0,120,0">
+            <Image x:Name="Image" Source="Resources/username.png" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Margin="0,2.5,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

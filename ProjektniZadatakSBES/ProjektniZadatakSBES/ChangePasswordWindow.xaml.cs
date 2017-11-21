@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ProjektniZadatakSBES
 {
     /// <summary>
-    /// Interaction logic for AddGroupWindow.xaml
+    /// Interaction logic for ChangePasswordWindow.xaml
     /// </summary>
-    public partial class AddGroupWindow : Window
+    public partial class ChangePasswordWindow : Window
     {
-        public AddGroupWindow()
+        public ChangePasswordWindow()
         {
             InitializeComponent();
         }
@@ -44,25 +44,22 @@ namespace ProjektniZadatakSBES
             this.Close();
         }
 
-        private void addGroupButton_Click(object sender, RoutedEventArgs e)
+        private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            if(groupNameTextBox.Text == "")
+            if (oldPasswordTextBox.Text == "" || ((MainUserWindow)this.Owner).loggedUser.Password != oldPasswordTextBox.Text)
             {
-                errorLabel.Content = "Please enter a group name.";
+                errorLabel.Content = "Current password is wrong!";
                 return;
             }
 
-            foreach (MiniInfo b in ((MainUserWindow)this.Owner).myGroupsStackPanel.Children)
+            if (newPasswordTextBox.Text == "")
             {
-                if (b.Button.Content.ToString() == groupNameTextBox.Text)
-                {
-                    errorLabel.Content = "Group already exists!";
-                    return;
-                }                
+                errorLabel.Content = "Please enter a valid password.";
+                return;
             }
 
-            ((MainUserWindow)this.Owner).myGroupsStackPanel.Children.Add(new MiniInfo(groupNameTextBox.Text, "group"));
-            ((MainUserWindow)this.Owner).clientProxy.AddGroup(groupNameTextBox.Text, ((MainUserWindow)this.Owner).loggedUser.Username);
+            ((MainUserWindow)this.Owner).loggedUser.Password = newPasswordTextBox.Text;
+            ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, ((MainUserWindow)this.Owner).loggedUser.Password, newPasswordTextBox.Text);
             this.Close();
         }
 
@@ -78,11 +75,11 @@ namespace ProjektniZadatakSBES
             ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
-        private void groupNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             errorLabel.Content = "";
             if (e.Key == Key.Enter)
-                addGroupButton_Click(null,null);
+                okButton_Click(null, null);
         }
     }
 }

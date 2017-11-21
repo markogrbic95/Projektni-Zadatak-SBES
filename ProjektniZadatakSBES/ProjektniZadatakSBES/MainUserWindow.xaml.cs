@@ -21,8 +21,8 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class MainUserWindow : Window
     {
-        User loggedUser;        
-        ClientProxy clientProxy;
+        public User loggedUser;        
+        public ClientProxy clientProxy;
 
         public MainUserWindow(User user, ClientProxy proxy)
         {
@@ -31,6 +31,8 @@ namespace ProjektniZadatakSBES
             clientProxy = proxy;
 
             SetUsersAndGroups();
+
+            ContentArea.Content = new Info(null,null);
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -39,12 +41,12 @@ namespace ProjektniZadatakSBES
                 this.DragMove();
         }
 
-        private void exitBtn_MouseEnter(object sender, MouseEventArgs e)
+        private void Btn_MouseEnter(object sender, MouseEventArgs e)
         {
             this.Cursor = Cursors.Hand;
         }
 
-        private void exitBtn_MouseLeave(object sender, MouseEventArgs e)
+        private void Btn_MouseLeave(object sender, MouseEventArgs e)
         {
             this.Cursor = Cursors.Arrow;
         }
@@ -60,15 +62,16 @@ namespace ProjektniZadatakSBES
             List<Group> userGroups = clientProxy.GetUserGroups(loggedUser.Username);
 
             foreach (User user in users)            
-                usersStackPanel.Children.Add(new MiniUserInfo(user.Username));
+                usersStackPanel.Children.Add(new MiniInfo(user.Username, "user"));
 
-            //foreach (Group group in userGroups)
-                //myGroupsStackPanel.Children.Add(new miniGroupInfo(group.GroupName));
+            foreach (Group group in userGroups)
+                myGroupsStackPanel.Children.Add(new MiniInfo(group.GroupName, "group"));
         }
 
         private void addGroupButton_Click(object sender, RoutedEventArgs e)
         {
             AddGroupWindow addGroupWindow = new AddGroupWindow();
+            addGroupWindow.Owner = this;
             addGroupWindow.ShowDialog();
         }
 
@@ -128,6 +131,13 @@ namespace ProjektniZadatakSBES
                     return;
                 }
             }
+        }
+
+        private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            changePasswordWindow.Owner = this;
+            changePasswordWindow.ShowDialog();
         }
     }
 }
