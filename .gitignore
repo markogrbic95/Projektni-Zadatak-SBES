@@ -437,3 +437,4 @@ ModelManifest.xml
 
 .fake/
 ProjektniZadatakSBES/users.xml
+ProjektniZadatakSBES/ProjektniZadatakSBES/ChangePasswordWindow.xaml.cs
