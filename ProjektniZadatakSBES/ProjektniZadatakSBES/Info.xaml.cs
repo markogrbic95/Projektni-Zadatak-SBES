@@ -40,6 +40,7 @@ namespace ProjektniZadatakSBES
                 bankaccLabel.Visibility = Visibility.Visible;
                 phoneLabel.Visibility = Visibility.Visible;
                 passwordLabel.Visibility = Visibility.Visible;
+                listBox.Visibility = Visibility.Hidden;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
@@ -54,9 +55,11 @@ namespace ProjektniZadatakSBES
                 bankaccLabel.Visibility = Visibility.Hidden;
                 phoneLabel.Visibility = Visibility.Hidden;
                 passwordLabel.Visibility = Visibility.Hidden;
+                listBox.Visibility = Visibility.Visible;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((Group)obj).GroupName;
+                listBox.ItemsSource = ((Group)obj).UsersList;
             }
         }
     }
