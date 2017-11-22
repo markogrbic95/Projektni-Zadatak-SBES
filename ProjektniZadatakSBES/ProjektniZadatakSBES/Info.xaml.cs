@@ -78,9 +78,12 @@ namespace ProjektniZadatakSBES
 
         private void addUserBtn_Click(object sender, RoutedEventArgs e)
         {
+            List<User> users = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AllUsersList();
+            listBox.ItemsSource = users;
         }
         private void delUserBtn_Click(object sender, RoutedEventArgs e)
         {
+
         }
     }
 }
