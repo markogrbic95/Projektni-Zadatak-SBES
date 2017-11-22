@@ -131,6 +131,21 @@ namespace Server
                 if (retVal != "Success!")
                     return retVal;
 
+               
+                if(phoneNumber.Length < 9 || phoneNumber.Length > 10)
+                {
+                    return "Phone number must contain 9 or 10 numbers!";
+                }
+
+                try
+                {
+                    Convert.ToInt32(phoneNumber);
+                }
+                catch (Exception)
+                {
+                    return "Phone number can't contain letters!";
+                }
+
                 registeredUsers.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
                 WriteFile();
 
