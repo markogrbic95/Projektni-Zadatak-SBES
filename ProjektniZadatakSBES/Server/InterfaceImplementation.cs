@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -18,7 +19,9 @@ namespace Server
         
         public static List<string> numberList = new List<string>() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
         public static List<string> interpunctionList = new List<string>() { ".", "?", "!", ",", ";", ":", "-" };
-        
+
+        static byte[] bytes = ASCIIEncoding.ASCII.GetBytes("ZeroCool");
+
         public string ChangePassword(string username, string newPassword)
         {
             registeredUsers = ReadFile();
@@ -116,21 +119,27 @@ namespace Server
             passwordList = ReadPasswords();
             registeredUsers = ReadFile();
 
-            if(registeredUsers.ContainsKey(username))
+            string decryptedAddress = Decrypt(address);
+            string decryptedPhoneNumber = Decrypt(phoneNumber);
+            string decryptedAccNumber = Decrypt(accNumber);
+            string decryptedPassword = Decrypt(password);
+
+            if (registeredUsers.ContainsKey(username))
             {
                 Console.WriteLine("This user already exist!");
                 return "This user already exist!";
             }
             else
             {
-                retVal = PasswordCheck(password);
+                retVal = PasswordCheck(decryptedPassword);
                 if (retVal != "Success!")
                     return retVal;
 
-                retVal = BankingAccountCheck(accNumber);
+                retVal = BankingAccountCheck(decryptedAccNumber);
                 if (retVal != "Success!")
                     return retVal;
 
+<<<<<<< HEAD
                
                 if(phoneNumber.Length < 9 || phoneNumber.Length > 10)
                 {
@@ -147,9 +156,12 @@ namespace Server
                 }
 
                 registeredUsers.Add(username, new User(name, lastname, address, phoneNumber, accNumber, username, password));
+=======
+                registeredUsers.Add(username, new User(name, lastname, decryptedAddress, decryptedPhoneNumber, decryptedAccNumber, username, decryptedPassword));
+>>>>>>> da3eac7655400a0dbbdf9267952e8eb9905ea190
                 WriteFile();
 
-                Password pass = new Password(username, password);
+                Password pass = new Password(username, decryptedPassword);
                 passwordList.Add(pass);
                 WritePasswords();
 
@@ -569,6 +581,22 @@ namespace Server
                 retVal = "Your Banking Account must have 20 characters";
                 return retVal;
             }
+        }
+
+        public static string Decrypt(string cryptedString)
+        {
+            if (String.IsNullOrEmpty(cryptedString))
+            {
+                throw new ArgumentNullException
+                   ("The string which needs to be decrypted can not be null.");
+            }
+
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(cryptedString));
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoProvider.CreateDecryptor(bytes, bytes), CryptoStreamMode.Read);
+            StreamReader reader = new StreamReader(cryptoStream);
+
+            return reader.ReadToEnd();
         }
     }
 }
