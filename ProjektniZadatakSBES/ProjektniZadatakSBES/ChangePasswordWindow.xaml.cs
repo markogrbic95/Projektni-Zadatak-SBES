@@ -49,6 +49,9 @@ namespace ProjektniZadatakSBES
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
+            errorLabel.Foreground = new SolidColorBrush(Color.FromRgb(204, 0, 0));
+            errorLabel.Content = "";
+
             if (oldPasswordTextBox.Password == "" || ((MainUserWindow)this.Owner).loggedUser.Password != oldPasswordTextBox.Password)
             {
                 errorLabel.Content = "Current password wrong.";
@@ -70,7 +73,9 @@ namespace ProjektniZadatakSBES
             }
 
             ((MainUserWindow)this.Owner).loggedUser.Password = newPasswordTextBox.Password;
-            this.Close();
+
+            errorLabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
+            errorLabel.Content = "Success!";
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
