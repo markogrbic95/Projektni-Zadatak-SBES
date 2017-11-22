@@ -22,12 +22,9 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
-<<<<<<< HEAD
         Timer t = new Timer();
-=======
         static byte[] bytes = ASCIIEncoding.ASCII.GetBytes("ZeroCool");
 
->>>>>>> 94c52a3ed173d73c7c70aad6734350326c2eadac
         public ChangePasswordWindow(Point p)
         {
             InitializeComponent();

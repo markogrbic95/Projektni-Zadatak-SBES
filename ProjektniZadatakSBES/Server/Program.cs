@@ -14,7 +14,7 @@ namespace Server
         static void Main(string[] args)
         {
             NetTcpBinding binding = new NetTcpBinding();
-            string address = "net.tcp://localhost:25001/InterfaceImplementation";
+            string address = "net.tcp://localhost:25005/InterfaceImplementation";
 
             ServiceHost host = new ServiceHost(typeof(InterfaceImplementation));
             host.AddServiceEndpoint(typeof(Interface), binding, address);
