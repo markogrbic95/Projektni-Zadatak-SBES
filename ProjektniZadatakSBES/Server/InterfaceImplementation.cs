@@ -52,8 +52,11 @@ namespace Server
 
                 Password pass = new Password(username,newPassword);
                 passwordList.Add(pass);
+                registeredUsers[username].Password = newPassword;
 
+                WriteFile();
                 WritePasswords();
+
                 Console.WriteLine("Password changed successfuly");
 
                 return "Success";
