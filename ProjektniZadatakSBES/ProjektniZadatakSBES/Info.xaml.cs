@@ -41,6 +41,8 @@ namespace ProjektniZadatakSBES
                 phoneLabel.Visibility = Visibility.Visible;
                 passwordLabel.Visibility = Visibility.Visible;
                 listBox.Visibility = Visibility.Hidden;
+                addUserBtn.Visibility = Visibility.Hidden;
+                delUserBtn.Visibility = Visibility.Hidden;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
@@ -56,11 +58,29 @@ namespace ProjektniZadatakSBES
                 phoneLabel.Visibility = Visibility.Hidden;
                 passwordLabel.Visibility = Visibility.Hidden;
                 listBox.Visibility = Visibility.Visible;
+                addUserBtn.Visibility = Visibility.Visible;
+                delUserBtn.Visibility = Visibility.Visible;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((Group)obj).GroupName;
                 listBox.ItemsSource = ((Group)obj).UsersList;
             }
+        }
+        private void Btn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Hand;
+        }
+
+        private void Btn_MouseLeave(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void addUserBtn_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        private void delUserBtn_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

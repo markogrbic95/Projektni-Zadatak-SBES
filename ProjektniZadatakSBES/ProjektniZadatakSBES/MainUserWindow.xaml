@@ -194,8 +194,8 @@
         <Image x:Name="logoImage" Source="Resources/serverBlack.png" HorizontalAlignment="Center" Height="70" Margin="55,40,0,0" VerticalAlignment="Top" Width="70"/>
         <Label x:Name="logoLabel" Foreground="#494041" FontSize="40" FontWeight="Light" Content="SBES" HorizontalAlignment="Center" Margin="220,30,0,0" VerticalAlignment="Top"/>
         <Label x:Name="miniLogoLabel" Foreground="#494041" FontSize="20" FontWeight="Light" Content="Project 2017" HorizontalAlignment="Center" Margin="220,75,0,0" VerticalAlignment="Top"/>
-        <DockPanel HorizontalAlignment="Left" Height="250" Background="#fcfcfc" Margin="180,160,0,0" VerticalAlignment="Top" Width="520">
+        <DockPanel HorizontalAlignment="Left" Height="280" Background="#fcfcfc" Margin="180,160,0,0" VerticalAlignment="Top" Width="520">
             <ContentControl x:Name="ContentArea"/>
-        </DockPanel>
+        </DockPanel>        
     </Grid>
 </Window>
