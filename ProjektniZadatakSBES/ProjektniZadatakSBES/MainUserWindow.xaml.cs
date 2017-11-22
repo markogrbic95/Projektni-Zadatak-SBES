@@ -32,6 +32,9 @@ namespace ProjektniZadatakSBES
 
             SetUsersAndGroups();
             ContentArea.Content = new Info(loggedUser,"user");
+
+            deleteGroupButton.Visibility = Visibility.Hidden;
+            changeGroupButton.Visibility = Visibility.Hidden;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -89,10 +92,17 @@ namespace ProjektniZadatakSBES
             ((Info)ContentArea.Content).obj = loggedUser;
             ((Info)ContentArea.Content).type = "user";
             ((Info)ContentArea.Content).SetInfo();
+
+            deleteGroupButton.Visibility = Visibility.Hidden;
+            changeGroupButton.Visibility = Visibility.Hidden;
         }
 
         private void changeGroupButton_Click(object sender, RoutedEventArgs e)
         {
+            ChangeGroupWindow changeGroupWindow = new ChangeGroupWindow(new Point(this.Left, this.Top));
+            changeGroupWindow.Owner = this;
+            changeGroupWindow.Show();
+            return;            
         }
 
         private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
@@ -158,25 +168,6 @@ namespace ProjektniZadatakSBES
                     return;
                 }
             }
-        }
-
-        private void Window_LocationChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                foreach (Window window in Application.Current.Windows.OfType<ChangePasswordWindow>())
-                {
-                    window.Left = this.Left+720;
-                    window.Top = this.Top+90;
-                }
-
-                foreach (Window window in Application.Current.Windows.OfType<AddGroupWindow>())
-                {
-                    window.Left = this.Left+720;
-                    window.Top = this.Top+90;
-                }
-            }
-            catch { }
-        }
+        }        
     }
 }

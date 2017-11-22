@@ -11,7 +11,6 @@
         ResizeMode="NoResize"
         AllowsTransparency="True"
         MouseDown="Window_MouseDown"
-        LocationChanged="Window_LocationChanged"
         WindowStartupLocation="CenterScreen"
         FontSize="14"
         FontWeight="Medium"

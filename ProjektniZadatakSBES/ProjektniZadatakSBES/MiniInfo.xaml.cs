@@ -37,12 +37,22 @@ namespace ProjektniZadatakSBES
         {
             ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).type = buttonType;
 
-            if(buttonType == "user")            
+            if (buttonType == "user")
+            {
                 ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).obj =
                     ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).clientProxy.AllUsersList().Find(u => u.Username == Button.Content.ToString());
+
+                ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).deleteGroupButton.Visibility = Visibility.Hidden;
+                ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).changeGroupButton.Visibility = Visibility.Hidden;
+            }
             else
+            {
                 ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).obj =
                     ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).clientProxy.ReadGroups().Find(g => g.GroupName == Button.Content.ToString());
+
+                ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).deleteGroupButton.Visibility = Visibility.Visible;
+                ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).changeGroupButton.Visibility = Visibility.Visible;
+            }
 
             ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).SetInfo();
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,16 +15,13 @@ using System.Windows.Shapes;
 namespace ProjektniZadatakSBES
 {
     /// <summary>
-    /// Interaction logic for ChangePasswordWindow.xaml
+    /// Interaction logic for ChangeGroupWindow.xaml
     /// </summary>
-    public partial class ChangePasswordWindow : Window
+    public partial class ChangeGroupWindow : Window
     {
-        Timer t = new Timer();
-        public ChangePasswordWindow(Point p)
+        public ChangeGroupWindow(Point p)
         {
             InitializeComponent();
-            t.Interval = 500;
-            t.Elapsed += new ElapsedEventHandler(timer_Elapsed);
 
             this.Left = p.X + 720;
             this.Top = p.Y + 90;
@@ -51,51 +47,33 @@ namespace ProjektniZadatakSBES
             this.Close();
         }
 
-        private void okButton_Click(object sender, RoutedEventArgs e)
+        private void changeGroupButton_Click(object sender, RoutedEventArgs e)
         {
-            errorLabel.Foreground = new SolidColorBrush(Color.FromRgb(204, 0, 0));
-            errorLabel.Content = "";
-
-            if (oldPasswordTextBox.Password == "" || ((MainUserWindow)this.Owner).loggedUser.Password != oldPasswordTextBox.Password)
+            if (groupNameTextBox.Text == "")
             {
-                errorLabel.Content = "Current password wrong.";
+                errorLabel.Content = "Please enter a group name.";
                 return;
             }
 
-            if (newPasswordTextBox.Password == "")
+            foreach (MiniInfo b in ((MainUserWindow)this.Owner).myGroupsStackPanel.Children)
             {
-                errorLabel.Content = "Please enter a valid password.";
-                return;
+                if (b.Button.Content.ToString() == groupNameTextBox.Text)
+                {
+                    errorLabel.Content = "Group already exists!";
+                    return;
+                }
             }
 
-            string message = ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, newPasswordTextBox.Password);
-
-            if(message != "Success")
+            ((MainUserWindow)this.Owner).clientProxy.ChangeGroupName(((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString(), groupNameTextBox.Text, ((MainUserWindow)this.Owner).loggedUser.Username);
+            
+            foreach (MiniInfo b in ((MainUserWindow)this.Owner).myGroupsStackPanel.Children)
             {
-                errorLabel.Content = message;
-                return;
+                if (b.Button.Content.ToString() == ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString())
+                    b.Button.Content = groupNameTextBox.Text;
             }
 
-            ((MainUserWindow)this.Owner).loggedUser.Password = newPasswordTextBox.Password;
-
-            errorLabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
-            errorLabel.Content = "Success!";
-
-            newPasswordTextBox.Password = "";
-            oldPasswordTextBox.Password = "";
-
-            if (!t.Enabled)
-                t.Start();          
-        }
-
-        private void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            ((Timer)sender).Stop();
-
-            this.Dispatcher.Invoke(() =>
-            {
-                this.Close();
-            });
+            ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content = groupNameTextBox.Text;
+            this.Close();     
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
@@ -110,11 +88,11 @@ namespace ProjektniZadatakSBES
             ((Button)sender).Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
         }
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private void groupNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             errorLabel.Content = "";
             if (e.Key == Key.Enter)
-                okButton_Click(null, null);
+                changeGroupButton_Click(null, null);
         }
     }
 }
