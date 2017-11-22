@@ -25,8 +25,6 @@ namespace Server
             passwordList = ReadPasswords();
             string retVal = string.Empty;
 
-
-
             retVal = PasswordCheck(newPassword);
             if (retVal != "Success!")
                 return retVal;

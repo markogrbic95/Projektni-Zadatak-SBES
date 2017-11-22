@@ -74,6 +74,20 @@ namespace ProjektniZadatakSBES
             addGroupWindow.Show();
         }
 
+        private void deleteGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddGroupWindow addGroupWindow = new AddGroupWindow(new Point(this.Left, this.Top));
+            addGroupWindow.Owner = this;
+            addGroupWindow.Show();
+        }
+
+        private void changeGroupButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddGroupWindow addGroupWindow = new AddGroupWindow(new Point(this.Left, this.Top));
+            addGroupWindow.Owner = this;
+            addGroupWindow.Show();
+        }
+
         private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
         {
             ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(new Point(this.Left, this.Top));
