@@ -47,7 +47,16 @@ namespace Common
 
         public bool AddUsersToGroup(string groupName, string owner, string username)
         {
-            return factory.AddUsersToGroup(groupName, owner, username);
+            bool result = false;
+            try
+            {
+                result = factory.AddUsersToGroup(groupName, owner, username);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
         }
 
         public string ChangePassword(string username, string newPassword)
@@ -67,12 +76,30 @@ namespace Common
 
         public bool DeleteGroup(string groupName, string owner)
         {
-            return factory.DeleteGroup(groupName, owner);
+            bool result = false;
+            try
+            {
+                result = factory.DeleteGroup(groupName, owner);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
         }
 
         public bool DeleteUsersFromGroup(string groupName, string owner, string username)
         {
-            return factory.DeleteUsersFromGroup(groupName, owner, username);
+            bool result = false;
+            try
+            {
+                result = factory.DeleteUsersFromGroup(groupName, owner, username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
         }
 
         public User Login(string username, string password)
@@ -120,17 +147,44 @@ namespace Common
 
         public List<Group> GetUserGroups(string username)
         {
-            return factory.GetUserGroups(username);
+            List<Group> groups = new List<Group>();
+            try
+            {
+                groups = factory.GetUserGroups(username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return groups;
         }
 
         public bool ChangeGroupName(string oldName, string newName, string owner)
         {
-            return factory.ChangeGroupName(oldName, newName, owner);
+            bool result = false;
+            try
+            {
+                result = factory.ChangeGroupName(oldName, newName, owner);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return result;
         }
 
         public List<Group> ReadGroups()
         {
-            return factory.ReadGroups();
+            List<Group> groups = new List<Group>();
+            try
+            {
+                groups = factory.ReadGroups();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return groups;
         }
     }
 }
