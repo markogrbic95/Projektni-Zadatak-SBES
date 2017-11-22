@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +22,8 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class Registration : UserControl
     {
+        static byte[] bytes = ASCIIEncoding.ASCII.GetBytes("ZeroCool");
+
         public Registration()
         {
             InitializeComponent();
@@ -47,7 +51,7 @@ namespace ProjektniZadatakSBES
                     }
                 }
 
-                string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, addressTextBox.Text, phoneTextBox.Text, bankaccTextBox.Text, usernameTextBox.Text, passwordTextBox.Password);
+                string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, Encrypt(addressTextBox.Text), Encrypt(phoneTextBox.Text), Encrypt(bankaccTextBox.Text), usernameTextBox.Text, Encrypt(passwordTextBox.Password));
 
                 if (msg != "Success!")
                 {
@@ -68,6 +72,26 @@ namespace ProjektniZadatakSBES
                 errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
                 errorlabel.Content = "Success!";
             }
+        }
+
+        public static string Encrypt(string originalString)
+        {
+            if (String.IsNullOrEmpty(originalString))
+            {
+                throw new ArgumentNullException
+                       ("The string which needs to be encrypted can not be null.");
+            }
+
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoProvider.CreateEncryptor(bytes, bytes), CryptoStreamMode.Write);
+            StreamWriter writer = new StreamWriter(cryptoStream);
+            writer.Write(originalString);
+            writer.Flush();
+            cryptoStream.FlushFinalBlock();
+            writer.Flush();
+
+            return Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
         }
     }
 }

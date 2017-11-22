@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -20,7 +22,12 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
+<<<<<<< HEAD
         Timer t = new Timer();
+=======
+        static byte[] bytes = ASCIIEncoding.ASCII.GetBytes("ZeroCool");
+
+>>>>>>> 94c52a3ed173d73c7c70aad6734350326c2eadac
         public ChangePasswordWindow(Point p)
         {
             InitializeComponent();
@@ -68,7 +75,7 @@ namespace ProjektniZadatakSBES
                 return;
             }
 
-            string message = ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, newPasswordTextBox.Password);
+            string message = ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, Encrypt(newPasswordTextBox.Password));
 
             if(message != "Success")
             {
@@ -116,5 +123,26 @@ namespace ProjektniZadatakSBES
             if (e.Key == Key.Enter)
                 okButton_Click(null, null);
         }
+
+        public static string Encrypt(string originalString)
+        {
+            if (String.IsNullOrEmpty(originalString))
+            {
+                throw new ArgumentNullException
+                       ("The string which needs to be encrypted can not be null.");
+            }
+
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoProvider.CreateEncryptor(bytes, bytes), CryptoStreamMode.Write);
+            StreamWriter writer = new StreamWriter(cryptoStream);
+            writer.Write(originalString);
+            writer.Flush();
+            cryptoStream.FlushFinalBlock();
+            writer.Flush();
+
+            return Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+        }
+
     }
 }
