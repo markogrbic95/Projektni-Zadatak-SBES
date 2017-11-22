@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Group>
+    <GroupName>grupamoja</GroupName>
+    <Owner>marko</Owner>
+    <UsersList />
+  </Group>
+  <Group>
+    <GroupName>grupadupe</GroupName>
+    <Owner>marko</Owner>
+  </Group>
+</ArrayOfGroup>

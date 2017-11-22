@@ -36,6 +36,11 @@ namespace ProjektniZadatakSBES
         {
             if (type == "user")
             {
+                addressLabel.Visibility = Visibility.Visible;
+                bankaccLabel.Visibility = Visibility.Visible;
+                phoneLabel.Visibility = Visibility.Visible;
+                passwordLabel.Visibility = Visibility.Visible;
+
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
                 addressLabel.Content = ((User)obj).Address;
@@ -45,7 +50,13 @@ namespace ProjektniZadatakSBES
             }
             else
             {
+                addressLabel.Visibility = Visibility.Hidden;
+                bankaccLabel.Visibility = Visibility.Hidden;
+                phoneLabel.Visibility = Visibility.Hidden;
+                passwordLabel.Visibility = Visibility.Hidden;
+
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
+                nameLabel.Content = ((Group)obj).GroupName;
             }
         }
     }

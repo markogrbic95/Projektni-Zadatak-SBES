@@ -127,5 +127,10 @@ namespace Common
         {
             return factory.ChangeGroupName(oldName, newName, owner);
         }
+
+        public List<Group> ReadGroups()
+        {
+            return factory.ReadGroups();
+        }
     }
 }

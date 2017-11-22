@@ -43,5 +43,8 @@ namespace Common
 
         [OperationContract]
         bool ChangeGroupName(string oldName, string newName, string owner);
+
+        [OperationContract]
+        List<Group> ReadGroups();
     }
 }

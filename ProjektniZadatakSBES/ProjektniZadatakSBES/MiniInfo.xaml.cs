@@ -36,7 +36,14 @@ namespace ProjektniZadatakSBES
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).type = buttonType;
-            ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).obj = ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).clientProxy.AllUsersList().Find(u => u.Username == Button.Content.ToString());
+
+            if(buttonType == "user")            
+                ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).obj =
+                    ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).clientProxy.AllUsersList().Find(u => u.Username == Button.Content.ToString());
+            else
+                ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).obj =
+                    ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).clientProxy.ReadGroups().Find(g => g.GroupName == Button.Content.ToString());
+
             ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).SetInfo();
         }
 
