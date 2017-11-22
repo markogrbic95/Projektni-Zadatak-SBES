@@ -76,16 +76,23 @@ namespace ProjektniZadatakSBES
 
         private void deleteGroupButton_Click(object sender, RoutedEventArgs e)
         {
-            AddGroupWindow addGroupWindow = new AddGroupWindow(new Point(this.Left, this.Top));
-            addGroupWindow.Owner = this;
-            addGroupWindow.Show();
+            foreach(MiniInfo mini in myGroupsStackPanel.Children)
+            {
+                if(mini.Button.Content.ToString() == ((Info)ContentArea.Content).nameLabel.Content.ToString())
+                {
+                    myGroupsStackPanel.Children.Remove(mini);
+                    clientProxy.DeleteGroup(mini.Button.Content.ToString(), loggedUser.Username);
+                    break;
+                }                        
+            }            
+
+            ((Info)ContentArea.Content).obj = loggedUser;
+            ((Info)ContentArea.Content).type = "user";
+            ((Info)ContentArea.Content).SetInfo();
         }
 
         private void changeGroupButton_Click(object sender, RoutedEventArgs e)
         {
-            AddGroupWindow addGroupWindow = new AddGroupWindow(new Point(this.Left, this.Top));
-            addGroupWindow.Owner = this;
-            addGroupWindow.Show();
         }
 
         private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
