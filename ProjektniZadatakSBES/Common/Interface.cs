@@ -15,7 +15,7 @@ namespace Common
         string Registration(string name, string lastname, string address, string phoneNumber, string accNumber, string username, string password);
 
         [OperationContract]
-        bool ChangePassword(string username, string newPassword);
+        string ChangePassword(string username, string newPassword);
 
         [OperationContract]
         User Login(string username, string password);

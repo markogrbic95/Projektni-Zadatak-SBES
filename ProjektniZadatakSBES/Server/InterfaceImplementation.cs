@@ -19,15 +19,17 @@ namespace Server
         public static List<string> numberList = new List<string>() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
         public static List<string> interpunctionList = new List<string>() { ".", "?", "!", ",", ";", ":", "-" };
         
-        public bool ChangePassword(string username, string newPassword)
+        public string ChangePassword(string username, string newPassword)
         {
             registeredUsers = ReadFile();
             passwordList = ReadPasswords();
             string retVal = string.Empty;
 
+
+
             retVal = PasswordCheck(newPassword);
             if (retVal != "Success!")
-                return false;
+                return retVal;
 
             if (registeredUsers.ContainsKey(username))
             {
@@ -44,7 +46,7 @@ namespace Server
                     if(item == newPassword)
                     {
                         Console.WriteLine("You cant use previous passwords");
-                        return false;
+                        return "You cant use previous passwords";
                     }
                 }
 
@@ -54,13 +56,13 @@ namespace Server
                 WritePasswords();
                 Console.WriteLine("Password changed successfuly");
 
-                return true;
+                return "Success";
 
             }
             else
             {
                 Console.WriteLine("User with {0} username does not exist!", username);
-                return false;
+                return "User with " + username + " username does not exist!";
             }
         }
 
