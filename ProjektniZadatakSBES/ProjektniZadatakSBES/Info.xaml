@@ -5,17 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjektniZadatakSBES"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="520">
+             d:DesignHeight="320" d:DesignWidth="520">
     <Grid>
-        <Image x:Name="image" Height = "60" Width = "60" Margin = "210,0,210,200" />
+        <Image x:Name="image" Height = "60" Width = "60" Margin = "210,0,210,220" />
         <Label x:Name="nameLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,100" />
         <Label x:Name="addressLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,40" />
-        <Label x:Name="phoneLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,10,0,0" />
+        <Label x:Name="phoneLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,20,0,0" />
         <Label x:Name="bankaccLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,80,0,0" />
         <Label x:Name="passwordLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,140,0,0" />
         <ListBox x:Name="listBox" HorizontalAlignment="Center" Height="100" Margin="0,50,0,0" Background="#fcfcfc" VerticalAlignment="Center" Width="300"/>
 
-        <Button x:Name="addUserBtn" Height="30" Width="30" Margin="0,225,110,0" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="addUserBtn_Click" BorderThickness="0">
+        <Button x:Name="addUserBtn" Height="30" Width="30" Margin="0,220,110,0" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="addUserBtn_Click" BorderThickness="0">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="#fcfcfc"/>
@@ -37,7 +37,8 @@
             </Button.Style>
             <Image Source="Resources/addUser.png"/>
         </Button>
-        <Button x:Name="delUserBtn" Height="30" Width="30" Margin="110,225,0,0" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="delUserBtn_Click" BorderThickness="0">
+        <Label x:Name="addLabel" Content="Add User" Foreground = "#494041" FontSize = "14" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,270,110,0" />
+        <Button x:Name="delUserBtn" Height="30" Width="30" Margin="110,220,0,0" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="delUserBtn_Click" BorderThickness="0">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="#fcfcfc"/>
@@ -59,5 +60,6 @@
             </Button.Style>
             <Image Source="Resources/deleteUser.png"/>
         </Button>
+        <Label x:Name="delLabel" Content="Delete User" Foreground = "#494041" FontSize = "14" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "110,270,0,0" />
     </Grid>
 </UserControl>

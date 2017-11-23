@@ -43,6 +43,8 @@ namespace ProjektniZadatakSBES
                 listBox.Visibility = Visibility.Hidden;
                 addUserBtn.Visibility = Visibility.Hidden;
                 delUserBtn.Visibility = Visibility.Hidden;
+                delLabel.Visibility = Visibility.Hidden;
+                addLabel.Visibility = Visibility.Hidden;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
@@ -60,9 +62,12 @@ namespace ProjektniZadatakSBES
                 listBox.Visibility = Visibility.Visible;
                 addUserBtn.Visibility = Visibility.Visible;
                 delUserBtn.Visibility = Visibility.Visible;
+                delLabel.Visibility = Visibility.Visible;
+                addLabel.Visibility = Visibility.Visible;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((Group)obj).GroupName;
+                addressLabel.Content = ((Group)obj).Owner;                
                 listBox.ItemsSource = ((Group)obj).UsersList;
             }
         }
@@ -78,12 +83,17 @@ namespace ProjektniZadatakSBES
 
         private void addUserBtn_Click(object sender, RoutedEventArgs e)
         {
-            List<User> users = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AllUsersList();
-            listBox.ItemsSource = users;
+            AddUserToGroupWindow addUsersToGroupWindow =
+                new AddUserToGroupWindow(new Point(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).Left, 
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).Top));
+            addUsersToGroupWindow.Owner = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent);
+            addUsersToGroupWindow.SetUsers();
+            addUsersToGroupWindow.Show();
         }
         private void delUserBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.DeleteUsersFromGroup(nameLabel.Content.ToString(), addressLabel.Content.ToString(), listBox.SelectedItem.ToString());
+            
         }
     }
 }
