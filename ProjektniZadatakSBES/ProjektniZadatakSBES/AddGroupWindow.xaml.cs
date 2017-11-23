@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,11 +60,13 @@ namespace ProjektniZadatakSBES
             {
                 if (b.Button.Content.ToString() == groupNameTextBox.Text)
                 {
+                    Audit.GroupAddFailed(((MainUserWindow)this.Owner).loggedUser.Username, groupNameTextBox.Text);
                     errorLabel.Content = "Group already exists!";
                     return;
                 }                
             }
 
+            Audit.GroupAddSuccess(((MainUserWindow)this.Owner).loggedUser.Username, groupNameTextBox.Text);
             ((MainUserWindow)this.Owner).myGroupsStackPanel.Children.Add(new MiniInfo(groupNameTextBox.Text, "group"));
             ((MainUserWindow)this.Owner).clientProxy.AddGroup(groupNameTextBox.Text, ((MainUserWindow)this.Owner).loggedUser.Username);
             this.Close();

@@ -48,10 +48,10 @@ namespace ProjektniZadatakSBES
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
-                addressLabel.Content = ((User)obj).Address;
-                bankaccLabel.Content = ((User)obj).AccountNumber;
-                phoneLabel.Content = ((User)obj).PhoneNumber;
-                passwordLabel.Content = ((User)obj).Password;
+                addressLabel.Content = "Adresa: " + ((User)obj).Address;
+                bankaccLabel.Content = "Broj racuna: " + ((User)obj).AccountNumber;
+                phoneLabel.Content = "Telefon: " + ((User)obj).PhoneNumber;
+                passwordLabel.Content = "Lozinka: " + ((User)obj).Password;
             }
             else
             {

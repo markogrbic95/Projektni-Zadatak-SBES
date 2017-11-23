@@ -46,5 +46,17 @@ namespace Common
 
         [OperationContract]
         List<Group> ReadGroups();
+
+        [OperationContract]
+        void AddUserPermission(string owner, string username);
+
+        [OperationContract]
+        void RemoveUserPermission(string owner, string username);
+
+        [OperationContract]
+        void AddGroupPermission(string owner, string groupName);
+
+        [OperationContract]
+        void RemoveGroupPermission(string owner, string groupName);
     }
 }

@@ -597,5 +597,33 @@ namespace Server
 
             return reader.ReadToEnd();
         }
+
+        public void AddUserPermission(string owner, string username)
+        {
+            ReadFile();
+            registeredUsers[owner].AllowedUsers.Add(username);
+            WriteFile();
+        }
+
+        public void RemoveUserPermission(string owner, string username)
+        {
+            ReadFile();
+            registeredUsers[owner].AllowedUsers.Remove(username);
+            WriteFile();
+        }
+
+        public void AddGroupPermission(string owner, string groupName)
+        {
+            ReadFile();
+            registeredUsers[owner].AllowedGroups.Add(groupName);
+            WriteFile();
+        }
+
+        public void RemoveGroupPermission(string owner, string groupName)
+        {
+            ReadFile();
+            registeredUsers[owner].AllowedGroups.Remove(groupName);
+            WriteFile();
+        }
     }
 }

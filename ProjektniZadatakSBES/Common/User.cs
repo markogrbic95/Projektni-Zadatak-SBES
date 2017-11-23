@@ -16,12 +16,12 @@ namespace Common
         private string lastName = string.Empty;
         private string address = string.Empty;
         private string phoneNumber = string.Empty;
-        // valid bank account : 200000000001234512 ---> 18 numbers;
-        // zeros can be removed, like this : 200-12345-12
         private string accountNumber = string.Empty;
         private string username = string.Empty;
         private string password = string.Empty;
         private bool logged = false;
+        private List<string> allowedUsers;
+        private List<string> allowedGroups;
 
         public User(string name, string lastName, string address, string phoneNumber, string accountNumber, string username, string password)
         {
@@ -33,6 +33,8 @@ namespace Common
             this.username = username;
             this.password = password;
             this.logged = false;
+            this.allowedUsers = new List<string>();
+            this.AllowedGroups = new List<string>();
         }
 
         public User()
@@ -149,6 +151,34 @@ namespace Common
             set
             {
                 logged = value;
+            }
+        }
+
+        [DataMember]
+        public List<string> AllowedUsers
+        {
+            get
+            {
+                return allowedUsers;
+            }
+
+            set
+            {
+                allowedUsers = value;
+            }
+        }
+
+        [DataMember]
+        public List<string> AllowedGroups
+        {
+            get
+            {
+                return allowedGroups;
+            }
+
+            set
+            {
+                allowedGroups = value;
             }
         }
     }

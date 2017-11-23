@@ -56,8 +56,10 @@ namespace ProjektniZadatakSBES
                 if (loggedUser != null)
                 {
                     errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
-                    errorlabel.Content = "Success!";                   
-                    
+                    errorlabel.Content = "Success!";
+
+                    Audit.AuthenticationSuccess(usernameTextBox.Text);
+
                     MainUserWindow muw = new MainUserWindow(loggedUser, MainWindow.proxy);
                     muw.Show();
                     
@@ -66,6 +68,7 @@ namespace ProjektniZadatakSBES
                     return;
                 }
 
+                Audit.AuthenticationFailed(usernameTextBox.Text);
                 errorlabel.Content = "Wrong username/password combination!";
             }
         }

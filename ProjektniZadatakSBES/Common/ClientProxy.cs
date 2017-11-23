@@ -186,5 +186,53 @@ namespace Common
             }
             return groups;
         }
+
+        public void AddUserPermission(string owner, string username)
+        {
+            try
+            {
+                factory.AddUserPermission(owner, username);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
+
+        public void RemoveUserPermission(string owner, string username)
+        {
+            try
+            {
+                factory.RemoveUserPermission(owner, username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
+
+        public void AddGroupPermission(string owner, string groupName)
+        {
+            try
+            {
+                factory.AddGroupPermission(owner, groupName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
+
+        public void RemoveGroupPermission(string owner, string groupName)
+        {
+            try
+            {
+                factory.RemoveGroupPermission(owner, groupName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+        }
     }
 }

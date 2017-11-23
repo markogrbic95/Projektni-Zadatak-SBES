@@ -44,6 +44,8 @@ namespace ProjektniZadatakSBES
 
                 ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).deleteGroupButton.Visibility = Visibility.Hidden;
                 ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).changeGroupButton.Visibility = Visibility.Hidden;
+
+                Audit.DataAccess(((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).loggedUser.Username, Button.Content.ToString());
             }
             else
             {
@@ -52,6 +54,8 @@ namespace ProjektniZadatakSBES
 
                 ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).deleteGroupButton.Visibility = Visibility.Visible;
                 ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).changeGroupButton.Visibility = Visibility.Visible;
+
+                Audit.GroupAccess(((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).loggedUser.Username, Button.Content.ToString());
             }
 
             ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).SetInfo();
