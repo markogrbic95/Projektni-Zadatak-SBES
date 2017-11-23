@@ -183,10 +183,5 @@ namespace ProjektniZadatakSBES
             clientProxy.RemoveUserPermission(loggedUser.Username, ((Info)ContentArea.Content).nameLabel.Content.ToString());
         }
         */
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            string[] split = ((Info)ContentArea.Content).nameLabel.Content.ToString().Split('-');
-            clientProxy.AddUserPermission(loggedUser.Username, split[1].Trim());
-        }
     }
 }

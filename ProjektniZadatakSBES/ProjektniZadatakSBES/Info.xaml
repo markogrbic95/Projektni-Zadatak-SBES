@@ -7,6 +7,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="320" d:DesignWidth="520">
     <Grid>
+        <Button x:Name="permissionsBtn" Height="30" Width="30" Margin="410,0,0,250" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="permissionsBtn_Click" BorderThickness="0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#fcfcfc"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#fcfcfc"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image x:Name="buttonImage" Source="Resources/permissionsAllowed.png"/>
+        </Button>
+        <Label x:Name="perLabel" Content="Allow Permission" Foreground = "#494041" FontSize = "14" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "400,0,0,180" />
+
+
         <Image x:Name="image" Height = "60" Width = "60" Margin = "210,0,210,220" />
         <Label x:Name="nameLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,100" />
         <Label x:Name="addressLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,40" />

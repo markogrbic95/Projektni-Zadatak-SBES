@@ -201,6 +201,10 @@
     <Resource Include="Resources\addUser.png" />
     <Resource Include="Resources\deleteUser.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\permissionsAllowed.png" />
+    <Resource Include="Resources\permissionsNotAllowed.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

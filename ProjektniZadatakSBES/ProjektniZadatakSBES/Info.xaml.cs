@@ -29,7 +29,7 @@ namespace ProjektniZadatakSBES
             InitializeComponent();
             this.type = type;
             this.obj = obj;
-            SetInfo();
+            //SetInfo();
         }
 
         public void SetInfo()
@@ -49,16 +49,18 @@ namespace ProjektniZadatakSBES
                     listBox.Visibility = Visibility.Hidden;
                     addUserBtn.Visibility = Visibility.Hidden;
                     delUserBtn.Visibility = Visibility.Hidden;
+                    addLabel.Visibility = Visibility.Hidden;
+                    delLabel.Visibility = Visibility.Hidden;
 
                     image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
+                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
+                    perLabel.Content = "Deny Permisson";
                     nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
                     addressLabel.Content = "Adresa: " + ((User)obj).Address;
                     bankaccLabel.Content = "Broj racuna: " + ((User)obj).AccountNumber;
                     phoneLabel.Content = "Telefon: " + ((User)obj).PhoneNumber;
                     passwordLabel.Content = "Lozinka: " + ((User)obj).Password;
-
                 }
-
                 else
                 {
                     addressLabel.Visibility = Visibility.Visible;
@@ -68,14 +70,15 @@ namespace ProjektniZadatakSBES
                     listBox.Visibility = Visibility.Hidden;
                     addUserBtn.Visibility = Visibility.Hidden;
                     delUserBtn.Visibility = Visibility.Hidden;
-                    nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
+                    addLabel.Visibility = Visibility.Hidden;
+                    delLabel.Visibility = Visibility.Hidden;
 
+                    nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
+                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
+                    perLabel.Content = "Allow Permission";
                     addressLabel.Content = "You dont have permissions to view this profile";
                     image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
-
                 }
-
-
 
             }
             else
@@ -87,8 +90,11 @@ namespace ProjektniZadatakSBES
                 listBox.Visibility = Visibility.Visible;
                 addUserBtn.Visibility = Visibility.Visible;
                 delUserBtn.Visibility = Visibility.Visible;
+                addLabel.Visibility = Visibility.Visible;
+                delLabel.Visibility = Visibility.Visible;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
+                addressLabel.Content = ((Group)obj).Owner;
                 nameLabel.Content = ((Group)obj).GroupName;
                 listBox.ItemsSource = ((Group)obj).UsersList;
             }
@@ -114,8 +120,28 @@ namespace ProjektniZadatakSBES
         }
         private void delUserBtn_Click(object sender, RoutedEventArgs e)
         {
-            ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.DeleteUsersFromGroup(nameLabel.Content.ToString(), addressLabel.Content.ToString(), listBox.SelectedItem.ToString());
-            listBox.ItemsSource = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadFromGroup(nameLabel.Content.ToString());
+            if(listBox.SelectedIndex != -1)
+            {
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.DeleteUsersFromGroup(nameLabel.Content.ToString(), addressLabel.Content.ToString(), listBox.SelectedItem.ToString());
+                listBox.ItemsSource = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadFromGroup(nameLabel.Content.ToString());
+            }
+        }
+
+        private void permissionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (perLabel.Content.ToString() == "Allow Permission")
+            {
+                perLabel.Content = "Deny Permisson";
+                buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
+                
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AddUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]);               
+
+                return;
+            }
+
+            perLabel.Content = "Allow Permission";
+            buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.RemoveUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]); 
         }
     }
 }
