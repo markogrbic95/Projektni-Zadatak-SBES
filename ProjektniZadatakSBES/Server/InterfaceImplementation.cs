@@ -625,5 +625,23 @@ namespace Server
             registeredUsers[owner].AllowedGroups.Remove(groupName);
             WriteFile();
         }
+
+        public List<string> ReadFromGroup(string groupName)
+        {
+            var tempList = ReadGroups();
+
+            Group group = new Group();
+
+            foreach(var item in tempList)
+            {
+                if(item.GroupName == groupName)
+                {
+                    group = item;
+                    break;
+                }
+            }
+
+            return group.UsersList;
+        }
     }
 }

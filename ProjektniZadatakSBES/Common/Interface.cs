@@ -58,5 +58,8 @@ namespace Common
 
         [OperationContract]
         void RemoveGroupPermission(string owner, string groupName);
+
+        [OperationContract]
+        List<string> ReadFromGroup(string groupName);
     }
 }

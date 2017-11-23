@@ -234,5 +234,20 @@ namespace Common
                 Console.WriteLine("Error: {0}", e.Message);
             }
         }
+
+        public List<string> ReadFromGroup(string groupName)
+        {
+            List<string> users = new List<string>();
+            try
+            {
+                users = factory.ReadFromGroup(groupName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+
+            return users;
+        }
     }
 }
