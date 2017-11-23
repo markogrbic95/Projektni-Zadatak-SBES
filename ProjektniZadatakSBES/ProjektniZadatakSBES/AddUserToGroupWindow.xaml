@@ -1,0 +1,73 @@
+﻿<Window x:Class="ProjektniZadatakSBES.AddUserToGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjektniZadatakSBES"
+        mc:Ignorable="d"
+        Title="AddUserToGroupWindow" Height="350" Width="300"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+        WindowStartupLocation="Manual"
+        FontSize="14"
+        FontWeight="Medium"
+        Background="#ecf0f1" 
+        Icon="/Resources/icon.ico"  >
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="40"  VerticalAlignment="Top" Width="300" Background="#e3634f">
+            <Label x:Name="addUserToGroupLabel" FontSize="16" FontWeight="Light" Content="Add New User To Group" Margin="10,5,0,0" Foreground="#fff"/>
+            <Button x:Name="exitBtn" Height="20" Width="20" Margin="260,-30,0,0" MouseEnter="exitBtn_MouseEnter" MouseLeave="exitBtn_MouseLeave" Click="exitBtn_Click" BorderThickness="0">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#e3634f"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#e3634f"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Source="Resources/exitWhite.png"/>
+            </Button>
+        </StackPanel>
+        
+        <ScrollViewer x:Name="usersScrollViewer" HorizontalAlignment="Center" Height="200" VerticalAlignment="Center" Width="200" Margin="0,0,0,0">
+            <StackPanel x:Name="usersStackPanel" Background="#ecf0f1"/>
+        </ScrollViewer>
+
+        <Button x:Name="addUserToGroupButton" FontSize="14" FontWeight="Light" Content="OK" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="110,0,110,20" Width="80" Height="20" Click="addUserToGroupButton_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#e3634f"/>
+                    <Setter Property="Foreground" Value="#fff"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#e3634f"/>
+                            <Setter Property="Foreground" Value="#fcfcfc"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>
