@@ -52,5 +52,11 @@ namespace Common
 
         [OperationContract]
         void RemoveUserPermission(string owner, string username);
+
+        [OperationContract]
+        void AddGroupPermission(string owner, string groupName);
+
+        [OperationContract]
+        void RemoveGroupPermission(string owner, string groupName);
     }
 }

@@ -21,6 +21,7 @@ namespace Common
         private string password = string.Empty;
         private bool logged = false;
         private List<string> allowedUsers;
+        private List<string> allowedGroups;
 
         public User(string name, string lastName, string address, string phoneNumber, string accountNumber, string username, string password)
         {
@@ -33,6 +34,7 @@ namespace Common
             this.password = password;
             this.logged = false;
             this.allowedUsers = new List<string>();
+            this.AllowedGroups = new List<string>();
         }
 
         public User()
@@ -163,6 +165,20 @@ namespace Common
             set
             {
                 allowedUsers = value;
+            }
+        }
+
+        [DataMember]
+        public List<string> AllowedGroups
+        {
+            get
+            {
+                return allowedGroups;
+            }
+
+            set
+            {
+                allowedGroups = value;
             }
         }
     }

@@ -611,5 +611,19 @@ namespace Server
             registeredUsers[owner].AllowedUsers.Remove(username);
             WriteFile();
         }
+
+        public void AddGroupPermission(string owner, string groupName)
+        {
+            ReadFile();
+            registeredUsers[owner].AllowedGroups.Add(groupName);
+            WriteFile();
+        }
+
+        public void RemoveGroupPermission(string owner, string groupName)
+        {
+            ReadFile();
+            registeredUsers[owner].AllowedGroups.Remove(groupName);
+            WriteFile();
+        }
     }
 }
