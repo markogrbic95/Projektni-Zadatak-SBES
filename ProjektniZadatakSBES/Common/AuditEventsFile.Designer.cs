@@ -61,11 +61,29 @@ namespace Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} successfully authenticated..
+        ///   Looks up a localized string similar to User {0} failed to authenticated. Date and Time: {1}.
+        /// </summary>
+        internal static string UserAuthenticationFailed {
+            get {
+                return ResourceManager.GetString("UserAuthenticationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully authenticated. Date and Time: {1}.
         /// </summary>
         internal static string UserAuthenticationSuccess {
             get {
                 return ResourceManager.GetString("UserAuthenticationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully registrated on system. Date and Time: {1}.
+        /// </summary>
+        internal static string UserRegistrationSuccess {
+            get {
+                return ResourceManager.GetString("UserRegistrationSuccess", resourceCulture);
             }
         }
     }

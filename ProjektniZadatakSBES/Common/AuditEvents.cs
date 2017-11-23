@@ -11,8 +11,8 @@ namespace Common
     public enum AuditEventTypes
     {
         UserAuthenticationSuccess = 0,
-        UserAuthorizationSuccess = 1,
-        UserAuthorizationFailed = 2
+        UserAuthenticationFailed = 1,
+        UserRegistrationSuccess = 2,
     }
 
     public class AuditEvents
@@ -40,6 +40,22 @@ namespace Common
             get
             {
                 return ResourceMgr.GetString(AuditEventTypes.UserAuthenticationSuccess.ToString());
+            }
+        }
+
+        public static string UserAuthorizationFailed
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserAuthenticationFailed.ToString());
+            }
+        }
+
+        public static string UserRegistrationSuccess
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserRegistrationSuccess.ToString());
             }
         }
     }
