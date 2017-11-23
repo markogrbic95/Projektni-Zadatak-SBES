@@ -170,6 +170,23 @@ namespace ProjektniZadatakSBES
                     return;
                 }
             }
-        }        
+        }
+
+       /* private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+            string[] split = ((Info)ContentArea.Content).nameLabel.Content.ToString().Split('-');
+            clientProxy.AddUserPermission(loggedUser.Username,split[1].Trim());
+        }
+
+        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            clientProxy.RemoveUserPermission(loggedUser.Username, ((Info)ContentArea.Content).nameLabel.Content.ToString());
+        }
+        */
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            string[] split = ((Info)ContentArea.Content).nameLabel.Content.ToString().Split('-');
+            clientProxy.AddUserPermission(loggedUser.Username, split[1].Trim());
+        }
     }
 }
