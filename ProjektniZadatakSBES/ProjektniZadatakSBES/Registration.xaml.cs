@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace ProjektniZadatakSBES
                         return;
                     }
                 }
+                string textBox = usernameTextBox.Text;
 
                 string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, Encrypt(addressTextBox.Text), Encrypt(phoneTextBox.Text), Encrypt(bankaccTextBox.Text), usernameTextBox.Text, Encrypt(passwordTextBox.Password));
 
@@ -68,6 +70,8 @@ namespace ProjektniZadatakSBES
                     if (tb is PasswordBox)                    
                         ((PasswordBox)tb).Password = null;                    
                 }
+
+                Audit.RegistrationSuccess(textBox);
 
                 errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
                 errorlabel.Content = "Success!";

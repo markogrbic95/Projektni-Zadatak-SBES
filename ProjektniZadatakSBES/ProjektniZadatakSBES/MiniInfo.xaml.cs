@@ -44,6 +44,10 @@ namespace ProjektniZadatakSBES
 
                 ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).deleteGroupButton.Visibility = Visibility.Hidden;
                 ((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).changeGroupButton.Visibility = Visibility.Hidden;
+
+                Audit.DataAccess(((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).loggedUser.Username, Button.Content.ToString());
+
+                
             }
             else
             {

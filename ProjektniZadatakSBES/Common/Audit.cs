@@ -38,13 +38,61 @@ namespace Common
             {
                 string newLog = AuditEvents.UserAuthenticationSuccess;
 
-                string s = String.Format(newLog, userName);
+                string s = String.Format(newLog, userName, DateTime.Now.ToString());
 
                 customLog.WriteEntry(s);
             }
             else
             {
                 throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAuthenticationSuccess));
+            }
+        }
+
+        public static void AuthenticationFailed(string userName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserAuthorizationFailed;
+
+                string s = String.Format(newLog, userName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAuthenticationFailed));
+            }
+        }
+
+        public static void RegistrationSuccess(string userName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserRegistrationSuccess;
+
+                string s = String.Format(newLog, userName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserRegistrationSuccess));
+            }
+        }
+
+        public static void DataAccess(string userName,string viewedUser)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserDataAccess;
+
+                string s = String.Format(newLog, userName, viewedUser, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserDataAccess));
             }
         }
 

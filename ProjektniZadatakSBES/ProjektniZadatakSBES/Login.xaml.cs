@@ -68,6 +68,7 @@ namespace ProjektniZadatakSBES
                     return;
                 }
 
+                Audit.AuthenticationFailed(usernameTextBox.Text);
                 errorlabel.Content = "Wrong username/password combination!";
             }
         }
