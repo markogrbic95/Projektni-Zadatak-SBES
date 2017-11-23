@@ -123,9 +123,30 @@
   <data name="UserAuthenticationSuccess" xml:space="preserve">
     <value>User {0} successfully authenticated. Date and Time: {1}</value>
   </data>
+  <data name="UserChangePasswordSuccess" xml:space="preserve">
+    <value>User {0} changed passwords successfully. Date and Time: {1}</value>
+  </data>
   <data name="UserDataAccess" xml:space="preserve">
     <value>User {0} gained access to {1}'s informations. Date and Time: {2}
 </value>
+  </data>
+  <data name="UserGroupAccess" xml:space="preserve">
+    <value>User {0} gained access to {1} options. Date and Time: {2}</value>
+  </data>
+  <data name="UserGroupAddFailed" xml:space="preserve">
+    <value>User {0} failed to add group {1} because that group already exits. Date and Time: {2}</value>
+  </data>
+  <data name="UserGroupAddSuccess" xml:space="preserve">
+    <value>User {0} successfully added group {1}. Date and Time: {2}</value>
+  </data>
+  <data name="UserGroupDeleteSuccess" xml:space="preserve">
+    <value>User {0} succesfully deleted {1}. Date and time: {2}</value>
+  </data>
+  <data name="UserGroupEditFailed" xml:space="preserve">
+    <value>User {0} failed to changed {1} name because that group already exits. Date and Time: {2}</value>
+  </data>
+  <data name="UserGroupEditSuccess" xml:space="preserve">
+    <value>User {0} successfully changed {1} name to {2}. Date and Time: {3}</value>
   </data>
   <data name="UserRegistrationSuccess" xml:space="preserve">
     <value>User {0} successfully registrated on system. Date and Time: {1}</value>

@@ -79,12 +79,75 @@ namespace Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User {0} changed passwords successfully. Date and Time: {1}.
+        /// </summary>
+        internal static string UserChangePasswordSuccess {
+            get {
+                return ResourceManager.GetString("UserChangePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User {0} gained access to {1}&apos;s informations. Date and Time: {2}
         ///.
         /// </summary>
         internal static string UserDataAccess {
             get {
                 return ResourceManager.GetString("UserDataAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} gained access to {1} options. Date and Time: {2}.
+        /// </summary>
+        internal static string UserGroupAccess {
+            get {
+                return ResourceManager.GetString("UserGroupAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to add group {1} because that group already exits. Date and Time: {2}.
+        /// </summary>
+        internal static string UserGroupAddFailed {
+            get {
+                return ResourceManager.GetString("UserGroupAddFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully added group {1}. Date and Time: {2}.
+        /// </summary>
+        internal static string UserGroupAddSuccess {
+            get {
+                return ResourceManager.GetString("UserGroupAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} succesfully deleted {1}. Date and time: {2}.
+        /// </summary>
+        internal static string UserGroupDeleteSuccess {
+            get {
+                return ResourceManager.GetString("UserGroupDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to changed {1} name because that group already exits. Date and Time: {2}.
+        /// </summary>
+        internal static string UserGroupEditFailed {
+            get {
+                return ResourceManager.GetString("UserGroupEditFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully changed {1} name to {2}. Date and Time: {3}.
+        /// </summary>
+        internal static string UserGroupEditSuccess {
+            get {
+                return ResourceManager.GetString("UserGroupEditSuccess", resourceCulture);
             }
         }
         

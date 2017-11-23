@@ -14,7 +14,13 @@ namespace Common
         UserAuthenticationFailed = 1,
         UserRegistrationSuccess = 2,
         UserDataAccess = 3,
-
+        UserChangePasswordSuccess = 4,
+        UserGroupAddFailed = 5,
+        UserGroupAddSuccess = 6,
+        UserGroupAccess = 7,
+        UserGroupDeleteSuccess = 8,
+        UserGroupEditSuccess = 9,
+        UserGroupEditFailed = 10
     }
 
     public class AuditEvents
@@ -67,6 +73,63 @@ namespace Common
             {
                 return ResourceMgr.GetString(AuditEventTypes.UserDataAccess.ToString());
             }
+        }
+
+        public static string UserChangePasswordSuccess
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserChangePasswordSuccess.ToString());
+            }
+        }
+
+        public static string UserGroupAddFailed
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserGroupAddFailed.ToString());
+            }
+        }
+
+        public static string UserGroupAddSuccess
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserGroupAddSuccess.ToString());
+            }
+        }
+
+        public static string UserGroupAccess
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserGroupAccess.ToString());
+            }
+        }
+
+        public static string UserGroupDeleteSuccess
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserGroupDeleteSuccess.ToString());
+            }
+        }
+
+        public static string UserGroupEditSuccess
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserGroupEditSuccess.ToString());
+            }
+        }
+
+        public static string UserGroupEditFailed
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserGroupEditFailed.ToString());
+            }
+
         }
     }
 }

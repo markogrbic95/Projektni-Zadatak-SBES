@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Common;
 
 namespace ProjektniZadatakSBES
 {
@@ -59,13 +60,15 @@ namespace ProjektniZadatakSBES
             {
                 if (b.Button.Content.ToString() == groupNameTextBox.Text)
                 {
+                    Audit.GroupEditFailed(((MainUserWindow)this.Owner).loggedUser.Username, groupNameTextBox.Text);
                     errorLabel.Content = "Group already exists!";
                     return;
                 }
             }
 
             ((MainUserWindow)this.Owner).clientProxy.ChangeGroupName(((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString(), groupNameTextBox.Text, ((MainUserWindow)this.Owner).loggedUser.Username);
-            
+            Audit.GroupEditSuccess(((MainUserWindow)this.Owner).loggedUser.Username, ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString(), groupNameTextBox.Text);
+
             foreach (MiniInfo b in ((MainUserWindow)this.Owner).myGroupsStackPanel.Children)
             {
                 if (b.Button.Content.ToString() == ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString())

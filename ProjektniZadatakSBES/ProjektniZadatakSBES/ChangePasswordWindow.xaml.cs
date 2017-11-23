@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -73,6 +74,7 @@ namespace ProjektniZadatakSBES
                 return;
             }
 
+            string user = ((MainUserWindow)this.Owner).loggedUser.Username;
             string message = ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, Encrypt(newPasswordTextBox.Password));
 
             if(message != "Success")
@@ -85,6 +87,8 @@ namespace ProjektniZadatakSBES
 
             errorLabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
             errorLabel.Content = "Success!";
+
+            Audit.ChangePasswordSuccess(user);
 
             newPasswordTextBox.Password = "";
             oldPasswordTextBox.Password = "";

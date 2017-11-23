@@ -80,7 +80,7 @@ namespace Common
             }
         }
 
-        public static void DataAccess(string userName,string viewedUser)
+        public static void DataAccess(string userName, string viewedUser)
         {
             if (customLog != null)
             {
@@ -93,6 +93,118 @@ namespace Common
             else
             {
                 throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserDataAccess));
+            }
+        }
+
+        public static void ChangePasswordSuccess(string userName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserChangePasswordSuccess;
+
+                string s = String.Format(newLog, userName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserChangePasswordSuccess));
+            }
+        }
+
+        public static void GroupAddFailed(string userName, string groupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserGroupAddFailed;
+
+                string s = String.Format(newLog, userName, groupName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserGroupAddFailed));
+            }
+        }
+
+        public static void GroupAddSuccess(string userName, string groupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserGroupAddSuccess;
+
+                string s = String.Format(newLog, userName, groupName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserGroupAddSuccess));
+            }
+        }
+
+        public static void GroupAccess(string userName, string groupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserGroupAccess;
+
+                string s = String.Format(newLog, userName, groupName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserGroupAccess));
+            }
+        }
+
+        public static void GroupDeleteSuccess(string userName, string groupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserGroupDeleteSuccess;
+
+                string s = String.Format(newLog, userName, groupName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserGroupDeleteSuccess));
+            }
+        }
+
+        public static void GroupEditSuccess(string userName, string oldGroupName, string newGroupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserGroupEditSuccess;
+
+                string s = String.Format(newLog, userName, oldGroupName, newGroupName,DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserGroupEditSuccess));
+            }
+        }
+
+        public static void GroupEditFailed(string userName, string groupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserGroupEditFailed;
+
+                string s = String.Format(newLog, userName, groupName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserGroupEditFailed));
             }
         }
 

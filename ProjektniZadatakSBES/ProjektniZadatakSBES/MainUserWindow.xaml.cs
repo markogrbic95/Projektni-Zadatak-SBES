@@ -83,6 +83,8 @@ namespace ProjektniZadatakSBES
             {
                 if(mini.Button.Content.ToString() == ((Info)ContentArea.Content).nameLabel.Content.ToString())
                 {
+                    Audit.GroupDeleteSuccess(loggedUser.Username, mini.Button.Content.ToString());
+
                     myGroupsStackPanel.Children.Remove(mini);
                     clientProxy.DeleteGroup(mini.Button.Content.ToString(), loggedUser.Username);
                     break;
