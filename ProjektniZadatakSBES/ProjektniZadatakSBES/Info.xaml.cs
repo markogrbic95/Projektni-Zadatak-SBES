@@ -29,16 +29,27 @@ namespace ProjektniZadatakSBES
             InitializeComponent();
             this.type = type;
             this.obj = obj;
-            //SetInfo();
         }
 
         public void SetInfo()
         {
             if (type == "user")
             {
-                Dictionary<string, User> users = MainWindow.proxy.ReadFile();
-                User u = new User();
-                u = ((User)obj);
+                Dictionary<string, User> users = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadFile();
+                User u = ((User)obj);
+
+                image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
+
+                if (((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedUsers.Contains(u.Username))
+                {
+                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
+                    perLabel.Content = "Deny Permission";
+                }
+                else
+                {
+                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
+                    perLabel.Content = "Allow Permission";
+                }
 
                 if (u.AllowedUsers.Count > 0 && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
                 {
@@ -51,10 +62,7 @@ namespace ProjektniZadatakSBES
                     delUserBtn.Visibility = Visibility.Hidden;
                     addLabel.Visibility = Visibility.Hidden;
                     delLabel.Visibility = Visibility.Hidden;
-
-                    image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
-                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
-                    perLabel.Content = "Deny Permisson";
+       
                     nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
                     addressLabel.Content = "Adresa: " + ((User)obj).Address;
                     bankaccLabel.Content = "Broj racuna: " + ((User)obj).AccountNumber;
@@ -74,15 +82,26 @@ namespace ProjektniZadatakSBES
                     delLabel.Visibility = Visibility.Hidden;
 
                     nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
-                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
-                    perLabel.Content = "Allow Permission";
                     addressLabel.Content = "You dont have permissions to view this profile";
-                    image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
                 }
-
             }
             else
             {
+                Group group = ((Group)obj);
+
+                image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
+
+                if (((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Count > 0 && ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Contains(group.GroupName))
+                {
+                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
+                    perLabel.Content = "Deny Permission";
+                }
+                else
+                {
+                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
+                    perLabel.Content = "Allow Permission";
+                }
+
                 addressLabel.Visibility = Visibility.Hidden;
                 bankaccLabel.Visibility = Visibility.Hidden;
                 phoneLabel.Visibility = Visibility.Hidden;
@@ -93,9 +112,8 @@ namespace ProjektniZadatakSBES
                 addLabel.Visibility = Visibility.Visible;
                 delLabel.Visibility = Visibility.Visible;
 
-                image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
-                addressLabel.Content = ((Group)obj).Owner;
                 nameLabel.Content = ((Group)obj).GroupName;
+                addressLabel.Content = ((Group)obj).Owner;
                 listBox.ItemsSource = ((Group)obj).UsersList;
             }
         }
@@ -133,15 +151,32 @@ namespace ProjektniZadatakSBES
             {
                 perLabel.Content = "Deny Permisson";
                 buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
-                
-                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AddUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]);               
 
-                return;
+                if (type == "user")
+                {
+                    ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AddUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]);
+                    ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedUsers.Add(nameLabel.Content.ToString().Split(' ')[3]);
+                    return;
+                }
+
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AddGroupPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString());
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Add(nameLabel.Content.ToString());
             }
+            else
+            {
+                perLabel.Content = "Allow Permission";
+                buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
 
-            perLabel.Content = "Allow Permission";
-            buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
-                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.RemoveUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]); 
+                if(type == "user")
+                {
+                    ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.RemoveUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]);
+                    ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedUsers.Remove(nameLabel.Content.ToString().Split(' ')[3]);
+                    return;
+                }
+
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.RemoveGroupPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString());
+                ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Remove(nameLabel.Content.ToString());
+            }
         }
     }
 }
