@@ -142,7 +142,22 @@ namespace Server
                 if (retVal != "Success!")
                     return retVal;
 
+                if(decryptedPhoneNumber.Length < 9 || decryptedPhoneNumber.Length > 10)
+                {
+                    return "Phone number must contain 9 or 10 numbers!";
+                }
+
+                try
+                {
+                    Convert.ToInt32(decryptedPhoneNumber);
+                }
+                catch (Exception)
+                {
+                    return "Phone number can't contain letters!";
+                }
+
                 registeredUsers.Add(username, new User(name, lastname, decryptedAddress, decryptedPhoneNumber, decryptedAccNumber, username, decryptedPassword));
+
                 WriteFile();
 
                 Password pass = new Password(username, decryptedPassword);
