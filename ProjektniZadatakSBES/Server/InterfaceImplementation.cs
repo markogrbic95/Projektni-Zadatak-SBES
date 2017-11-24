@@ -158,6 +158,8 @@ namespace Server
 
                 registeredUsers.Add(username, new User(name, lastname, decryptedAddress, decryptedPhoneNumber, decryptedAccNumber, username, decryptedPassword));
 
+                registeredUsers[username].AllowedUsers.Add(username);
+
                 WriteFile();
 
                 Password pass = new Password(username, decryptedPassword);
