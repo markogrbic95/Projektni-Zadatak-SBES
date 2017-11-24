@@ -27,8 +27,9 @@ namespace Server
             registeredUsers = ReadFile();
             passwordList = ReadPasswords();
             string retVal = string.Empty;
+            string decryptedPassword = Decrypt(newPassword);
 
-            retVal = PasswordCheck(newPassword);
+            retVal = PasswordCheck(decryptedPassword);
             if (retVal != "Success!")
                 return retVal;
 
@@ -44,16 +45,16 @@ namespace Server
 
                 foreach (var item in userPasswords)
                 {
-                    if(item == newPassword)
+                    if(item == decryptedPassword)
                     {
                         Console.WriteLine("You cant use previous passwords");
                         return "You cant use previous passwords";
                     }
                 }
 
-                Password pass = new Password(username,newPassword);
+                Password pass = new Password(username, decryptedPassword);
                 passwordList.Add(pass);
-                registeredUsers[username].Password = newPassword;
+                registeredUsers[username].Password = decryptedPassword;
 
                 WriteFile();
                 WritePasswords();
@@ -74,9 +75,11 @@ namespace Server
         {
             registeredUsers = ReadFile();
 
+            string decryptedPassword = Decrypt(password);
+
             if (registeredUsers.ContainsKey(username))
             {
-                if(registeredUsers[username].Password == password)
+                if(registeredUsers[username].Password == decryptedPassword)
                 {
                     registeredUsers[username].Logged = true;
                     Console.WriteLine("{0} logged successfully!",username);
