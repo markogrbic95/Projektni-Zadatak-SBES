@@ -35,9 +35,8 @@ namespace ProjektniZadatakSBES
         {
             if (type == "user")
             {
-                Dictionary<string, User> users = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadFile();
                 User u = ((User)obj);
-
+                bool IsInGroup = true;
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
 
                 if(u.Username != ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username)
@@ -55,15 +54,36 @@ namespace ProjektniZadatakSBES
                         buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
                         perLabel.Content = "Allow Permission";
                     }
+
+                    List<Group> groups = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadGroups();
+
+                    foreach (Group group in groups)
+                    {
+                        if (group.UsersList.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
+                        {
+                            if (u.AllowedGroups.Contains(group.GroupName))
+                            {
+                                IsInGroup = true;
+                            }
+                            else
+                            {
+                                IsInGroup = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (u.AllowedGroups.Count == 0)
+                        IsInGroup = true;
+
                 }
                 else
                 {
                     permissionsBtn.Visibility = Visibility.Hidden;
                     perLabel.Visibility = Visibility.Hidden;
-                }
-                   
+                }                
 
-                if (u.AllowedUsers.Count > 0 && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
+                if (u.AllowedUsers.Count > 0 && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username) && IsInGroup)
                 {
                     addressLabel.Visibility = Visibility.Visible;
                     bankaccLabel.Visibility = Visibility.Visible;
