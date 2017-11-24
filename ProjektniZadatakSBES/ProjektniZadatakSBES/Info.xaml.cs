@@ -40,16 +40,28 @@ namespace ProjektniZadatakSBES
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
 
-                if (((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedUsers.Contains(u.Username))
+                if(u.Username != ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username)
                 {
-                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
-                    perLabel.Content = "Deny Permission";
+                    permissionsBtn.Visibility = Visibility.Visible;
+                    perLabel.Visibility = Visibility.Visible;
+
+                    if (((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedUsers.Contains(u.Username))
+                    {
+                        buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsNotAllowed.png", UriKind.RelativeOrAbsolute));
+                        perLabel.Content = "Deny Permission";
+                    }
+                    else
+                    {
+                        buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
+                        perLabel.Content = "Allow Permission";
+                    }
                 }
                 else
                 {
-                    buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
-                    perLabel.Content = "Allow Permission";
+                    permissionsBtn.Visibility = Visibility.Hidden;
+                    perLabel.Visibility = Visibility.Hidden;
                 }
+                   
 
                 if (u.AllowedUsers.Count > 0 && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
                 {
@@ -90,6 +102,9 @@ namespace ProjektniZadatakSBES
                 Group group = ((Group)obj);
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
+
+                permissionsBtn.Visibility = Visibility.Visible;
+                perLabel.Visibility = Visibility.Visible;
 
                 if (((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Count > 0 && ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Contains(group.GroupName))
                 {

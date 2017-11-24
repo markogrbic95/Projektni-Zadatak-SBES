@@ -32,6 +32,7 @@ namespace ProjektniZadatakSBES
 
             SetUsersAndGroups();
             ContentArea.Content = new Info(loggedUser,"user");
+            ((Info)ContentArea.Content).SetInfo();
 
             deleteGroupButton.Visibility = Visibility.Hidden;
             changeGroupButton.Visibility = Visibility.Hidden;
