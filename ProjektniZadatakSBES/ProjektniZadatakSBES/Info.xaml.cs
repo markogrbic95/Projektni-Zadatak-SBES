@@ -36,22 +36,47 @@ namespace ProjektniZadatakSBES
         {
             if (type == "user")
             {
-                addressLabel.Visibility = Visibility.Visible;
-                bankaccLabel.Visibility = Visibility.Visible;
-                phoneLabel.Visibility = Visibility.Visible;
-                passwordLabel.Visibility = Visibility.Visible;
-                listBox.Visibility = Visibility.Hidden;
-                addUserBtn.Visibility = Visibility.Hidden;
-                delUserBtn.Visibility = Visibility.Hidden;
-                delLabel.Visibility = Visibility.Hidden;
-                addLabel.Visibility = Visibility.Hidden;
+                Dictionary<string, User> users = MainWindow.proxy.ReadFile();
+                User u = new User();
+                u = ((User)obj);
 
-                image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
-                nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
-                addressLabel.Content = "Adresa: " + ((User)obj).Address;
-                bankaccLabel.Content = "Broj racuna: " + ((User)obj).AccountNumber;
-                phoneLabel.Content = "Telefon: " + ((User)obj).PhoneNumber;
-                passwordLabel.Content = "Lozinka: " + ((User)obj).Password;
+                if (u.AllowedUsers.Count > 0 && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
+                {
+                    addressLabel.Visibility = Visibility.Visible;
+                    bankaccLabel.Visibility = Visibility.Visible;
+                    phoneLabel.Visibility = Visibility.Visible;
+                    passwordLabel.Visibility = Visibility.Visible;
+                    listBox.Visibility = Visibility.Hidden;
+                    addUserBtn.Visibility = Visibility.Hidden;
+                    delUserBtn.Visibility = Visibility.Hidden;
+
+                    image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
+                    nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
+                    addressLabel.Content = "Adresa: " + ((User)obj).Address;
+                    bankaccLabel.Content = "Broj racuna: " + ((User)obj).AccountNumber;
+                    phoneLabel.Content = "Telefon: " + ((User)obj).PhoneNumber;
+                    passwordLabel.Content = "Lozinka: " + ((User)obj).Password;
+
+                }
+
+                else
+                {
+                    addressLabel.Visibility = Visibility.Visible;
+                    bankaccLabel.Visibility = Visibility.Hidden;
+                    phoneLabel.Visibility = Visibility.Hidden;
+                    passwordLabel.Visibility = Visibility.Hidden;
+                    listBox.Visibility = Visibility.Hidden;
+                    addUserBtn.Visibility = Visibility.Hidden;
+                    delUserBtn.Visibility = Visibility.Hidden;
+                    nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
+
+                    addressLabel.Content = "You dont have permissions to view this profile";
+                    image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
+
+                }
+
+
+
             }
             else
             {
@@ -62,12 +87,9 @@ namespace ProjektniZadatakSBES
                 listBox.Visibility = Visibility.Visible;
                 addUserBtn.Visibility = Visibility.Visible;
                 delUserBtn.Visibility = Visibility.Visible;
-                delLabel.Visibility = Visibility.Visible;
-                addLabel.Visibility = Visibility.Visible;
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
                 nameLabel.Content = ((Group)obj).GroupName;
-                addressLabel.Content = ((Group)obj).Owner;                
                 listBox.ItemsSource = ((Group)obj).UsersList;
             }
         }

@@ -249,5 +249,10 @@ namespace Common
 
             return users;
         }
+
+        public Dictionary<string, User> ReadFile()
+        {
+            return factory.ReadFile();
+        }
     }
 }

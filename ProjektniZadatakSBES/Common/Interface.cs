@@ -61,5 +61,8 @@ namespace Common
 
         [OperationContract]
         List<string> ReadFromGroup(string groupName);
+
+        [OperationContract]
+        Dictionary<string, User> ReadFile();
     }
 }
