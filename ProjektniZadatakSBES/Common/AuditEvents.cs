@@ -13,6 +13,8 @@ namespace Common
         UserAuthenticationSuccess = 0,
         UserAuthenticationFailed = 1,
         UserRegistrationSuccess = 2,
+        UserDataAccess = 3,
+
     }
 
     public class AuditEvents
@@ -56,6 +58,14 @@ namespace Common
             get
             {
                 return ResourceMgr.GetString(AuditEventTypes.UserRegistrationSuccess.ToString());
+            }
+        }
+
+        public static string UserDataAccess
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserDataAccess.ToString());
             }
         }
     }
