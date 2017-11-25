@@ -85,7 +85,6 @@ namespace ProjektniZadatakSBES
                 if(mini.Button.Content.ToString() == ((Info)ContentArea.Content).nameLabel.Content.ToString())
                 {
                     Audit.GroupDeleteSuccess(loggedUser.Username, mini.Button.Content.ToString());
-
                     myGroupsStackPanel.Children.Remove(mini);
                     clientProxy.DeleteGroup(mini.Button.Content.ToString(), loggedUser.Username);
                     break;
@@ -104,8 +103,8 @@ namespace ProjektniZadatakSBES
         {
             ChangeGroupWindow changeGroupWindow = new ChangeGroupWindow(new Point(this.Left, this.Top));
             changeGroupWindow.Owner = this;
+            changeGroupWindow.SetGroupName();
             changeGroupWindow.Show();
-            return;            
         }
 
         private void changePasswordBtn_Click(object sender, RoutedEventArgs e)
@@ -113,6 +112,13 @@ namespace ProjektniZadatakSBES
             ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(new Point(this.Left, this.Top));
             changePasswordWindow.Owner = this;
             changePasswordWindow.Show();
+        }
+
+        private void logoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)

@@ -56,9 +56,9 @@ namespace ProjektniZadatakSBES
                 return;
             }
 
-            foreach (MiniInfo b in ((MainUserWindow)this.Owner).myGroupsStackPanel.Children)
+            foreach (Group g in ((MainUserWindow)this.Owner).clientProxy.ReadGroups())
             {
-                if (b.Button.Content.ToString() == groupNameTextBox.Text)
+                if (g.Owner == ((MainUserWindow)this.Owner).loggedUser.Username && g.GroupName == groupNameTextBox.Text)
                 {
                     Audit.GroupAddFailed(((MainUserWindow)this.Owner).loggedUser.Username, groupNameTextBox.Text);
                     errorLabel.Content = "Group already exists!";

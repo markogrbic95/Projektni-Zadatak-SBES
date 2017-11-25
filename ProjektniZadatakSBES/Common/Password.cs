@@ -19,10 +19,7 @@ namespace Common
             this.oldPassword = oldPassword;
         }
 
-        public Password()
-        {
-
-        }
+        public Password() { }
 
         [DataMember]
         public string User

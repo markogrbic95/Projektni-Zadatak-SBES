@@ -129,7 +129,6 @@ namespace Common
             {
                 return ResourceMgr.GetString(AuditEventTypes.UserGroupEditFailed.ToString());
             }
-
         }
     }
 }

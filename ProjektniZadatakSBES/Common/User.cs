@@ -37,10 +37,7 @@ namespace Common
             this.AllowedGroups = new List<string>();
         }
 
-        public User()
-        {
-
-        }
+        public User() { }
 
         [DataMember]
         public string Name

@@ -51,31 +51,29 @@ namespace ProjektniZadatakSBES
         private void addUserToGroupButton_Click(object sender, RoutedEventArgs e)
         {
             List<string> usernamesToAdd = new List<string>();
-            List<Group> groups = ((MainUserWindow)this.Owner).clientProxy.ReadGroups();
-            Group thisGroup = new Group();
-
-            foreach (Group g in groups)
-            {
-                if (g.GroupName == ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString())
-                {
-                    thisGroup = g;
-                    break;
-                }
-            }
 
             foreach (UserChecker uc in usersStackPanel.Children)
             {
                 if ((bool)uc.checkBox.IsChecked)
                     usernamesToAdd.Add(uc.nameLabel.Content.ToString());
             }
-            
-            ((Info)((MainUserWindow)this.Owner).ContentArea.Content).listBox.ItemsSource = usernamesToAdd;
 
-            foreach(string s in usernamesToAdd)                
-                ((MainUserWindow)this.Owner).clientProxy.AddUsersToGroup(thisGroup.GroupName, thisGroup.Owner, s);            
+            foreach (Group g in ((MainUserWindow)this.Owner).clientProxy.ReadGroups())
+            {
+                if (g.Owner == ((MainUserWindow)this.Owner).loggedUser.Username && g.GroupName == ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString())
+                {
+                    foreach(string usersInGroup in ((MainUserWindow)this.Owner).clientProxy.ReadFromGroup(g.GroupName))
+                        ((MainUserWindow)this.Owner).clientProxy.DeleteUsersFromGroup(g.GroupName, g.Owner, usersInGroup);
 
-            this.Close();
+                    foreach (string s in usernamesToAdd)
+                        ((MainUserWindow)this.Owner).clientProxy.AddUsersToGroup(g.GroupName, g.Owner, s);
+
+                    ((Info)((MainUserWindow)this.Owner).ContentArea.Content).listBox.ItemsSource = usernamesToAdd;
+                    this.Close();
+                }
+            }     
         }
+
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
             ((Button)sender).Background = new SolidColorBrush(Color.FromRgb(247, 119, 99));
@@ -90,28 +88,24 @@ namespace ProjektniZadatakSBES
 
         public void SetUsers()
         {
-            List<User> users = (List<User>)((MainUserWindow)this.Owner).clientProxy.AllUsersList();
-            List<Group> groups = ((MainUserWindow)this.Owner).clientProxy.ReadGroups();
-            Group thisGroup = new Group();
-
-            foreach(Group g in groups)
+            foreach(Group g in ((MainUserWindow)this.Owner).clientProxy.ReadGroups())
             {
-                if (g.GroupName == ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString())
+                if (g.Owner == ((MainUserWindow)this.Owner).loggedUser.Username && g.GroupName == ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString())
                 {
-                    thisGroup = g;
-                    break;
+                    foreach (User u in ((MainUserWindow)this.Owner).clientProxy.AllUsersList())
+                    {
+                        if(u.Username != g.Owner)
+                        {
+                            UserChecker uc = new UserChecker();
+                            uc.nameLabel.Content = u.Username;
+
+                            if (g.UsersList.Contains(u.Username))
+                                uc.checkBox.IsChecked = true;
+
+                            usersStackPanel.Children.Add(uc);
+                        }
+                    }
                 }
-            }
-
-            foreach (User u in users)
-            {
-                UserChecker uc = new UserChecker();
-                uc.nameLabel.Content = u.Username;
-
-                if (thisGroup.UsersList.Contains(u.Username))
-                    uc.checkBox.IsChecked = true;
-
-                usersStackPanel.Children.Add(uc);
             }
         }
     }

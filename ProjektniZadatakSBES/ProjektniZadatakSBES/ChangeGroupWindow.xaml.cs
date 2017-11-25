@@ -49,25 +49,32 @@ namespace ProjektniZadatakSBES
         }
 
         private void changeGroupButton_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             if (groupNameTextBox.Text == "")
             {
                 errorLabel.Content = "Please enter a group name.";
                 return;
             }
 
-            foreach (MiniInfo b in ((MainUserWindow)this.Owner).myGroupsStackPanel.Children)
+            foreach (Group g in ((MainUserWindow)this.Owner).clientProxy.ReadGroups())
             {
-                if (b.Button.Content.ToString() == groupNameTextBox.Text)
+                if (g.Owner == ((MainUserWindow)this.Owner).loggedUser.Username && g.GroupName == groupNameTextBox.Text)
                 {
+                    if(((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString() == g.GroupName)
+                    {
+                        Audit.GroupEditFailed(((MainUserWindow)this.Owner).loggedUser.Username, groupNameTextBox.Text);
+                        errorLabel.Content = "That is the groups name.";
+                        return;
+                    }
+
                     Audit.GroupEditFailed(((MainUserWindow)this.Owner).loggedUser.Username, groupNameTextBox.Text);
                     errorLabel.Content = "Group already exists!";
                     return;
                 }
             }
 
-            ((MainUserWindow)this.Owner).clientProxy.ChangeGroupName(((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString(), groupNameTextBox.Text, ((MainUserWindow)this.Owner).loggedUser.Username);
             Audit.GroupEditSuccess(((MainUserWindow)this.Owner).loggedUser.Username, ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString(), groupNameTextBox.Text);
+            ((MainUserWindow)this.Owner).clientProxy.ChangeGroupName(((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString(), groupNameTextBox.Text, ((MainUserWindow)this.Owner).loggedUser.Username);
 
             foreach (MiniInfo b in ((MainUserWindow)this.Owner).myGroupsStackPanel.Children)
             {
@@ -96,6 +103,11 @@ namespace ProjektniZadatakSBES
             errorLabel.Content = "";
             if (e.Key == Key.Enter)
                 changeGroupButton_Click(null, null);
+        }
+
+        public void SetGroupName()
+        {
+            groupNameTextBox.Text = ((Info)((MainUserWindow)this.Owner).ContentArea.Content).nameLabel.Content.ToString();
         }
     }
 }

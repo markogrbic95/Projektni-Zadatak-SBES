@@ -73,8 +73,7 @@ namespace ProjektniZadatakSBES
                 errorLabel.Content = "Please enter a valid password.";
                 return;
             }
-
-            string user = ((MainUserWindow)this.Owner).loggedUser.Username;
+            
             string message = ((MainUserWindow)this.Owner).clientProxy.ChangePassword(((MainUserWindow)this.Owner).loggedUser.Username, Encrypt(newPasswordTextBox.Password));
 
             if(message != "Success")
@@ -84,11 +83,10 @@ namespace ProjektniZadatakSBES
             }
 
             ((MainUserWindow)this.Owner).loggedUser.Password = newPasswordTextBox.Password;
+            Audit.ChangePasswordSuccess(((MainUserWindow)this.Owner).loggedUser.Username);
 
             errorLabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
             errorLabel.Content = "Success!";
-
-            Audit.ChangePasswordSuccess(user);
 
             newPasswordTextBox.Password = "";
             oldPasswordTextBox.Password = "";

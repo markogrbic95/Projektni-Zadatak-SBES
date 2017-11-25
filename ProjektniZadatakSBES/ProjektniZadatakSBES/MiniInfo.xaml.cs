@@ -30,9 +30,9 @@ namespace ProjektniZadatakSBES
             this.buttonType = buttonType;
 
             if(buttonType != "user")            
-                Image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
-            
+                Image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));            
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).type = buttonType;

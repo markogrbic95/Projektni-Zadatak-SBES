@@ -167,6 +167,7 @@ namespace ProjektniZadatakSBES
             AddUserToGroupWindow addUsersToGroupWindow =
                 new AddUserToGroupWindow(new Point(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).Left, 
                 ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).Top));
+
             addUsersToGroupWindow.Owner = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent);
             addUsersToGroupWindow.SetUsers();
             addUsersToGroupWindow.Show();
