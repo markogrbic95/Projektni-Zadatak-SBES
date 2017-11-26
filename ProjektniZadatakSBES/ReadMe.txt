@@ -1,0 +1,1 @@
+delete grupe treba grupu da brise i iz allowed grupa ako se tamo nalazi grupa

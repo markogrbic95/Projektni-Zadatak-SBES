@@ -7,7 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="163">
     <Grid>
-
+        <StackPanel x:Name="StackPanel" Background="#ecf0f1" Margin="0,0,120,0">
+            <Image x:Name="Image" Source="Resources/username.png" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Margin="0,2.5,0,0"/>
+        </StackPanel>
         <Button x:Name="Button" FontSize="14" FontWeight="Light" Content="Grba" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="120" Height="30" Click="Button_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Margin="43,0,0,0">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -31,8 +33,5 @@
                 </Style>
             </Button.Style>
         </Button>
-        <StackPanel x:Name="StackPanel" Background="#ecf0f1" Margin="0,0,120,0">
-            <Image x:Name="Image" Source="Resources/username.png" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Margin="0,2.5,0,0"/>
-        </StackPanel>
     </Grid>
 </UserControl>

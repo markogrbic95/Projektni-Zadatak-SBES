@@ -31,7 +31,6 @@
         </Button>
         <Label x:Name="perLabel" Content="Allow Permission" Foreground = "#494041" FontSize = "14" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "400,0,0,180" />
 
-
         <Image x:Name="image" Height = "60" Width = "60" Margin = "210,0,210,220" />
         <Label x:Name="nameLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,100" />
         <Label x:Name="addressLabel" Foreground = "#494041" FontSize = "16" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,0,0,40" />
@@ -63,6 +62,7 @@
             <Image Source="Resources/addUser.png"/>
         </Button>
         <Label x:Name="addLabel" Content="Add User" Foreground = "#494041" FontSize = "14" FontWeight = "Light" HorizontalAlignment = "Center" HorizontalContentAlignment = "Center" VerticalAlignment = "Center" Width = "Auto" Height = "Auto" Margin = "0,270,110,0" />
+        
         <Button x:Name="delUserBtn" Height="30" Width="30" Margin="110,220,0,0" MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave" Click="delUserBtn_Click" BorderThickness="0">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">

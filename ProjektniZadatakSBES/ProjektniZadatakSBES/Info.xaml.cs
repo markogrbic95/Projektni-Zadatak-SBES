@@ -36,7 +36,8 @@ namespace ProjektniZadatakSBES
             if (type == "user")
             {
                 User u = ((User)obj);
-                bool IsInGroup = true;
+                bool IsInGroup = false;
+                bool HasGroupPer = false;
                 image.Source = new BitmapImage(new Uri(@"\Resources\username.png", UriKind.RelativeOrAbsolute));
 
                 if(u.Username != ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username)
@@ -53,69 +54,51 @@ namespace ProjektniZadatakSBES
                     {
                         buttonImage.Source = new BitmapImage(new Uri(@"\Resources\permissionsAllowed.png", UriKind.RelativeOrAbsolute));
                         perLabel.Content = "Allow Permission";
-                    }
+                    }                   
 
-                    List<Group> groups = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadGroups();
-
-                    foreach (Group group in groups)
+                    foreach (Group group in ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadGroups())
                     {
-                        if (group.UsersList.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
+                        if (group.Owner == u.Username && group.UsersList.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
                         {
+                            IsInGroup = true;
+
                             if (u.AllowedGroups.Contains(group.GroupName))
                             {
-                                IsInGroup = true;
+                                HasGroupPer = true;
                             }
                             else
                             {
-                                IsInGroup = false;
+                                HasGroupPer = false;
                                 break;
                             }
                         }
                     }
-
-                    if (u.AllowedGroups.Count == 0)
-                        IsInGroup = true;
-
                 }
                 else
                 {
                     permissionsBtn.Visibility = Visibility.Hidden;
                     perLabel.Visibility = Visibility.Hidden;
-                }                
-
-                if (u.AllowedUsers.Count > 0 && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username) && IsInGroup)
-                {
-                    addressLabel.Visibility = Visibility.Visible;
-                    bankaccLabel.Visibility = Visibility.Visible;
-                    phoneLabel.Visibility = Visibility.Visible;
-                    passwordLabel.Visibility = Visibility.Visible;
-                    listBox.Visibility = Visibility.Hidden;
-                    addUserBtn.Visibility = Visibility.Hidden;
-                    delUserBtn.Visibility = Visibility.Hidden;
-                    addLabel.Visibility = Visibility.Hidden;
-                    delLabel.Visibility = Visibility.Hidden;
-       
-                    nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
-                    addressLabel.Content = "Adresa: " + ((User)obj).Address;
-                    bankaccLabel.Content = "Broj racuna: " + ((User)obj).AccountNumber;
-                    phoneLabel.Content = "Telefon: " + ((User)obj).PhoneNumber;
-                    passwordLabel.Content = "Lozinka: " + ((User)obj).Password;
                 }
+
+                if (IsInGroup)
+                {
+                    if (HasGroupPer)
+                    {
+                        ShowInfo();
+                        return;
+                    }
+                    else
+                    {
+                        HideInfo();
+                        return;
+                    }
+                }      
+
+                if (u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username) || IsInGroup)
+                    ShowInfo();                
                 else
-                {
-                    addressLabel.Visibility = Visibility.Visible;
-                    bankaccLabel.Visibility = Visibility.Hidden;
-                    phoneLabel.Visibility = Visibility.Hidden;
-                    passwordLabel.Visibility = Visibility.Hidden;
-                    listBox.Visibility = Visibility.Hidden;
-                    addUserBtn.Visibility = Visibility.Hidden;
-                    delUserBtn.Visibility = Visibility.Hidden;
-                    addLabel.Visibility = Visibility.Hidden;
-                    delLabel.Visibility = Visibility.Hidden;
+                    HideInfo();
 
-                    nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
-                    addressLabel.Content = "You dont have permissions to view this profile";
-                }
             }
             else
             {
@@ -152,6 +135,7 @@ namespace ProjektniZadatakSBES
                 listBox.ItemsSource = ((Group)obj).UsersList;
             }
         }
+
         private void Btn_MouseEnter(object sender, MouseEventArgs e)
         {
             this.Cursor = Cursors.Hand;
@@ -213,6 +197,41 @@ namespace ProjektniZadatakSBES
                 ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.RemoveGroupPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString());
                 ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Remove(nameLabel.Content.ToString());
             }
+        }
+
+        private void ShowInfo()
+        {
+            addressLabel.Visibility = Visibility.Visible;
+            bankaccLabel.Visibility = Visibility.Visible;
+            phoneLabel.Visibility = Visibility.Visible;
+            passwordLabel.Visibility = Visibility.Visible;
+            listBox.Visibility = Visibility.Hidden;
+            addUserBtn.Visibility = Visibility.Hidden;
+            delUserBtn.Visibility = Visibility.Hidden;
+            addLabel.Visibility = Visibility.Hidden;
+            delLabel.Visibility = Visibility.Hidden;
+
+            nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
+            addressLabel.Content = "Address: " + ((User)obj).Address;
+            bankaccLabel.Content = "Bank account: " + ((User)obj).AccountNumber;
+            phoneLabel.Content = "Phone: " + ((User)obj).PhoneNumber;
+            passwordLabel.Content = "Password: " + ((User)obj).Password;
+        }
+
+        private void HideInfo()
+        {
+            addressLabel.Visibility = Visibility.Visible;
+            bankaccLabel.Visibility = Visibility.Hidden;
+            phoneLabel.Visibility = Visibility.Hidden;
+            passwordLabel.Visibility = Visibility.Hidden;
+            listBox.Visibility = Visibility.Hidden;
+            addUserBtn.Visibility = Visibility.Hidden;
+            delUserBtn.Visibility = Visibility.Hidden;
+            addLabel.Visibility = Visibility.Hidden;
+            delLabel.Visibility = Visibility.Hidden;
+
+            nameLabel.Content = ((User)obj).Name + " " + ((User)obj).LastName + " - " + ((User)obj).Username;
+            addressLabel.Content = "You dont have permissions to view this profile";
         }
     }
 }
