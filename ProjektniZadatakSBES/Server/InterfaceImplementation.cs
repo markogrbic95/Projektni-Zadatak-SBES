@@ -390,13 +390,17 @@ namespace Server
         public bool DeleteGroup(string groupName, string owner)
         {
             groupList = ReadGroups();
+            registeredUsers = ReadFile();
 
             foreach (var item in groupList)
             {
                 if (item.GroupName == groupName && item.Owner == owner)
                 {
                     groupList.Remove(item);
+                    if (registeredUsers[owner].AllowedGroups.Contains(groupName))
+                        registeredUsers[owner].AllowedGroups.Remove(groupName);
                     WriteGroups();
+                    WriteFile();
                     return true;
                 }
             }
@@ -407,6 +411,7 @@ namespace Server
         public bool ChangeGroupName(string oldName, string newName, string owner)
         {
             groupList = ReadGroups();
+            registeredUsers = ReadFile();
 
             foreach (var item in groupList)
             {
@@ -422,7 +427,13 @@ namespace Server
                 if (item.GroupName == oldName && item.Owner == owner)
                 {
                     item.GroupName = newName;
+                    if (registeredUsers[owner].AllowedGroups.Contains(oldName))
+                    {
+                        int index = registeredUsers[owner].AllowedGroups.FindIndex(x => x == oldName);
+                        registeredUsers[owner].AllowedGroups[index] = newName;
+                    }
                     WriteGroups();
+                    WriteFile();
                     return true;
                 }
             }
