@@ -82,6 +82,7 @@ namespace Server
                 if(registeredUsers[username].Password == decryptedPassword)
                 {
                     registeredUsers[username].Logged = true;
+                    WriteFile();
                     Console.WriteLine("{0} logged successfully!",username);
 
                     return registeredUsers[username];
@@ -106,6 +107,7 @@ namespace Server
             if (registeredUsers[username].Logged)
             {
                 registeredUsers[username].Logged = false;
+                WriteFile();
                 Console.WriteLine("User {0} successfully logout!", username);
                 return true;
             }

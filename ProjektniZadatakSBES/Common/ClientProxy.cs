@@ -252,7 +252,16 @@ namespace Common
 
         public Dictionary<string, User> ReadFile()
         {
-            return factory.ReadFile();
+            Dictionary<string, User> tempDictionary = new Dictionary<string, User>();
+            try
+            {
+                tempDictionary = factory.ReadFile();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+            }
+            return tempDictionary;
         }
     }
 }

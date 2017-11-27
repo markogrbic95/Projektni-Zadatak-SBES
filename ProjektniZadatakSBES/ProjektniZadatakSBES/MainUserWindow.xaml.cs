@@ -116,6 +116,7 @@ namespace ProjektniZadatakSBES
 
         private void logoutBtn_Click(object sender, RoutedEventArgs e)
         {
+            clientProxy.Logout(loggedUser.Username);
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
@@ -178,17 +179,5 @@ namespace ProjektniZadatakSBES
                 }
             }
         }
-
-       /* private void checkBox_Checked(object sender, RoutedEventArgs e)
-        {
-            string[] split = ((Info)ContentArea.Content).nameLabel.Content.ToString().Split('-');
-            clientProxy.AddUserPermission(loggedUser.Username,split[1].Trim());
-        }
-
-        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            clientProxy.RemoveUserPermission(loggedUser.Username, ((Info)ContentArea.Content).nameLabel.Content.ToString());
-        }
-        */
     }
 }

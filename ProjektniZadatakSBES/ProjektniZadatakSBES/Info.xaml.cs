@@ -204,7 +204,7 @@ namespace ProjektniZadatakSBES
             addressLabel.Visibility = Visibility.Visible;
             bankaccLabel.Visibility = Visibility.Visible;
             phoneLabel.Visibility = Visibility.Visible;
-            passwordLabel.Visibility = Visibility.Visible;
+            passwordLabel.Visibility = Visibility.Hidden;
             listBox.Visibility = Visibility.Hidden;
             addUserBtn.Visibility = Visibility.Hidden;
             delUserBtn.Visibility = Visibility.Hidden;
