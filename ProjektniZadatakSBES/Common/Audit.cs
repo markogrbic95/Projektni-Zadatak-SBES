@@ -208,6 +208,86 @@ namespace Common
             }
         }
 
+        public static void ChangePasswordFailed(string userName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserChangePasswordFailed;
+
+                string s = String.Format(newLog, userName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserChangePasswordFailed));
+            }
+        }
+
+        public static void AllowedPermision(string userName, string newUser)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserAllowedPermision;
+
+                string s = String.Format(newLog, userName, newUser, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAllowedPermision));
+            }
+        }
+
+        public static void DenyPermision(string userName, string newUser)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserDenyPermision;
+
+                string s = String.Format(newLog, userName, newUser, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserDenyPermision));
+            }
+        }
+
+        public static void AddedUserToGroup(string userName, string newUser, string groupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserAddedUserToGroup;
+
+                string s = String.Format(newLog, userName, newUser, groupName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAddedUserToGroup));
+            }
+        }
+
+        public static void RemoveUserFromGroup(string userName, string newUser, string groupName)
+        {
+            if (customLog != null)
+            {
+                string newLog = AuditEvents.UserRemoveUserFromGroup;
+
+                string s = String.Format(newLog, userName, newUser, groupName, DateTime.Now.ToString());
+
+                customLog.WriteEntry(s);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserRemoveUserFromGroup));
+            }
+        }
+
         public void Dispose()
         {
             if (customLog != null)

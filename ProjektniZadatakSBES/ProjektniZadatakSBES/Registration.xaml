@@ -12,10 +12,22 @@
         <TextBox x:Name="nameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
         <TextBox x:Name="surnameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="455,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
         <TextBox x:Name="addressTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="125,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
-        <TextBox x:Name="phoneTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="455,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
-        <TextBox x:Name="bankaccTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <TextBox x:Name="phoneTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="455,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC">
+            <TextBox.ToolTip>
+                <TextBlock>Phone number must contain 9 or 10 numbers</TextBlock>
+            </TextBox.ToolTip>
+        </TextBox>
+        <TextBox x:Name="bankaccTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="125,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC">
+            <TextBox.ToolTip>
+                <TextBlock>Bank account should be in form like this: xxx-xxxxxxxxxxxxx-xx</TextBlock>
+            </TextBox.ToolTip>
+        </TextBox>
         <TextBox x:Name="usernameTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="18" FontWeight="Light" HorizontalAlignment="Left" Height="30" Margin="455,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
-        <PasswordBox x:Name="passwordTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="14" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="125,360,0,0" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC"/>
+        <PasswordBox x:Name="passwordTextBox" Background="#fcfcfc" Foreground="#494041" FontSize="14" FontWeight="Thin" HorizontalAlignment="Left" Height="30" Margin="125,360,0,0" VerticalAlignment="Top" Width="200" BorderThickness="0,0,0,1" BorderBrush="#E9EAEC">
+            <PasswordBox.ToolTip>
+                <TextBlock>Password must contain at least 10 characters (max 20) including at least one upper case letter, one down case letter, one number and one interpunction sign</TextBlock>
+            </PasswordBox.ToolTip>
+        </PasswordBox>
 
         <Label x:Name="nameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Name:" HorizontalAlignment="Left" Margin="45,175,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>
         <Label x:Name="surnameLabel" Foreground="#494041" FontSize="16" FontWeight="Light" Content="Surname:" HorizontalAlignment="Left" Margin="375,175,0,0" VerticalAlignment="Top" Height="30" Width="Auto"/>

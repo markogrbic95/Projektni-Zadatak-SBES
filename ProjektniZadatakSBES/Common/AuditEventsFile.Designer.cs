@@ -61,6 +61,24 @@ namespace Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User {0} added user {1} to {2} group. Date and time: {3}.
+        /// </summary>
+        internal static string UserAddedUserToGroup {
+            get {
+                return ResourceManager.GetString("UserAddedUserToGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} allowed user {1} permision on his personal informations. Date and Time: {2}.
+        /// </summary>
+        internal static string UserAllowedPermision {
+            get {
+                return ResourceManager.GetString("UserAllowedPermision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User {0} failed to authenticated. Date and Time: {1}.
         /// </summary>
         internal static string UserAuthenticationFailed {
@@ -79,7 +97,16 @@ namespace Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} changed passwords successfully. Date and Time: {1}.
+        ///   Looks up a localized string similar to User {0} failed to changed password. Date and Time: {1}.
+        /// </summary>
+        internal static string UserChangePasswordFailed {
+            get {
+                return ResourceManager.GetString("UserChangePasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} changed password successfully. Date and Time: {1}.
         /// </summary>
         internal static string UserChangePasswordSuccess {
             get {
@@ -94,6 +121,15 @@ namespace Common {
         internal static string UserDataAccess {
             get {
                 return ResourceManager.GetString("UserDataAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} deny user {1} permision on his personal informations. Date and Time: {2}.
+        /// </summary>
+        internal static string UserDenyPermision {
+            get {
+                return ResourceManager.GetString("UserDenyPermision", resourceCulture);
             }
         }
         
@@ -157,6 +193,15 @@ namespace Common {
         internal static string UserRegistrationSuccess {
             get {
                 return ResourceManager.GetString("UserRegistrationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} remove user {1} from {2} group. Date and time: {3}.
+        /// </summary>
+        internal static string UserRemoveUserFromGroup {
+            get {
+                return ResourceManager.GetString("UserRemoveUserFromGroup", resourceCulture);
             }
         }
     }

@@ -186,6 +186,7 @@ namespace ProjektniZadatakSBES
         {
             if(listBox.SelectedIndex != -1)
             {
+                Audit.RemoveUserFromGroup(addressLabel.Content.ToString(), listBox.SelectedItem.ToString(), nameLabel.Content.ToString());
                 ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.DeleteUsersFromGroup(nameLabel.Content.ToString(), addressLabel.Content.ToString(), listBox.SelectedItem.ToString());
                 listBox.ItemsSource = ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.ReadFromGroup(nameLabel.Content.ToString());
             }
@@ -200,6 +201,7 @@ namespace ProjektniZadatakSBES
 
                 if (type == "user")
                 {
+                    Audit.AllowedPermision((((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username), nameLabel.Content.ToString().Split(' ')[3]);
                     ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.AddUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]);
                     ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedUsers.Add(nameLabel.Content.ToString().Split(' ')[3]);
                     return;
@@ -215,6 +217,7 @@ namespace ProjektniZadatakSBES
 
                 if(type == "user")
                 {
+                    Audit.DenyPermision((((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username), nameLabel.Content.ToString().Split(' ')[3]);
                     ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).clientProxy.RemoveUserPermission(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username, nameLabel.Content.ToString().Split(' ')[3]);
                     ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedUsers.Remove(nameLabel.Content.ToString().Split(' ')[3]);
                     return;
