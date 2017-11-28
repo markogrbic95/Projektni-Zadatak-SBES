@@ -20,7 +20,12 @@ namespace Common
         UserGroupAccess = 7,
         UserGroupDeleteSuccess = 8,
         UserGroupEditSuccess = 9,
-        UserGroupEditFailed = 10
+        UserGroupEditFailed = 10,
+        UserChangePasswordFailed = 11,
+        UserAllowedPermision = 12,
+        UserDenyPermision = 13,
+        UserAddedUserToGroup = 14,
+        UserRemoveUserFromGroup = 15
     }
 
     public class AuditEvents
@@ -128,6 +133,46 @@ namespace Common
             get
             {
                 return ResourceMgr.GetString(AuditEventTypes.UserGroupEditFailed.ToString());
+            }
+        }
+
+        public static string UserChangePasswordFailed
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserChangePasswordFailed.ToString());
+            }
+        }
+
+        public static string UserAllowedPermision
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserAllowedPermision.ToString());
+            }
+        }
+
+        public static string UserDenyPermision
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserDenyPermision.ToString());
+            }
+        }
+
+        public static string UserAddedUserToGroup
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserAddedUserToGroup.ToString());
+            }
+        }
+
+        public static string UserRemoveUserFromGroup
+        {
+            get
+            {
+                return ResourceMgr.GetString(AuditEventTypes.UserRemoveUserFromGroup.ToString());
             }
         }
     }

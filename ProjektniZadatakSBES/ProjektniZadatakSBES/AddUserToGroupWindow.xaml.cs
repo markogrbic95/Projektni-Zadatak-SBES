@@ -66,7 +66,10 @@ namespace ProjektniZadatakSBES
                         ((MainUserWindow)this.Owner).clientProxy.DeleteUsersFromGroup(g.GroupName, g.Owner, usersInGroup);
 
                     foreach (string s in usernamesToAdd)
+                    {
                         ((MainUserWindow)this.Owner).clientProxy.AddUsersToGroup(g.GroupName, g.Owner, s);
+                        Audit.AddedUserToGroup(g.Owner, s, g.GroupName);
+                    }
 
                     ((Info)((MainUserWindow)this.Owner).ContentArea.Content).listBox.ItemsSource = usernamesToAdd;
                     this.Close();
