@@ -64,8 +64,6 @@ namespace ProjektniZadatakSBES
                     muw.Show();
                     
                     ((Window)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).Close();
-                        
-                    return;
                 }
 
                 Audit.AuthenticationFailed(usernameTextBox.Text);

@@ -69,6 +69,7 @@
                 </Style>
             </Button.Style>
         </Button>
+        
         <Button x:Name="registerButton" Content="REGISTER" Margin="0,380,350,0" Width="350" Height="50" Click="registerButton_Click" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">

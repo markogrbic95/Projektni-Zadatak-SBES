@@ -52,8 +52,6 @@ namespace ProjektniZadatakSBES
                         return;
                     }
                 }
-
-                string textBox = usernameTextBox.Text;
 				
 				if (nameTextBox.Text.Contains(' '))
 					nameTextBox.Text = Regex.Replace(nameTextBox.Text, @"\s", "");
@@ -82,7 +80,7 @@ namespace ProjektniZadatakSBES
                         ((PasswordBox)tb).Password = null;                    
                 }
 
-                Audit.RegistrationSuccess(textBox);
+                Audit.RegistrationSuccess(usernameTextBox.Text);
 
                 errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
                 errorlabel.Content = "Success!";

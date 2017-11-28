@@ -98,7 +98,7 @@ namespace ProjektniZadatakSBES
                     }
                 }      
 
-                if (u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username) || IsInGroup)
+                if (u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
                     ShowInfo();                
                 else
                     HideInfo();
@@ -138,7 +138,6 @@ namespace ProjektniZadatakSBES
                 bankaccLabel.Visibility = Visibility.Hidden;
                 phoneLabel.Visibility = Visibility.Hidden;
                 passwordLabel.Visibility = Visibility.Hidden;
-
                 listBox.Visibility = Visibility.Visible;
 
                 if (group.Owner == ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username)
