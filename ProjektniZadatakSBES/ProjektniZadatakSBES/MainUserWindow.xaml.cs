@@ -71,7 +71,6 @@ namespace ProjektniZadatakSBES
         private void SetUsersAndGroups()
         {
             List<string> usersNotToAdd = new List<string>();
-            List<string> groupsNotToAdd = new List<string>();
 
             this.Dispatcher.Invoke(() =>
             {
@@ -84,33 +83,18 @@ namespace ProjektniZadatakSBES
                     }
                 }
 
-                foreach (var group in groupsList)
-                {
-                    if (group.UsersList.Contains(loggedUser.Username) || group.Owner == loggedUser.Username)
-                    {
-                        if (myGroupsStackPanel.Children.Count > 0)
-                        {
-                            foreach (MiniInfo miniInfo in myGroupsStackPanel.Children)
-                            {
-                                if (miniInfo.Button.Content.ToString() == group.GroupName)
-                                    groupsNotToAdd.Add(group.GroupName);
-                            }
-                        }
-                    }
-                    else
-                        groupsNotToAdd.Add(group.GroupName);                       
-                }
-
                 foreach (var u in usersList)
                 {
                     if (!usersNotToAdd.Contains(u.Username))
                         usersStackPanel.Children.Add(new MiniInfo(u.Username, "user"));
                 }
 
-                foreach (var g in groupsList)
+                myGroupsStackPanel.Children.Clear();
+
+                foreach (var group in groupsList)
                 {
-                    if (!groupsNotToAdd.Contains(g.GroupName))
-                        myGroupsStackPanel.Children.Add(new MiniInfo(g.GroupName, "group"));
+                    if (group.UsersList.Contains(loggedUser.Username) || group.Owner == loggedUser.Username)                    
+                        myGroupsStackPanel.Children.Add(new MiniInfo(group.GroupName, "group"));                                         
                 }
             });            
         }
