@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,8 +53,25 @@ namespace ProjektniZadatakSBES
                     }
                 }
                 string textBox = usernameTextBox.Text;
+				
+				if (nameTextBox.Text.Contains(' '))
+				{
+					nameTextBox.Text = Regex.Replace(nameTextBox.Text, @"\s", "");
+				}
 
-                string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, Encrypt(addressTextBox.Text), Encrypt(phoneTextBox.Text), Encrypt(bankaccTextBox.Text), usernameTextBox.Text, Encrypt(passwordTextBox.Password));
+				if (surnameTextBox.Text.Contains(' '))
+				{
+					surnameTextBox.Text = Regex.Replace(surnameTextBox.Text, @"\s", "");
+				}
+
+				if (usernameTextBox.Text.Contains(' '))
+				{
+					usernameTextBox.Text = Regex.Replace(usernameTextBox.Text, @"\s", "");
+				}
+
+
+
+				string msg = MainWindow.proxy.Registration(nameTextBox.Text, surnameTextBox.Text, Encrypt(addressTextBox.Text), Encrypt(phoneTextBox.Text), Encrypt(bankaccTextBox.Text), usernameTextBox.Text, Encrypt(passwordTextBox.Password));
 
                 if (msg != "Success!")
                 {
