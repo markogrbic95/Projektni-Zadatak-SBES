@@ -22,10 +22,11 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class MainUserWindow : Window
     {
-        public User loggedUser;
         public ClientProxy clientProxy;
 
         Timer updateTimer = new Timer();
+
+        public User loggedUser;
         public static List<User> usersList = new List<User>();
         public static List<Group> groupsList = new List<Group>();
 
@@ -35,12 +36,7 @@ namespace ProjektniZadatakSBES
             loggedUser = user;
             clientProxy = proxy;
 
-            usersList = clientProxy.AllUsersList();
-            groupsList = clientProxy.ReadGroups();
-
-            SetUsersAndGroups();
-
-            updateTimer.Interval = 2000;
+            updateTimer.Interval = 1;
             updateTimer.Elapsed += new ElapsedEventHandler(updateTimer_Elpased);
             updateTimer.Start(); 
 
@@ -53,6 +49,7 @@ namespace ProjektniZadatakSBES
 
         private void updateTimer_Elpased(object sender, ElapsedEventArgs e)
         {
+            ((Timer)sender).Interval = 1000;
             usersList = clientProxy.AllUsersList();
             groupsList = clientProxy.ReadGroups();
 
@@ -70,10 +67,18 @@ namespace ProjektniZadatakSBES
 
         private void SetUsersAndGroups()
         {
-            List<string> usersNotToAdd = new List<string>();
-
             this.Dispatcher.Invoke(() =>
             {
+                List<string> usersNotToAdd = new List<string>();
+
+                string currentName = "";
+                string type = ((Info)ContentArea.Content).type;
+
+                if (type == "user")
+                    currentName = ((Info)ContentArea.Content).nameLabel.Content.ToString().Split(' ')[3];
+                else
+                    currentName = ((Info)ContentArea.Content).nameLabel.Content.ToString();
+
                 foreach (var user in usersList)
                 {
                     foreach (MiniInfo miniInfo in usersStackPanel.Children)
@@ -93,9 +98,46 @@ namespace ProjektniZadatakSBES
 
                 foreach (var group in groupsList)
                 {
-                    if (group.UsersList.Contains(loggedUser.Username) || group.Owner == loggedUser.Username)                    
-                        myGroupsStackPanel.Children.Add(new MiniInfo(group.GroupName, "group"));                                         
+                    if (group.UsersList.Contains(loggedUser.Username) || group.Owner == loggedUser.Username)
+                        myGroupsStackPanel.Children.Add(new MiniInfo(group.GroupName, "group"));
                 }
+
+                switch (type)
+                {
+                    case "user":
+                    {
+                        foreach(MiniInfo miniInfo in usersStackPanel.Children)
+                        {
+                            if (miniInfo.Button.Content.ToString() == currentName)
+                                miniInfo.Button_Click(null, null);
+                        }
+                        break;
+                    }
+                    case "group":
+                    {
+                        bool found = false;
+                        if(myGroupsStackPanel.Children.Count > 0)
+                        {
+                            foreach (MiniInfo miniInfo in myGroupsStackPanel.Children)
+                            {
+                                if (miniInfo.Button.Content.ToString() == currentName)
+                                {
+                                    miniInfo.Button_Click(null, null);
+                                    found = true;
+                                }
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            ((Info)ContentArea.Content).obj = loggedUser;
+                            ((Info)ContentArea.Content).type = "user";
+                            ((Info)ContentArea.Content).SetInfo();
+                        }
+                        break;
+                    }
+                }          
+                          
             });            
         }
 
@@ -117,6 +159,7 @@ namespace ProjektniZadatakSBES
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
+            clientProxy.Logout(loggedUser.Username);
             Application.Current.Shutdown();
         }
 

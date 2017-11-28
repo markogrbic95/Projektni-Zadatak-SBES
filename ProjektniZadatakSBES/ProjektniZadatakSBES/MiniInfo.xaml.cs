@@ -33,7 +33,7 @@ namespace ProjektniZadatakSBES
                 Image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             ((Info)((MainUserWindow)((Grid)((ScrollViewer)((StackPanel)this.Parent).Parent).Parent).Parent).ContentArea.Content).type = buttonType;
 
