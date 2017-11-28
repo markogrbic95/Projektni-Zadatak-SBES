@@ -21,7 +21,7 @@ namespace ProjektniZadatakSBES
     /// </summary>
     public partial class MainUserWindow : Window
     {
-        public User loggedUser;        
+        public User loggedUser;
         public ClientProxy clientProxy;
 
         public MainUserWindow(User user, ClientProxy proxy)
@@ -62,6 +62,16 @@ namespace ProjektniZadatakSBES
         private void SetUsersAndGroups()
         {
             List<User> users = clientProxy.AllUsersList();
+            List<Group> allGroups = clientProxy.ReadGroups();
+            foreach(var item in allGroups)
+            {
+                foreach(var u in item.UsersList)
+                {
+                    if(u == loggedUser.Username)
+                        myGroupsStackPanel.Children.Add(new MiniInfo(item.GroupName, "group"));
+                }
+            }
+
             List<Group> userGroups = clientProxy.GetUserGroups(loggedUser.Username);
 
             foreach (User user in users)            
