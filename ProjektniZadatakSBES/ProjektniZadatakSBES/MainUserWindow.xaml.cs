@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,18 +25,94 @@ namespace ProjektniZadatakSBES
         public User loggedUser;
         public ClientProxy clientProxy;
 
+        Timer updateTimer = new Timer();
+        public static List<User> usersList = new List<User>();
+        public static List<Group> groupsList = new List<Group>();
+
         public MainUserWindow(User user, ClientProxy proxy)
         {
             InitializeComponent();
             loggedUser = user;
             clientProxy = proxy;
 
+            usersList = clientProxy.AllUsersList();
+            groupsList = clientProxy.ReadGroups();
+
             SetUsersAndGroups();
+
+            updateTimer.Interval = 2000;
+            updateTimer.Elapsed += new ElapsedEventHandler(updateTimer_Elpased);
+            updateTimer.Start(); 
+
             ContentArea.Content = new Info(loggedUser,"user");
             ((Info)ContentArea.Content).SetInfo();
 
             deleteGroupButton.Visibility = Visibility.Hidden;
             changeGroupButton.Visibility = Visibility.Hidden;
+        }
+
+        private void updateTimer_Elpased(object sender, ElapsedEventArgs e)
+        {
+            usersList = clientProxy.AllUsersList();
+            groupsList = clientProxy.ReadGroups();
+
+            foreach(var user in usersList)
+            {
+                if (user.Username == loggedUser.Username)
+                {
+                    loggedUser = user;
+                    break;
+                }
+            }
+
+            SetUsersAndGroups();
+        }
+
+        private void SetUsersAndGroups()
+        {
+            List<string> usersNotToAdd = new List<string>();
+            List<string> groupsNotToAdd = new List<string>();
+
+            this.Dispatcher.Invoke(() =>
+            {
+                foreach (var user in usersList)
+                {
+                    foreach (MiniInfo miniInfo in usersStackPanel.Children)
+                    {
+                        if (miniInfo.Button.Content.ToString() == user.Username)
+                            usersNotToAdd.Add(user.Username);
+                    }
+                }
+
+                foreach (var group in groupsList)
+                {
+                    if (group.UsersList.Contains(loggedUser.Username) || group.Owner == loggedUser.Username)
+                    {
+                        if (myGroupsStackPanel.Children.Count > 0)
+                        {
+                            foreach (MiniInfo miniInfo in myGroupsStackPanel.Children)
+                            {
+                                if (miniInfo.Button.Content.ToString() == group.GroupName)
+                                    groupsNotToAdd.Add(group.GroupName);
+                            }
+                        }
+                    }
+                    else
+                        groupsNotToAdd.Add(group.GroupName);                       
+                }
+
+                foreach (var u in usersList)
+                {
+                    if (!usersNotToAdd.Contains(u.Username))
+                        usersStackPanel.Children.Add(new MiniInfo(u.Username, "user"));
+                }
+
+                foreach (var g in groupsList)
+                {
+                    if (!groupsNotToAdd.Contains(g.GroupName))
+                        myGroupsStackPanel.Children.Add(new MiniInfo(g.GroupName, "group"));
+                }
+            });            
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -57,28 +134,6 @@ namespace ProjektniZadatakSBES
         private void exitBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
-
-        private void SetUsersAndGroups()
-        {
-            List<User> users = clientProxy.AllUsersList();
-            List<Group> allGroups = clientProxy.ReadGroups();
-            foreach(var item in allGroups)
-            {
-                foreach(var u in item.UsersList)
-                {
-                    if(u == loggedUser.Username)
-                        myGroupsStackPanel.Children.Add(new MiniInfo(item.GroupName, "group"));
-                }
-            }
-
-            List<Group> userGroups = clientProxy.GetUserGroups(loggedUser.Username);
-
-            foreach (User user in users)            
-                usersStackPanel.Children.Add(new MiniInfo(user.Username, "user"));
-
-            foreach (Group group in userGroups)
-                myGroupsStackPanel.Children.Add(new MiniInfo(group.GroupName, "group"));
         }
 
         private void addGroupButton_Click(object sender, RoutedEventArgs e)
