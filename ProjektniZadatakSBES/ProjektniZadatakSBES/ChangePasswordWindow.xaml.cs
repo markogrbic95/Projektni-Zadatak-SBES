@@ -64,12 +64,14 @@ namespace ProjektniZadatakSBES
 
             if (oldPasswordTextBox.Password == "" || ((MainUserWindow)this.Owner).loggedUser.Password != oldPasswordTextBox.Password)
             {
+                Audit.ChangePasswordFailed(((MainUserWindow)this.Owner).loggedUser.Username);
                 errorLabel.Content = "Current password wrong.";
                 return;
             }
 
             if (newPasswordTextBox.Password == "")
             {
+                Audit.ChangePasswordFailed(((MainUserWindow)this.Owner).loggedUser.Username);
                 errorLabel.Content = "Please enter a valid password.";
                 return;
             }
@@ -78,6 +80,7 @@ namespace ProjektniZadatakSBES
 
             if(message != "Success")
             {
+                Audit.ChangePasswordFailed(((MainUserWindow)this.Owner).loggedUser.Username);
                 errorLabel.Content = message;
                 return;
             }

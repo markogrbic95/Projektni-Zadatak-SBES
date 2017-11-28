@@ -29,7 +29,7 @@ namespace ProjektniZadatakSBES
         Registration reg = new Registration();
 
         public static NetTcpBinding binding = new NetTcpBinding();
-        public static string address = "net.tcp://localhost:25005/InterfaceImplementation";
+        public static string address = "net.tcp://localhost:25007/InterfaceImplementation";
         public static ClientProxy proxy = new ClientProxy(binding, address);
 
         public MainWindow()
