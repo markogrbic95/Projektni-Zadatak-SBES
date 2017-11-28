@@ -82,6 +82,10 @@ namespace ProjektniZadatakSBES
 
                 if (IsInGroup)
                 {
+                    // if (HasGroupPer && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
+                    // Linija koda u komentaru, ako se radi logicko &&
+                    // tj. ako treba da bude vidljivo samo u slucaju kada ima permisiju i u grupi i kao korisnik
+                    // a nije vidljivo ako pripada grupi koja ima permisiju, a kao user nema permisiju
                     if (HasGroupPer)
                     {
                         ShowInfo();
@@ -106,8 +110,18 @@ namespace ProjektniZadatakSBES
 
                 image.Source = new BitmapImage(new Uri(@"\Resources\group.png", UriKind.RelativeOrAbsolute));
 
-                permissionsBtn.Visibility = Visibility.Visible;
-                perLabel.Visibility = Visibility.Visible;
+                if (group.Owner == ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username)
+                {
+                    permissionsBtn.Visibility = Visibility.Visible;
+                    perLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    permissionsBtn.Visibility = Visibility.Hidden;
+                    perLabel.Visibility = Visibility.Hidden;
+                    ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).changeGroupButton.Visibility = Visibility.Hidden;
+                    ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).deleteGroupButton.Visibility = Visibility.Hidden;
+                }
 
                 if (((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Count > 0 && ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.AllowedGroups.Contains(group.GroupName))
                 {
@@ -124,11 +138,23 @@ namespace ProjektniZadatakSBES
                 bankaccLabel.Visibility = Visibility.Hidden;
                 phoneLabel.Visibility = Visibility.Hidden;
                 passwordLabel.Visibility = Visibility.Hidden;
+
                 listBox.Visibility = Visibility.Visible;
-                addUserBtn.Visibility = Visibility.Visible;
-                delUserBtn.Visibility = Visibility.Visible;
-                addLabel.Visibility = Visibility.Visible;
-                delLabel.Visibility = Visibility.Visible;
+
+                if (group.Owner == ((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username)
+                {
+                    addUserBtn.Visibility = Visibility.Visible;
+                    delUserBtn.Visibility = Visibility.Visible;
+                    addLabel.Visibility = Visibility.Visible;
+                    delLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    addUserBtn.Visibility = Visibility.Hidden;
+                    delUserBtn.Visibility = Visibility.Hidden;
+                    addLabel.Visibility = Visibility.Hidden;
+                    delLabel.Visibility = Visibility.Hidden;
+                }
 
                 nameLabel.Content = ((Group)obj).GroupName;
                 addressLabel.Content = ((Group)obj).Owner;
