@@ -70,6 +70,8 @@ namespace ProjektniZadatakSBES
                     return;
                 }
 
+                Audit.RegistrationSuccess(usernameTextBox.Text);
+
                 foreach (Object tb in regGrid.Children)
                 {
                     if (tb is TextBox)                    
@@ -79,8 +81,6 @@ namespace ProjektniZadatakSBES
                     if (tb is PasswordBox)                    
                         ((PasswordBox)tb).Password = null;                    
                 }
-
-                Audit.RegistrationSuccess(usernameTextBox.Text);
 
                 errorlabel.Foreground = new SolidColorBrush(Color.FromRgb(75, 181, 67));
                 errorlabel.Content = "Success!";

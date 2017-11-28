@@ -151,7 +151,7 @@ namespace Server
 
                 try
                 {
-                    Convert.ToInt32(decryptedPhoneNumber);
+                    Convert.ToDouble(decryptedPhoneNumber);
                 }
                 catch (Exception)
                 {
