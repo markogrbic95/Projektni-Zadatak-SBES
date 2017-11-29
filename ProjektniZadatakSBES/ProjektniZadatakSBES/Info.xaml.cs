@@ -82,10 +82,6 @@ namespace ProjektniZadatakSBES
 
                 if (IsInGroup)
                 {
-                    // if (HasGroupPer && u.AllowedUsers.Contains(((MainUserWindow)((Grid)((DockPanel)((ContentControl)this.Parent).Parent).Parent).Parent).loggedUser.Username))
-                    // Linija koda u komentaru, ako se radi logicko &&
-                    // tj. ako treba da bude vidljivo samo u slucaju kada ima permisiju i u grupi i kao korisnik
-                    // a nije vidljivo ako pripada grupi koja ima permisiju, a kao user nema permisiju
                     if (HasGroupPer)
                     {
                         ShowInfo();
